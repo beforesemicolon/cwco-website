@@ -1,0 +1,66 @@
+@import "colors";
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Exo 2.0', sans-serif;
+  font-weight: 100;
+  margin-top: 0;
+  color: var(--black, $black);
+}
+
+h2 {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+h3 {
+  font-size: 32px;
+}
+
+h4 {
+  font-size: 21px;
+}
+
+h5 {
+  font-size: 18px;
+}
+
+h6 {
+  font-size: 14px;
+}
+
+p {
+  margin-top: 0;
+}
+
+.btn,
+button {
+  padding: 10px 20px;
+  border-radius: 4px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 1px solid transparent;
+  text-transform: capitalize;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  
+  &.cta-btn {
+    background: var(--cta-color, $cta-color);
+    color: var(--light, $light);
+    font-weight: 500;
+  }
+  
+  &.outlined-btn {
+    border: 1px solid var(--black, $black);
+    background: var(--light, $light);
+    color: var(--black, $black);
+  }
+}
+
+.page-wrapper {
+  padding-left: calc(50vw - min(1200px, calc(100vw - 50px))/2);
+  padding-right: calc(50vw - min(1200px, calc(100vw - 50px))/2);
+}

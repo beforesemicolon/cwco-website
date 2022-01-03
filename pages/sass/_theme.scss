@@ -1,0 +1,18 @@
+@import "colors";
+
+:root {
+  --brand-color: #{$brand-color};
+  --cta-color: #{$cta-color};
+  --error: #{$error};
+  --success: #{$success};
+  --warning: #{$warning};
+  // dark
+  --black: #{$black};
+  --dark: #{$dark};
+  --dark-grey: #{$dark-grey};
+  --ash: #{$ash};
+  // light
+  --light: #{$light};
+  --light-grey: #{$light-grey};
+  --light-blue: #{$light-blue};
+}
