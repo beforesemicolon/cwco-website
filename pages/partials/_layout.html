@@ -4,6 +4,22 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta http-equiv="Content-Security-Policy" content="{CSP}">
+  <!--	site information -->
+	<title>{title}</title>
+	<meta name="description" content="{description}">
+	<meta property="og:title" content="{title}">
+	<meta property="og:type" content="website">
+	<meta property="og:description" content="{description}">
+	<meta property="og:image" content="{imageUrl}">
+	<meta property="og:url" content="{url}">
+	<meta property="og:site_name" content="CWCO">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@beforesemicolon">
+	<meta name="twitter:image" content="{imageUrl}">
+	<meta name="twitter:description" content="{description}">
+	<meta name="twitter:image:alt" content="{description}">
+  <!-- favicon -->
 	<link rel="apple-touch-icon" sizes="57x57" href="../assets/favicon/apple-icon-57x57.png">
 	<link rel="apple-touch-icon" sizes="60x60" href="../assets/favicon/apple-icon-60x60.png">
 	<link rel="apple-touch-icon" sizes="72x72" href="../assets/favicon/apple-icon-72x72.png">
@@ -21,14 +37,14 @@
 	<meta name="msapplication-TileColor" content="#ffffff">
 	<meta name="msapplication-TileImage" content="../assets/favicon/ms-icon-144x144.png">
 	<meta name="theme-color" content="#ffffff">
-	<title>{title}</title>
+	
 	<inject id="style"></inject>
 </head>
 <body>
 <!--	<a href="#main-content" id="skip-navigation">skip navigation</a>-->
 	<header class="page-wrapper">
 		<h1><img src="../assets/cwco-logo.svg" alt="CWCO logo"></h1>
-		<a href="https://www.npmjs.com/package/cwco" class="version-number" target="_blank">v{version}</a>
+		<a href="https://www.npmjs.com/package/cwco" class="version-number" target="_blank" rel="noreferrer">v{version}</a>
 	</header>
 	<main class="page-wrapper" id="main-content">
 		<inject></inject>
@@ -43,24 +59,24 @@
 					<li><a href="/documentation">Documentation</a></li>
 					<li><a href="/examples">Usage Examples</a></li>
 					<li><a href="https://medium.com/before-semicolon/tagged/cwco">Blog</a></li>
-					<li><a href="https://www.youtube.com/playlist?list=PLpWvGP6yhJUjZJEhaULhXJ0NNbH_EOOuj">Youtube Playlist</a></li>
+					<li><a href="https://www.youtube.com/playlist?list=PLpWvGP6yhJUjZJEhaULhXJ0NNbH_EOOuj" rel="noreferrer">Youtube Playlist</a></li>
 				</ul>
 			</section>
 			<section>
 				<h3>About Before Semicolon</h3>
 				<ul>
-					<li><a href="https://github.com/beforesemicolon">Open Source Software</a></li>
-					<li><a href="https://beforesemicolon.com/">Website</a></li>
-					<li><a href="https://medium.com/before-semicolon">Blog</a></li>
-					<li><a href="https://www.youtube.com/channel/UCrU33aw1k9BqTIq2yKXrmBw">Youtube Channel</a></li>
+					<li><a href="https://github.com/beforesemicolon" rel="noopener">Open Source Software</a></li>
+					<li><a href="https://beforesemicolon.com/" rel="noopener">Website</a></li>
+					<li><a href="https://medium.com/before-semicolon" rel="noopener">Blog</a></li>
+					<li><a href="https://www.youtube.com/channel/UCrU33aw1k9BqTIq2yKXrmBw" rel="noopener">Youtube Channel</a></li>
 					<li>
 						<address>
-							<a href="https://medium.com/before-semicolon"><img src="../assets/medium2.svg" alt="medium blog page" width="20"></a>
-							<a href="https://www.facebook.com/beforesemicolon/"><img src="../assets/facebook.svg" alt="facebook page" width="20"></a>
-							<a href="https://www.instagram.com/before_semicolon_/"><img src="../assets/instagram.svg" alt="instagram page" width="20"></a>
-							<a href="https://www.reddit.com/r/beforesemicolon/"><img src="../assets/reddit.svg" alt="reddit page" width="20"></a>
-							<a href="https://twitter.com/BeforeSemicolon"><img src="../assets/twitter.svg" alt="twitter page" width="20"></a>
-							<a href="https://www.youtube.com/channel/UCrU33aw1k9BqTIq2yKXrmBw"><img src="../assets/youtube.svg" alt="YouTube channel" width="20"></a>
+							<a href="https://medium.com/before-semicolon" rel="noopener"><img src="../assets/medium2.svg" alt="medium blog page" width="20"></a>
+							<a href="https://www.facebook.com/beforesemicolon/" rel="noopener"><img src="../assets/facebook.svg" alt="facebook page" width="20"></a>
+							<a href="https://www.instagram.com/before_semicolon_/" rel="noopener"><img src="../assets/instagram.svg" alt="instagram page" width="20"></a>
+							<a href="https://www.reddit.com/r/beforesemicolon/" rel="noopener"><img src="../assets/reddit.svg" alt="reddit page" width="20"></a>
+							<a href="https://twitter.com/BeforeSemicolon" rel="noopener"><img src="../assets/twitter.svg" alt="twitter page" width="20"></a>
+							<a href="https://www.youtube.com/channel/UCrU33aw1k9BqTIq2yKXrmBw" rel="noopener"><img src="../assets/youtube.svg" alt="YouTube channel" width="20"></a>
 						</address>
 					</li>
 				</ul>
@@ -73,5 +89,66 @@
 	</footer>
 	
 	<inject id="script"></inject>
+	
+	<div id="shapes-bg"></div>
+	
+	<script src="./../scripts/particles.min.js" nonce="local"></script>
+	<script nonce="local">
+		particlesJS("shapes-bg", {
+			"particles": {
+				"number": {
+					"value": 15,
+					"density": {
+						"enable": true,
+						"value_area": 800
+					}
+				},
+				"color": {
+					"value": ["#FFF5F7", "#F6F5FF", "#F5FEFF", "#FFF5F5", "#F5FAFF", "#F7FFF5", "#F5FFFA", "#F5FFFF", "#FFF5F9",  "#F5F6FF"]
+				},
+				"shape": {
+					"type": ["circle", "edge", "triangle"],
+				},
+				"opacity": {
+					"value": 1,
+					"random": false,
+					"anim": {
+						"enable": false,
+						"speed": 1,
+						"opacity_min": 0.1,
+						"sync": true
+					}
+				},
+				"size": {
+					"value": 50,
+					"random": true,
+					"anim": {
+						"enable": false,
+						"speed": 80,
+						"size_min": 0.1,
+						"sync": false
+					}
+				},
+				"move": {
+					"enable": true,
+					"speed": 2,
+				}
+			},
+			"interactivity": {
+				"detect_on": "canvas",
+				"events": {
+					"onhover": {
+						"enable": false,
+						"mode": "repulse"
+					},
+					"onclick": {
+						"enable": false,
+					},
+					"resize": true
+				},
+			},
+			"retina_detect": true
+		})
+	</script>
 </body>
 </html>

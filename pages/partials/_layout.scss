@@ -45,6 +45,22 @@ strong {
   }
 }
 
+#shapes-bg {
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  position: fixed;
+  left: 0;
+  top: 0;
+  opacity: 0.5;
+}
+
+header,
+main,
+footer {
+  z-index: 1;
+}
+
 // header
 header {
   height: 115px;
