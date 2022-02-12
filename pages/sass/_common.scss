@@ -32,35 +32,16 @@ p {
   margin-top: 0;
 }
 
-.btn,
-button {
-  padding: 10px 20px;
-  border-radius: 4px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  border: 1px solid transparent;
-  text-transform: capitalize;
+ul, ol {
+  list-style: none;
+}
+
+a {
   cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  
-  &.cta-btn {
-    background: var(--cta-color, $cta-color);
-    color: var(--light, $light);
-    font-weight: 500;
-  }
-  
-  &.outlined-btn {
-    border: 1px solid var(--black, $black);
-    background: var(--light, $light);
-    color: var(--black, $black);
-  }
 }
 
 .page-wrapper {
   padding-left: calc(50vw - min(1200px, calc(100vw - 50px))/2);
   padding-right: calc(50vw - min(1200px, calc(100vw - 50px))/2);
 }
+

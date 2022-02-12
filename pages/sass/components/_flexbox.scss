@@ -1,0 +1,77 @@
+.gap {
+  &-tiny {
+    gap: 5px;
+  }
+  &-xsm {
+    gap: 10px;
+  }
+  &-sm {
+    gap: 20px;
+  }
+  &-md {
+    gap: 30px;
+  }
+  &-lg {
+    gap: 40px;
+  }
+  &-xlg {
+    gap: 50px;
+  }
+}
+
+.row,
+.row-reversed{
+  display: flex;
+  align-items: center;
+  
+  &.align {
+    &-right {
+      justify-content: flex-end;
+    }
+    &-center {
+      justify-content: center;
+    }
+  }
+  
+  &.baseline {
+    &-top {
+      align-items: flex-start;
+    }
+    &-bottom {
+      align-items: flex-end;
+    }
+  }
+}
+
+.row-reversed {
+  flex-direction: row-reverse;
+}
+
+.col,
+.col-reversed {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  &.align {
+    &-right {
+      align-items: flex-end;
+    }
+    &-center {
+      align-items: center;
+    }
+  }
+  
+  &.baseline {
+    &-top {
+      justify-content: flex-start;
+    }
+    &-bottom {
+      justify-content: flex-end;
+    }
+  }
+}
+
+.col-reversed {
+  flex-direction: column-reverse;
+}

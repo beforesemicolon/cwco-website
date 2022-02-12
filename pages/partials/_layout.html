@@ -42,9 +42,46 @@
 </head>
 <body>
 <!--	<a href="#main-content" id="skip-navigation">skip navigation</a>-->
-	<header class="page-wrapper">
-		<h1><img src="../assets/cwco-logo.svg" alt="CWCO logo"></h1>
-		<a href="https://www.npmjs.com/package/cwco" class="version-number" target="_blank" rel="noreferrer">v{version}</a>
+	<header class="page-wrapper row">
+		<div class="row gap-sm">
+			<h1><img src="../assets/cwco-logo.svg" alt="CWCO logo"></h1>
+			<a href="https://www.npmjs.com/package/cwco" class="version-number" target="_blank" rel="noreferrer">v{version}</a>
+		</div>
+		<div class="row gap-sm">
+			<nav tabindex="0">
+				<ul aria-label="main-menu" role="menubar">
+					<li><a role="menuitem" href="https://codepen.io/beforesemicolon/pen/eYGMwbz" class="cta">Try it Out!</a></li>
+					<li><a role="menuitem" href="/documentation">Docs</a></li>
+					<li><a role="menuitem" href="https://beforesemicolon.github.io/cwco/?example=create-component.html&theme=neo&file=app.js">Examples</a></li>
+					<li><a role="menuitem" href="https://www.youtube.com/watch?v=yv3BeEssw9E">Tutorial</a></li>
+					<li><a role="menuitem" href="https://medium.com/before-semicolon/tagged/cwco">Blog</a></li>
+				</ul>
+				<ul aria-label="documentation-menu" role="menubar">
+					<li><a role="menuitem" href="/documentations/why-cwco">Why CWCO?</a></li>
+					<li><a role="menuitem" href="/documentations/getting-started">Getting Started</a></li>
+					<li><a role="menuitem" href="/documentations/creating-components">Creating Components</a></li>
+					<li><a role="menuitem" href="/documentations/component-lifecycles">Component Lifecycles</a></li>
+					<li><a role="menuitem" href="/documentations/attributes-and-properties">Attributes & Properties</a></li>
+					<li><a role="menuitem" href="/documentations/template">Template</a></li>
+					<li><a role="menuitem" href="/documentations/directive">Directive</a></li>
+					<li><a role="menuitem" href="/documentations/context">Context</a></li>
+					<li><a role="menuitem" href="/documentations/stylesheet">Stylesheet</a></li>
+					<li><a role="menuitem" href="/documentations/faq">FAQ</a></li>
+					<li>
+						<address aria-label="social-media" class="row gap-xsm align-right">
+							<a href="https://medium.com/before-semicolon" rel="noopener"><img src="../assets/medium2.svg" alt="medium blog page" width="20"></a>
+							<a href="https://www.facebook.com/beforesemicolon/" rel="noopener"><img src="../assets/facebook.svg" alt="facebook page" width="20"></a>
+							<a href="https://www.instagram.com/before_semicolon_/" rel="noopener"><img src="../assets/instagram.svg" alt="instagram page" width="20"></a>
+							<a href="https://www.reddit.com/r/beforesemicolon/" rel="noopener"><img src="../assets/reddit.svg" alt="reddit page" width="20"></a>
+							<a href="https://twitter.com/BeforeSemicolon" rel="noopener"><img src="../assets/twitter.svg" alt="twitter page" width="20"></a>
+							<a href="https://www.youtube.com/channel/UCrU33aw1k9BqTIq2yKXrmBw" rel="noopener"><img src="../assets/youtube.svg" alt="YouTube channel" width="20"></a>
+						</address>
+					</li>
+				</ul>
+			</nav>
+			<button type="button" class="icon"><img src="./../assets/search-icon.svg" alt="search icon"></button>
+			<button tabindex="0" type="button" class="icon" id="mobile-menu-toggle"><img src="./../assets/mobile-menu-icon.svg" alt="mobile menu icon"></button>
+		</div>
 	</header>
 	<main class="page-wrapper" id="main-content">
 		<inject></inject>
@@ -70,7 +107,7 @@
 					<li><a href="https://medium.com/before-semicolon" rel="noopener">Blog</a></li>
 					<li><a href="https://www.youtube.com/channel/UCrU33aw1k9BqTIq2yKXrmBw" rel="noopener">Youtube Channel</a></li>
 					<li>
-						<address>
+						<address aria-label="social-media">
 							<a href="https://medium.com/before-semicolon" rel="noopener"><img src="../assets/medium2.svg" alt="medium blog page" width="20"></a>
 							<a href="https://www.facebook.com/beforesemicolon/" rel="noopener"><img src="../assets/facebook.svg" alt="facebook page" width="20"></a>
 							<a href="https://www.instagram.com/before_semicolon_/" rel="noopener"><img src="../assets/instagram.svg" alt="instagram page" width="20"></a>
@@ -120,7 +157,7 @@
 					}
 				},
 				"size": {
-					"value": 50,
+					"value": 75,
 					"random": true,
 					"anim": {
 						"enable": false,
