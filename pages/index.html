@@ -1,37 +1,26 @@
+<variable name="t" value="$data.translations[locale] || $data.translations.en"></variable>
+<variable name="page" value="$data.pages[path]"></variable>
+
 <include partial="layout" data="{
-	title: 'CWCO - Web Components Library',
-	description: 'Web Component Library to build future proof web libraries and application',
-	url: '',
-	CSP: 'script-src \'nonce-local\' \'strict-dynamic\' \'unsafe-inline\' https:; object-src \'none\'; base-uri http://localhost:3000/;',
-	imageUrl: '',
-	version: '1.2.0',
+	...page,
+	version: $data.version,
 }">
 	<link rel="stylesheet" href="./home.scss" inject-id="style">
 	
 	<div class="details">
 		<div class="intro">
-			<h2>JavaScript Web Components Library</h2>
-			<p class="description">A simpler and more powerful way to <strong>build future-proof web libraries and applications</strong>
-			                       using Web Components Technology.</p>
-			<p class="license-github"><span><strong>MIT</strong> license</span> <a href="https://github.com/beforesemicolon/cwco" target="_blank" rel="noopener"><img
+			<h2>{t.intro.title}</h2>
+			<p class="description">{t.intro.description}</p>
+			<p class="license-github"><span>{t.license}</span> <a href="https://github.com/beforesemicolon/cwco" target="_blank" rel="noopener"><img
 				src="../assets/github.png" alt="github-icon" width="25" ></a></p>
 			<div class="cta-action">
-				<a href="/get-started" class="btn cta-btn">Get Started</a>
-				<a href="/documentation"  class="btn outlined-btn">Documentation</a>
+				<a href="/get-started" class="btn cta-btn">{t.button.getStarted}</a>
+				<a href="/documentation"  class="btn outlined-btn">{t.button.documentation}</a>
 			</div>
 			<!-- /.cta-action -->
 		</div>
 		<ul class="feature-list" on.click="handleClick()">
-			<li><img src="../assets/check-mark.png" alt="check mark" width="20"> No Build Required! (Plug and Play)</li>
-			<li><img src="../assets/check-mark.png" alt="check mark" width="20"> Works with other libraries/frameworks</li>
-			<li><img src="../assets/check-mark.png" alt="check mark" width="20"> Reactive Template</li>
-			<li><img src="../assets/check-mark.png" alt="check mark" width="20"> Powerful built-in Directives</li>
-			<li><img src="../assets/check-mark.png" alt="check mark" width="20"> Built-in Context Data handling</li>
-			<li><img src="../assets/check-mark.png" alt="check mark" width="20"> Event + Data Binding (in HTML and CSS)</li>
-			<li><img src="../assets/check-mark.png" alt="check mark" width="20"> Build View directly in HTML file</li>
-			<li><img src="../assets/check-mark.png" alt="check mark" width="20"> Simple API</li>
-			<li><img src="../assets/check-mark.png" alt="check mark" width="20"> Fast rendering</li>
-			<li><img src="../assets/check-mark.png" alt="check mark" width="20"> Lightweight package</li>
+			<li #repeat="t.featureList"><img src="../assets/check-mark.png" alt="check mark" width="20"> {$item}</li>
 		</ul>
 	</div>
 	

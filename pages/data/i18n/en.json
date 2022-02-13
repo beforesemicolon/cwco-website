@@ -1,0 +1,62 @@
+{
+  "menu": {
+    "main": {
+      "tryItOut": "Try it Out!",
+      "docs": "Docs",
+      "examples": "Examples",
+      "tutorial": "Tutorial",
+      "blog": "Blog"
+    },
+    "documentation": {
+      "title": "Documentation",
+      "whyCWCO": "Why CWCO?",
+      "gettingStarted": "Getting Started",
+      "creatingComponents": "Creating Components",
+      "componentsLifecycles": "Component Lifecycles",
+      "attrAndProps": "Attributes & Properties",
+      "template": "Template",
+      "directive": "Directive",
+      "context": "Context",
+      "stylesheet": "Stylesheet",
+      "faq": "FAQ"
+    },
+    "learningResources": {
+      "title": "Learning Resources",
+      "essentialTraining": "Essential Training",
+      "documentation": "Documentation",
+      "usageExamples": "Usage Examples",
+      "youtubePlaylist": "Youtube Playlist"
+    },
+    "about": {
+      "title": "About Before Semicolon",
+      "openSource": "Open Source Software",
+      "website": "Website",
+      "blog": "Blog",
+      "youtubeChannel": "Youtube Channel"
+    }
+  },
+  "intro": {
+    "title": "Contextful Web Components Library",
+    "description": "A simpler and more powerful way to <strong>build future-proof web libraries and applications</strong> using Web Components Technology."
+  },
+  "license": "<strong>MIT</strong> license",
+  "button": {
+    "getStarted": "Get Started",
+    "documentation": "Documentation"
+  },
+  "featureList": [
+    "No Build Required! (Plug and Play)",
+    "Works with other libraries/frameworks",
+    "Reactive Template",
+    "Powerful built-in Directives",
+    "Built-in Context Data handling",
+    "Event + Data Binding (in HTML and CSS)",
+    "Build View directly in HTML file",
+    "Simple API",
+    "Fast rendering",
+    "Lightweight package"
+  ],
+  "footer": {
+    "copyright": "Copyright &copy; {year} Before Semicolon. All rights reserved."
+  }
+}

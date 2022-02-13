@@ -1,3 +1,5 @@
+<variable name="t" value="$data.translations[locale] || $data.translations.en"></variable>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<meta http-equiv="Content-Security-Policy" content="{CSP}">
-  <!--	site information -->
+	<!--	site information -->
 	<title>{title}</title>
 	<meta name="description" content="{description}">
 	<meta property="og:title" content="{title}">
@@ -19,7 +21,7 @@
 	<meta name="twitter:image" content="{imageUrl}">
 	<meta name="twitter:description" content="{description}">
 	<meta name="twitter:image:alt" content="{description}">
-  <!-- favicon -->
+	<!-- favicon -->
 	<link rel="apple-touch-icon" sizes="57x57" href="../assets/favicon/apple-icon-57x57.png">
 	<link rel="apple-touch-icon" sizes="60x60" href="../assets/favicon/apple-icon-60x60.png">
 	<link rel="apple-touch-icon" sizes="72x72" href="../assets/favicon/apple-icon-72x72.png">
@@ -29,7 +31,7 @@
 	<link rel="apple-touch-icon" sizes="144x144" href="../assets/favicon/apple-icon-144x144.png">
 	<link rel="apple-touch-icon" sizes="152x152" href="../assets/favicon/apple-icon-152x152.png">
 	<link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon/apple-icon-180x180.png">
-	<link rel="icon" type="image/png" sizes="192x192"  href="../assets/favicon/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="192x192" href="../assets/favicon/android-icon-192x192.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="96x96" href="../assets/favicon/favicon-96x96.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon/favicon-16x16.png">
@@ -41,86 +43,70 @@
 	<inject id="style"></inject>
 </head>
 <body>
-<!--	<a href="#main-content" id="skip-navigation">skip navigation</a>-->
+	<!--	<a href="#main-content" id="skip-navigation">skip navigation</a>-->
 	<header class="page-wrapper row">
 		<div class="row gap-sm">
-			<h1><img src="../assets/cwco-logo.svg" alt="CWCO logo"></h1>
-			<a href="https://www.npmjs.com/package/cwco" class="version-number" target="_blank" rel="noreferrer">v{version}</a>
+			<h1><a href="/"><img src="../assets/cwco-logo.svg" alt="CWCO logo"></a></h1>
+			<a href="https://www.npmjs.com/package/cwco" class="version-number" target="_blank"
+			   rel="noreferrer">v{version}</a>
 		</div>
 		<div class="row gap-sm">
 			<nav tabindex="0">
 				<ul aria-label="main-menu" role="menubar">
-					<li><a role="menuitem" href="https://codepen.io/beforesemicolon/pen/eYGMwbz" class="cta">Try it Out!</a></li>
-					<li><a role="menuitem" href="/documentation">Docs</a></li>
-					<li><a role="menuitem" href="https://beforesemicolon.github.io/cwco/?example=create-component.html&theme=neo&file=app.js">Examples</a></li>
-					<li><a role="menuitem" href="https://www.youtube.com/watch?v=yv3BeEssw9E">Tutorial</a></li>
-					<li><a role="menuitem" href="https://medium.com/before-semicolon/tagged/cwco">Blog</a></li>
+					<li #repeat="$data.menu.main">
+						<a role="menuitem" href="{$item.link}" class="{$index === 0 ? 'cta' : ''}">{$item.label}</a>
+					</li>
 				</ul>
 				<ul aria-label="documentation-menu" role="menubar">
-					<li><a role="menuitem" href="/documentations/why-cwco">Why CWCO?</a></li>
-					<li><a role="menuitem" href="/documentations/getting-started">Getting Started</a></li>
-					<li><a role="menuitem" href="/documentations/creating-components">Creating Components</a></li>
-					<li><a role="menuitem" href="/documentations/component-lifecycles">Component Lifecycles</a></li>
-					<li><a role="menuitem" href="/documentations/attributes-and-properties">Attributes & Properties</a></li>
-					<li><a role="menuitem" href="/documentations/template">Template</a></li>
-					<li><a role="menuitem" href="/documentations/directive">Directive</a></li>
-					<li><a role="menuitem" href="/documentations/context">Context</a></li>
-					<li><a role="menuitem" href="/documentations/stylesheet">Stylesheet</a></li>
-					<li><a role="menuitem" href="/documentations/faq">FAQ</a></li>
+					<li #repeat="$data.menu.documentation"><a role="menuitem" href="{$item.link}">{$item.label}</a></li>
 					<li>
 						<address aria-label="social-media" class="row gap-xsm align-right">
-							<a href="https://medium.com/before-semicolon" rel="noopener"><img src="../assets/medium2.svg" alt="medium blog page" width="20"></a>
-							<a href="https://www.facebook.com/beforesemicolon/" rel="noopener"><img src="../assets/facebook.svg" alt="facebook page" width="20"></a>
-							<a href="https://www.instagram.com/before_semicolon_/" rel="noopener"><img src="../assets/instagram.svg" alt="instagram page" width="20"></a>
-							<a href="https://www.reddit.com/r/beforesemicolon/" rel="noopener"><img src="../assets/reddit.svg" alt="reddit page" width="20"></a>
-							<a href="https://twitter.com/BeforeSemicolon" rel="noopener"><img src="../assets/twitter.svg" alt="twitter page" width="20"></a>
-							<a href="https://www.youtube.com/channel/UCrU33aw1k9BqTIq2yKXrmBw" rel="noopener"><img src="../assets/youtube.svg" alt="YouTube channel" width="20"></a>
+							<a #repeat="$data.socialMedia" href="{$item.link}" rel="noopener">
+								<img src="{$item.icon}" alt="{$item.label}" width="20">
+							</a>
 						</address>
 					</li>
 				</ul>
 			</nav>
 			<button type="button" class="icon"><img src="./../assets/search-icon.svg" alt="search icon"></button>
-			<button tabindex="0" type="button" class="icon" id="mobile-menu-toggle"><img src="./../assets/mobile-menu-icon.svg" alt="mobile menu icon"></button>
+			<button tabindex="0" type="button" class="icon" id="mobile-menu-toggle"><img
+				src="./../assets/mobile-menu-icon.svg" alt="mobile menu icon"></button>
 		</div>
 	</header>
+	
 	<main class="page-wrapper" id="main-content">
 		<inject></inject>
 	</main>
+	
 	<footer class="page-wrapper">
 		<h2><img src="../assets/cwco-logo-name.svg" alt="cwco logo name" height="20"></h2>
 		<div class="footer-sections">
 			<section>
-				<h3>Learning Resources</h3>
+				<h3>{$data.menu.footer.learningResources.title}</h3>
 				<ul>
-					<li><a href="/essential-training">Essential Training</a></li>
-					<li><a href="/documentation">Documentation</a></li>
-					<li><a href="/examples">Usage Examples</a></li>
-					<li><a href="https://medium.com/before-semicolon/tagged/cwco">Blog</a></li>
-					<li><a href="https://www.youtube.com/playlist?list=PLpWvGP6yhJUjZJEhaULhXJ0NNbH_EOOuj" rel="noreferrer">Youtube Playlist</a></li>
+					<li #repeat="$data.menu.footer.learningResources.items">
+						<a href="{$item.link}" rel="noopener">{$item.label}</a>
+					</li>
 				</ul>
 			</section>
 			<section>
-				<h3>About Before Semicolon</h3>
+				<h3>{$data.menu.footer.about.title}</h3>
 				<ul>
-					<li><a href="https://github.com/beforesemicolon" rel="noopener">Open Source Software</a></li>
-					<li><a href="https://beforesemicolon.com/" rel="noopener">Website</a></li>
-					<li><a href="https://medium.com/before-semicolon" rel="noopener">Blog</a></li>
-					<li><a href="https://www.youtube.com/channel/UCrU33aw1k9BqTIq2yKXrmBw" rel="noopener">Youtube Channel</a></li>
+					<li #repeat="$data.menu.footer.about.items">
+						<a href="{$item.link}" rel="noopener">{$item.label}</a>
+					</li>
 					<li>
 						<address aria-label="social-media">
-							<a href="https://medium.com/before-semicolon" rel="noopener"><img src="../assets/medium2.svg" alt="medium blog page" width="20"></a>
-							<a href="https://www.facebook.com/beforesemicolon/" rel="noopener"><img src="../assets/facebook.svg" alt="facebook page" width="20"></a>
-							<a href="https://www.instagram.com/before_semicolon_/" rel="noopener"><img src="../assets/instagram.svg" alt="instagram page" width="20"></a>
-							<a href="https://www.reddit.com/r/beforesemicolon/" rel="noopener"><img src="../assets/reddit.svg" alt="reddit page" width="20"></a>
-							<a href="https://twitter.com/BeforeSemicolon" rel="noopener"><img src="../assets/twitter.svg" alt="twitter page" width="20"></a>
-							<a href="https://www.youtube.com/channel/UCrU33aw1k9BqTIq2yKXrmBw" rel="noopener"><img src="../assets/youtube.svg" alt="YouTube channel" width="20"></a>
+							<a #repeat="$data.socialMedia" href="{$item.link}" rel="noopener">
+								<img src="{$item.icon}" alt="{$item.label}" width="20">
+							</a>
 						</address>
 					</li>
 				</ul>
 			</section>
 			<div class="copyright">
 				<img src="../assets/before-semicolon-logo.png" alt="before semicolon logo" height="30">
-				<p><small>Copyright &copy; {(new Date()).getFullYear()} Before Semicolon. All rights reserved.</small></p>
+				<p><small>{t.footer.copyright.replace('{year}', (new Date()).getFullYear())}</small></p>
 			</div>
 		</div>
 	</footer>
@@ -141,7 +127,7 @@
 					}
 				},
 				"color": {
-					"value": ["#FFF5F7", "#F6F5FF", "#F5FEFF", "#FFF5F5", "#F5FAFF", "#F7FFF5", "#F5FFFA", "#F5FFFF", "#FFF5F9",  "#F5F6FF"]
+					"value": ["#fff5f7", "#f6f5ff", "#f5feff", "#fff5f5", "#f5faff", "#f7fff5", "#f5fffa", "#f5ffff", "#fff5f9", "#f5f6ff"]
 				},
 				"shape": {
 					"type": ["circle", "edge", "triangle"],
