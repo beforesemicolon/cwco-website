@@ -22,17 +22,9 @@
 			<!-- /.cta-action -->
 		</div>
 		<ul class="feature-list" on.click="handleClick()">
-			<li #repeat="t.featureList"><img src="../assets/check-mark.png" alt="check mark" width="20"> {$item}</li>
+			<li #repeat="t.featureList">
+				<img src="../assets/check-mark.png" alt="check mark" width="20"> {$item}
+			</li>
 		</ul>
 	</div>
-	
-	<section id="try-section">
-		<h2>Try it Out!</h2>
-
-		<iframe scrolling="no" title="cwco counter" src="https://codepen.io/beforesemicolon/embed/eYGMwbz?default-tab=js%2Cresult&editable=true&theme-id=dark" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
-			See the Pen <a href="https://codepen.io/beforesemicolon/pen/eYGMwbz" rel="noopener">
-			cwco counter</a> by Before Semicolon (<a href="https://codepen.io/beforesemicolon" rel="noopener">@beforesemicolon</a>)
-			on <a href="https://codepen.io" rel="noopener">CodePen</a>.
-		</iframe>
-	</section>
 </include>
