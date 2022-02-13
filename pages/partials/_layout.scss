@@ -12,10 +12,11 @@ body {
   font-family: "Open Sans", sans-serif;
   font-weight: 100;
   letter-spacing: 0.05rem;
+  padding: 0;
   margin: 0;
-  padding: 115px 0 0 0;
   background: var(--light, $light);
   color: var(--dark-grey, $dark-grey);
+  scroll-margin-top: 115px;
 }
 
 strong {
@@ -71,11 +72,10 @@ header {
   justify-content: space-between;
   align-items: flex-end;
   border-bottom: 1px solid $light-grey;
-  position: fixed;
-  z-index: 10000;
+  width: 100vw;
+  position: sticky;
   top: 0;
   left: 0;
-  width: 100vw;
   
   h1 {
     margin: 0;
@@ -110,7 +110,7 @@ header {
         border-bottom: 1px solid transparent;
       
         &:hover,
-        &:active {
+        &.active {
           border-color: var(--black, $black);
         }
       
@@ -126,7 +126,7 @@ header {
           }
         }
       
-        &:active a {
+        &.active a {
           font-weight: 500;
         }
       }
@@ -136,6 +136,10 @@ header {
   #mobile-menu-toggle {
     display: none;
   }
+}
+
+// main
+main {
 }
 
 // footer
@@ -266,6 +270,11 @@ footer {
     
         li {
           width: 100%;
+          
+          &.active {
+            border: none;
+            background: var(--light-grey, $light-grey);
+          }
       
           a {
             text-align: right;

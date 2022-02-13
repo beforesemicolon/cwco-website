@@ -7,19 +7,64 @@
 @import "sass/common";
 
 #documentation-block {
-  padding: 50px 0;
   display: flex;
   
   article {
     flex: 1;
+    color: var(--black, $black);
+    border-left: 1px solid var(--mid-grey, $mid-grey);
+    border-right: 1px solid var(--mid-grey, $mid-grey);
+    padding: 50px;
+    
+    h2, h3, h4, h5, h6 {
+      font-weight: 300;
+    }
+    
+    h2 {
+      margin-bottom: 40px;
+    }
+    
+    h3 {
+      border-bottom: 1px solid var(--light-grey, $light-grey);
+      padding-bottom: 10px;
+      margin-top: 40px;
+      margin-bottom: 10px;
+    }
+  
+    p, li, a {
+      line-height: 165%;
+    }
+    
+    ul {
+      list-style: square;
+    }
+    
+    li {
+      margin-bottom: 5px;
+    }
+    
+    p {
+      margin-bottom: 25px;
+    }
+    
+    a {
+      color: var(--cta-color, $cta-color);
+      font-weight: 300;
+    }
+    
+    strong, b {
+      font-weight: 300;
+    }
   }
   
   #documentation-menu {
-    width: 300px;
+    width: 350px;
     background: var(--light-grey, $light-grey);
     padding: 20px;
     border-radius: 5px;
-    margin-left: 70px;
+    margin: 50px 0 0 50px;
+    position: sticky;
+    top: 0;
     
     li {
       a {
@@ -29,6 +74,29 @@
         color: var(--dark, $dark);
         font-weight: 300;
       }
+      
+      &.active {
+        a {
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}
+
+footer {
+  margin-top: 20px;
+}
+
+@media screen and (max-width: 1025px) {
+  #documentation-block {
+    article {
+      padding: 50px 0;
+      border: none;
+    }
+  
+    #documentation-menu {
+      width: 250px;
     }
   }
 }

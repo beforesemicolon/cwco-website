@@ -53,12 +53,16 @@
 		<div class="row gap-sm">
 			<nav tabindex="0">
 				<ul aria-label="main-menu" role="menubar">
-					<li #repeat="$data.menu.main">
-						<a role="menuitem" href="{$item.link}" class="{$index === 0 ? 'cta' : ''}">{$item.label}</a>
+					<li #repeat="$data.menu.main" #attr="class, active, path === $item.link">
+						<a role="menuitem" href="{$item.link}" class="{$index === 0 ? 'cta' : ''}">
+							{$item.label}
+						</a>
 					</li>
 				</ul>
 				<ul aria-label="documentation-menu" role="menubar">
-					<li #repeat="$data.menu.documentation"><a role="menuitem" href="{$item.link}">{$item.label}</a></li>
+					<li #repeat="$data.menu.documentation" #attr="class, active, path === $item.link">
+						<a role="menuitem" href="{$item.link}">{$item.label}</a>
+					</li>
 					<li>
 						<address aria-label="social-media" class="row gap-xsm align-right">
 							<a #repeat="$data.socialMedia" href="{$item.link}" rel="noopener">

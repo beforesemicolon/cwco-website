@@ -15,7 +15,7 @@
 		</article>
 		
 		<ul id="documentation-menu" aria-label="documentation-menu" role="menubar">
-			<li #repeat="$data.menu.documentation">
+			<li #repeat="$data.menu.documentation" #attr="class, active, path.startsWith($item.link)">
 				<a role="menuitem" href="{$item.link}">{$item.label}</a>
 			</li>
 		</ul>
