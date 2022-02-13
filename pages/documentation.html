@@ -3,10 +3,22 @@
 
 <include partial="layout" data="{
 	...page,
+	title: page.title(t),
+	description: page.description(t),
 	version: $data.version,
 }">
 	<link rel="stylesheet" href="./documentation.scss" inject-id="style">
 	
-	<h2>Documentation</h2>
+	<div id="documentation-block">
+		<article>
+			<h2>Documentation</h2>
+		</article>
+		
+		<ul id="documentation-menu" aria-label="documentation-menu" role="menubar">
+			<li #repeat="$data.menu.documentation">
+				<a role="menuitem" href="{$item.link}">{$item.label}</a>
+			</li>
+		</ul>
+	</div>
 	
 </include>

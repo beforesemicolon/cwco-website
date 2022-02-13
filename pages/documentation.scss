@@ -5,3 +5,36 @@
 @import "sass/components/button";
 @import "sass/components/flexbox";
 @import "sass/common";
+
+#documentation-block {
+  padding: 50px 0;
+  display: flex;
+  
+  article {
+    flex: 1;
+  }
+  
+  #documentation-menu {
+    width: 300px;
+    background: var(--light-grey, $light-grey);
+    padding: 20px;
+    border-radius: 5px;
+    margin-left: 25px;
+    
+    li {
+      a {
+        display: block;
+        padding: 10px;
+        text-decoration: none;
+        color: var(--dark, $dark);
+        font-weight: 300;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 725px) {
+  #documentation-menu {
+    display: none !important;
+  }
+}

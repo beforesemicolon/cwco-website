@@ -1,5 +1,5 @@
 const env = process.env.NODE_ENV || 'development';
-const pages = require('./pages/data/pages.json');
+const pages = require('./pages/data/pages');
 const en = require('./pages/data/i18n/en.json');
 const menu = require('./pages/data/menu');
 const socialMedia = require('./pages/data/social-media');
