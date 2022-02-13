@@ -74,4 +74,55 @@ main {
   }
 }
 
+@media screen and (max-width: 1024px) {
+  main {
+    .details {
+      flex-direction: column;
+    }
+    
+    .intro,
+    .feature-list {
+      width: 100%;
+    }
+  
+    .feature-list {
+      margin-top: 50px;
+    }
+  }
+}
+
+@media screen and (max-width: 725px) {
+  main {
+    .feature-list {
+      margin-top: 50px;
+      padding: 10px 20px;
+      
+      li {
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 425px) {
+  main {
+    .details {
+      padding-top: 60px;
+    }
+    
+    .intro {
+      h2 {
+        font-size: 42px;
+      }
+      
+      .description {
+        width: 100%;
+      }
+    }
+    
+    .feature-list {
+      line-height: 120%;
+    }
+  }
+}
 
