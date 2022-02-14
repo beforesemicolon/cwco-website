@@ -1,0 +1,57 @@
+<h2 id="directives"><a href="#directives"></a>Directives</h2>
+<p>Directives are HTML attributes not specific to any tag. They are global logic attributes.</p>
+<p>The idea of a directive is already built-in into HTML. For example, the attributes <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/draggable">draggable</a>
+   and <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/contenteditable">contenteditable</a> are directives.
+   They can be placed in any HTML tag to allow that tag to gain special capabilities.</p>
+<p>The idea is same here and with Web Components you have a few special built-in ones, and you can also <a href="https://github.com/beforesemicolon/cwco/blob/master/docs/custom-directives.md">create a custom
+                                                                                                                                                                                                one</a> for your need.</p>
+<p>One thing in common for all directives is that you don&#39;t need to use the curly braces to specify data or logic in some cases.
+   Their value are already understood to be information to be executed for a result. When creating a custom one,
+   you have a chance to handle parsing the value yourself, so you can take values in whatever format you want.</p>
+
+<h3 id="bind"><a href="#bind"></a>bind</h3>
+<p>The <code>bind</code> directive allows you to bind a property to a DOM element. This can be a specific attribute, a property of
+   the component class, or a property of the component instance. It may feel redundant to use the <code>bind</code> directive when you
+   can just use curly braces but bind was introduced to solve a very specific problem.</p>
+<p>The following is how to do data binding with curly braces:</p>
+
+<code-snippet language="html">
+<span>{label}</span>
+<input placeholder="{placeholder}" />
+</code-snippet>
+
+<p>However, if you want to use a template directly on the HTML file(when using
+	<a href="https://github.com/beforesemicolon/cwco/blob/master/docs/ContextProviderComponent.md">context providers</a> for example)
+   you may experience a quick flash where you see the curly braces instead of the value they are supposed to represent.</p>
+<p>For that case and other you may want to use the <code>bind</code> directive.</p>
+<p>The following will show the default static value until Javascript kicks in and bind the value to the element.</p>
+
+<code-snippet language="html">
+<span bind="{label}">Default Label</span>
+<input bind.placeholder="{placeholder}" placeholder="Default Placeholder" />
+</code-snippet>
+
+<p>If you simply do <code #ignore>bind=&quot;{label}&quot;</code> for example, it is assumed you want to bind to the element text content. You also
+   have the option to specify which property or attribute you want to bind to, like <code #ignore>bind.innerHTML=&quot;{markup}&quot;</code> or
+	<code #ignore>bind.placeholder=&quot;{placeholder}&quot;</code></p>
+<p>The bind become even more powerful when you server side render the HTML. It allows you to set the value in the server
+   and then have the data bound when the javascript loads. It is also a nice way to provide backup for in HTML template
+   rendered in case user has JavaScript disabled.</p>
+<h4 id="bind-vs-attr">bind vs attr</h4>
+<p>The <code>attr</code> will CONDITIONALLY set the attribute, while the <code>bind</code> will ALWAYS set the attribute or property.</p>
+<p>You should AVOID using both <code>attr</code> and <code>bind</code> on the same attribute. The last one acting on the element attribute will
+   be the one that ends up binding the attribute value.</p>
+
+<code-snippet language="html">
+<li
+	bind.className="bind" attr.class="attr, true"
+	attr.id="attr, true" bind.id="bind"
+></li>
+
+<!-- renders:
+<li class="attr" id="bind">my item</li>
+-->
+</code-snippet>
+
+<p>Also, while <code>attr</code> only acts on element attributes, <code>bind</code> acts on the element&#39;s property. That&#39;s why you use <code>className</code>
+   instead of <code>class</code> when using <code>bind</code>.</p>

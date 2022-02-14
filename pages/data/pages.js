@@ -58,7 +58,11 @@ module.exports = {
     template: "properties"
   }),
   "/documentation/template": createPage("/documentation/template", {localeKey: "template", template: "template"}),
-  "/documentation/directive": createPage("/documentation/directive", {localeKey: "directive", template: "directive"}),
+  "/documentation/if-directive": createPage("/documentation/if-directive", {localeKey: "ifDirective", template: "if-directive"}),
+  "/documentation/repeat-directive": createPage("/documentation/repeat-directive", {localeKey: "repeatDirective", template: "repeat-directive"}),
+  "/documentation/attr-directive": createPage("/documentation/attr-directive", {localeKey: "attrDirective", template: "attr-directive"}),
+  "/documentation/bind-directive": createPage("/documentation/bind-directive", {localeKey: "bindDirective", template: "bind-directive"}),
+  "/documentation/ref-directive": createPage("/documentation/ref-directive", {localeKey: "refDirective", template: "ref-directive"}),
   "/documentation/custom-directive": createPage("/documentation/custom-directive", {
     localeKey: "customDirective",
     template: "custom-directive"

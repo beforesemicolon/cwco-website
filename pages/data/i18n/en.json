@@ -56,9 +56,25 @@
       "title": "Component Template | CWCO - Web Components Library",
       "description": "CWCO Component Template"
     },
-    "directive": {
-      "title": "Component Directive | CWCO - Web Components Library",
-      "description": "CWCO Component Directive"
+    "ifDirective": {
+      "title": "Component If Directive | CWCO - Web Components Library",
+      "description": "CWCO Component If Directive"
+    },
+    "repeatDirective": {
+      "title": "Component Repeat Directive | CWCO - Web Components Library",
+      "description": "CWCO Component Repeat Directive"
+    },
+    "attrDirective": {
+      "title": "Component Attr Directive | CWCO - Web Components Library",
+      "description": "CWCO Component Attr Directive"
+    },
+    "bindDirective": {
+      "title": "Component Bind Directive | CWCO - Web Components Library",
+      "description": "CWCO Component Bind Directive"
+    },
+    "refDirective": {
+      "title": "Component Ref Directive | CWCO - Web Components Library",
+      "description": "CWCO Component Ref Directive"
     },
     "customDirective": {
       "title": "Component Custom Directive | CWCO - Web Components Library",
@@ -107,6 +123,11 @@
       "properties": "Properties",
       "template": "Template",
       "directive": "Directive",
+      "ifDirective": "If",
+      "repeatDirective": "Repeat",
+      "attrDirective": "Attr",
+      "refDirective": "Ref",
+      "bindDirective": "Bind",
       "customDirective": "Custom Directive",
       "context": "Context",
       "events": "Events",
