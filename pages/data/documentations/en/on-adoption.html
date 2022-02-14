@@ -1,0 +1,37 @@
+<h2 id="livecycles"><a href="#livecycles"></a>LiveCycles</h2>
+<p>The native web component API has <a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#using_the_lifecycle_callbacks">livecycles</a>
+   methods:</p>
+<ul>
+	<li>connectedCallback;</li>
+	<li>disconnectedCallback;</li>
+	<li>attributeChangedCallback;</li>
+	<li>adoptedCallback;</li>
+</ul>
+<p><code>WebComponent</code> simply renames them and &quot;fixes&quot; couple of things about some of them.</p>
+
+<h3 id="onadoption"><a href="#onadoption"></a>onAdoption</h3>
+<p>This livecycle function is called when the component element is moved from one document to another, for example,
+   if the element is removed from a iFrame document to the current window document.</p>
+
+<code-snippet language="js">
+class BFSButton extends WebComponent {
+	static observedAttributes = ['label']
+	
+	onAdoption() {
+		console.log('adopted')
+	}
+}
+
+BFSButton.register();
+</code-snippet>
+
+<code-snippet language="js">
+const btn = new BFSButton();
+const iframe = document.body.querySelector('iframe');
+
+// will trigger onMount call
+document.body.appendChild(btn)
+
+// will trigger onAdoption call
+iframe.contentDocument.body.appendChild(btn)
+</code-snippet>

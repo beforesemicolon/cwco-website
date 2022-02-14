@@ -31,7 +31,6 @@ module.exports = {
     {label: en.menu.documentation.context, link: "/documentation/context", subMenu: []},
     {label: en.menu.documentation.stylesheet, link: "/documentation/stylesheet", subMenu: []},
     {label: en.menu.documentation.events, link: "/documentation/events", subMenu: []},
-    {label: en.menu.documentation.errors, link: "/documentation/errors", subMenu: []},
     {label: en.menu.documentation.faq, link: "/documentation/faq", subMenu: []},
   ],
   footer: {

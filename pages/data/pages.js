@@ -69,6 +69,5 @@ module.exports = {
     template: "stylesheet"
   }),
   "/documentation/events": createPage("/documentation/events", {localeKey: "events", template: "events"}),
-  "/documentation/errors": createPage("/documentation/errors", {localeKey: "errors", template: "errors"}),
   "/documentation/faq": createPage("/documentation/faq", {localeKey: "faq", template: "faq"}),
 }
