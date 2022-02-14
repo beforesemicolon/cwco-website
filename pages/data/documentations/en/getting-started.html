@@ -48,7 +48,10 @@ const {
 <code-snippet language="js">
 // add it before importing CWCO classes if you plan to execute execute the node file
 import 'cwco/dist/node-window';
-import { WebComponent, ContextProviderComponent, Directive } from 'cwco';
+import {
+	WebComponent,
+	ContextProviderComponent,
+	Directive } from 'cwco';
 </code-snippet>
 
 <p>If you are using a Node environment to code your project but you will compile or build it before you <strong><strong>run it
@@ -57,15 +60,23 @@ in the browser</strong></strong>, you <strong>DON'T need to import window file</
 <code-snippet language="js">
 // btn.js
 
-require('cwco/dist/node-window'); // <- not needed if this code will run in the browser
+// not needed if this code will run in the browser
+require('cwco/dist/node-window');
 
 const { WebComponent } = require('cwco');
 
 class MyButton extends WebComponent {
-	static observedAttributes = ['type', 'label'];
+	static observedAttributes = [
+		'type',
+		'label'
+	];
 	
 	get template() {
-	return `<button type="{type}"><slot>{label}</slot></button>`;
+		return `
+			<button
+				type="{type}">
+				<slot>{label}</slot>
+			</button>`;
 	}
 }
 
@@ -73,6 +84,7 @@ MyButton.register();
 
 const btn = new MyButton();
 btn.innerHTML = 'label'
+
 document.body.appendChild(btn);
 
 console.log(btn.root.innerHTML);
@@ -82,6 +94,7 @@ console.log(btn.root.innerHTML);
 <h3 id="create-a-project"><a href="#create-a-project" class="target"></a>Create a Project</h3>
 <p>CWCO does not need to be build or compiled so it fits just fine with any project setup.</p>
 <p>You can use CWCO with any project alongside any library or framework. </p>
+
 <h3 id="vite-project"><a href="#vite-project" class="target"></a>Vite project</h3>
 
 <code-snippet>
@@ -101,7 +114,11 @@ class MyButton extends WebComponent {
 	static observedAttributes = ['type', 'label'];
 	
 	get template() {
-		return `<button type="{type}"><slot>{label}</slot></button>`;
+		return `
+			<button
+				type="{type}">
+				<slot>{label}</slot>
+			</button>`;
 	}
 }
 
@@ -113,19 +130,21 @@ MyButton.register();
 <code-snippet language="html">
 <!-- index.html -->
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 <head>
-	<meta charset="UTF-8" />
-	<link rel="icon" type="image/svg+xml" href="favicon.svg" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Vite App</title>
+	...
 </head>
 <body>
 	
 	<!-- build your view right in the HTML file -->
-	<my-button type="button" onclick="alert('it works!')">click me</my-button>
+	<my-button
+		type="button"
+		onclick="alert('it works!')">
+		click me
+	</my-button>
 	
 	<script type="module" src="/main.js"></script>
+	
 </body>
 </html>
 </code-snippet>
@@ -149,10 +168,12 @@ export class MyButton extends WebComponent {
 	static observedAttributes = ['type', 'label'];
 	
 	get template() {
-		return `<button type="{type}"><slot>{label}</slot></button>`;
+		return `
+			<button type="{type}">
+				<slot>{label}</slot>
+			</button>`;
 	}
 }
-
 
 // index.jsx
 import React from 'react';
@@ -184,14 +205,16 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
-return (
-	<div id="App">
-		<header className="App-header">
-			<img src={logo} className="App-logo" alt="logo" />
-			<my-button type="button" label="learn more" onClick={() => alert('it works!')}/>
-		</header>
-	</div>
-);
+	return (
+		<div id="App">
+			<header className="App-header">
+				<img src={logo} className="App-logo" alt="logo" />
+				<my-button type="button"
+				           label="learn more"
+				           onClick={() => alert('it works!')}/>
+			</header>
+		</div>
+	);
 }
 
 export default App;
@@ -225,10 +248,17 @@ ng serve --open
 import { WebComponent } from 'cwco';
 
 export class MyButton extends WebComponent {
-	static override observedAttributes = ['type', 'label'];
+	static override observedAttributes = [
+		'type',
+		'label'
+	];
 	
 	override get template() {
-		return `<button type="{type}"><slot>{label}</slot></button>`;
+		return `
+			<button
+				type="{type}">
+				<slot>{label}</slot>
+			</button>`;
 	}
 }
 </code-snippet>
@@ -242,7 +272,8 @@ import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppComponent} from './app.component';
 
-// import 'WebComponent' from cwco module and all your components here
+// import 'WebComponent' from cwco module
+// and all your components here
 import {WebComponent} from 'cwco';
 import {MyButton} from './web-components/my-button.component';
 
@@ -255,7 +286,8 @@ import {MyButton} from './web-components/my-button.component';
 	],
 	providers: [],
 	bootstrap: [AppComponent],
-	schemas: [CUSTOM_ELEMENTS_SCHEMA] // <- needed to avoid unrecognized tag name errors
+	// needed to avoid unrecognized tag name errors
+	schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {
 
@@ -274,5 +306,7 @@ export class AppModule {
 <!-- src/app/app.component.html -->
 <my-button
 	type="button"
-	onclick="alert('it works!')">click me</my-button>
+	onclick="alert('it works!')">
+	click me
+</my-button>
 </code-snippet>
