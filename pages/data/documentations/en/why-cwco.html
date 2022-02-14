@@ -15,26 +15,24 @@ simple API which under the hood uses the browsers native web components APIs.</p
 	<li>It is <b>providing additional features and capabilities</b> to create HTML tags;</li>
 </ul>
 
-<h3 id="what-you-mean-contextful"><a href="#what-you-mean-contextful"></a> What you mean Contextful?</h3>
+<h3 id="what-we-mean-by-contextful"><a href="#what-we-mean-by-contextful"></a>What we mean by Contextful?</h3>
 <p><strong>CWCO</strong> is built on this idea that DOM elements are just data that you manipulate to build web views.
 This data is stateful and changes with actions and events manually set by the developer.</p>
 
 <p>
 	For this reason every DOM element is
-	associated with a <em>metadata</em> and a <em>context state data</em> which makes it possible for many features
+	associated with a <b>metadata</b> and a <b>context state data</b> which makes it possible for many features
 	you will discover as you go through these documents.
 </p>
 
-<p>Because the DOM is organized in a Tree data structure, a parent data can be inherited by its descendants which is how
-data changes propagate down. Data can also flow up unlike many libraries out there. CWCO does not re-invent the DOM, it
-just works with it.</p>
+<p>Because the DOM is organized in a Tree data structure, a parent node data can be inherited by its descendants which is how
+data changes propagate dow. Data flows up via events and context methods you set. CWCO does not re-invent the DOM, it
+just works with it allowing you to traverse it as you please.</p>
 
-<p>
-	The DOM is pretty free and you can traverse it up and down as you like to do whatever you
-	want. CWCO will not prevent you from doing anything. It will just provide you with tool to do those things easily.
-</p>
+<p>This association of DOM elements and data allows for quick DOM updates and data to be shared deeply without
+you have to pass it via attributes form element to element.</p>
 
-<p>This makes it so it does DOM updates really fast.</p>
+<p>This makes it, so it does DOM updates really fast.</p>
 
 <h3 id="why-cwco"><a href="#why-cwco"></a> Why CWCO?</h3>
 <p>CWCO is unique in its design. It is built to simplify how you build Web Components in order to promote this technology

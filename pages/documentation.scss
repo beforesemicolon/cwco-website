@@ -27,10 +27,17 @@
     }
     
     h3 {
-      border-bottom: 1px solid var(--light-grey, $light-grey);
+      border-bottom: 1px solid var(--mid-grey, $mid-grey);
       padding-bottom: 10px;
+      margin-top: 30px;
+      margin-bottom: 10px;
+    }
+    
+    h4 {
       margin-top: 40px;
       margin-bottom: 10px;
+      font-size: 18px;
+      font-weight: 400;
     }
   
     p, li, a {
@@ -46,7 +53,7 @@
     }
     
     p {
-      margin-bottom: 25px;
+      margin-bottom: 15px;
   
       code {
         font-family: monospace;
