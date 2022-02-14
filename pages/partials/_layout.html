@@ -60,8 +60,20 @@
 					</li>
 				</ul>
 				<ul aria-label="documentation-menu" role="menubar">
-					<li #repeat="$data.menu.documentation" #attr="class, active, path === $item.link">
+					<li #repeat="$data.menu.documentation"
+					    class="{path === $item.link && !$item.subMenu?.length ? 'active' : ''}
+			      {$item.subMenu?.length ? 'with-submenu' : ''}
+			      {$item.subMenu?.some(m => m.link === path) ? 'expanded' : ''}">
 						<a role="menuitem" href="{$item.link}">{$item.label}</a>
+						<ul aria-label="documentation-sub-menu"
+						    role="menubar"
+						    #if="$item.subMenu?.length"
+						    #attr="hidden, !$item.subMenu?.some(m => m.link === path)">
+							<li #repeat="$item.subMenu as subMenuItem"
+							    #attr="class, active, path === subMenuItem.link">
+								<a role="menuitem" href="{subMenuItem.link}">{subMenuItem.label}</a>
+							</li>
+						</ul>
 					</li>
 					<li>
 						<address aria-label="social-media" class="row gap-xsm align-right">

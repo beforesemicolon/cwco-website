@@ -16,7 +16,6 @@ body {
   margin: 0;
   background: var(--light, $light);
   color: var(--dark-grey, $dark-grey);
-  scroll-margin-top: 115px;
 }
 
 strong {
@@ -100,7 +99,6 @@ header {
       margin: 0;
       padding: 0;
       display: flex;
-      gap: 20px;
   
       &[aria-label="documentation-menu"] {
         display: none;
@@ -108,11 +106,7 @@ header {
     
       & li {
         border-bottom: 1px solid transparent;
-      
-        &:hover,
-        &.active {
-          border-color: var(--black, $black);
-        }
+        position: relative;
       
         a {
           padding: 10px;
@@ -125,9 +119,53 @@ header {
             font-weight: 500;
           }
         }
-      
-        &.active a {
-          font-weight: 500;
+  
+        &.active {
+          & > a {
+            font-weight: 500;
+          }
+    
+          &::before {
+            content: "";
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--cta-color, $cta-color);
+            position: absolute;
+            left: 15px;
+            top: 15px;
+          }
+        }
+  
+        &.with-submenu {
+          
+          &::before {
+            content: "";
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: url("../assets/arrow-down-icon.svg") center center/ 100% no-repeat;
+            position: absolute;
+            left: 15px;
+            top: 15px;
+          }
+    
+          &.expanded {
+            background: var(--light-grey, $light-grey);
+            
+            &::before {
+              background: url("../assets/arrow-up-icon.svg") center center/ 100% no-repeat;
+            }
+  
+            ul {
+              background: var(--light-grey, $light-grey);
+              
+              li {
+                font-size: 14px;
+              }
+            }
+          }
         }
       }
     }
@@ -285,7 +323,7 @@ footer {
             padding-right: 30px;
             padding-bottom: 30px;
             margin-top: 30px;
-            position: absolute;
+            position: fixed;
             bottom: 0;
             right: 0;
             background: var(--light, $light);

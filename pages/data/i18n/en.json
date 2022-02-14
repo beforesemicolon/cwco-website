@@ -7,6 +7,82 @@
     "documentation": {
       "title": "Documentation | CWCO - Web Components Library",
       "description": "CWCO Documentation, Getting Started and Tutorial Guide"
+    },
+    "gettingStarted": {
+      "title": "Getting Started Guide | CWCO - Web Components Library",
+      "description": "CWCO Getting Started Guide Documentation"
+    },
+    "webComponent": {
+      "title": "WebComponent | CWCO - Web Components Library",
+      "description": "CWCO WebComponent Class"
+    },
+    "contextProviderComponent": {
+      "title": "ContextProviderComponent | CWCO - Web Components Library",
+      "description": "CWCO ContextProviderComponent Class"
+    },
+    "configurations": {
+      "title": "Configurations | CWCO - Web Components Library",
+      "description": "CWCO Component Configurations"
+    },
+    "onMount": {
+      "title": "onMount LiveCycle | CWCO - Web Components Library",
+      "description": "CWCO Component onMount LiveCycle"
+    },
+    "onDestroy": {
+      "title": "onDestroy LiveCycle | CWCO - Web Components Library",
+      "description": "CWCO Component onDestroy LiveCycle"
+    },
+    "onAdoption": {
+      "title": "onAdoption LiveCycle | CWCO - Web Components Library",
+      "description": "CWCO Component onAdoption LiveCycle"
+    },
+    "onUpdate": {
+      "title": "onUpdate LiveCycle | CWCO - Web Components Library",
+      "description": "CWCO Component onUpdate LiveCycle"
+    },
+    "onError": {
+      "title": "onError LiveCycle | CWCO - Web Components Library",
+      "description": "CWCO Component onError LiveCycle"
+    },
+    "attributes": {
+      "title": "Component Attributes | CWCO - Web Components Library",
+      "description": "CWCO Component Attributes "
+    },
+    "properties": {
+      "title": "Component Properties | CWCO - Web Components Library",
+      "description": "CWCO Component Properties"
+    },
+    "template": {
+      "title": "Component Template | CWCO - Web Components Library",
+      "description": "CWCO Component Template"
+    },
+    "directive": {
+      "title": "Component Directive | CWCO - Web Components Library",
+      "description": "CWCO Component Directive"
+    },
+    "customDirective": {
+      "title": "Component Custom Directive | CWCO - Web Components Library",
+      "description": "CWCO Component Custom Directive"
+    },
+    "context": {
+      "title": "Component Context | CWCO - Web Components Library",
+      "description": "CWCO Component Context"
+    },
+    "stylesheet": {
+      "title": "Component Stylesheet | CWCO - Web Components Library",
+      "description": "CWCO Component Stylesheet"
+    },
+    "events": {
+      "title": "Component Events | CWCO - Web Components Library",
+      "description": "CWCO Component Events"
+    },
+    "errors": {
+      "title": "Component Errors | CWCO - Web Components Library",
+      "description": "CWCO Component Errors"
+    },
+    "faq": {
+      "title": "FAQ | CWCO - Web Components Library",
+      "description": "CWCO Frequently Asked Questions"
     }
   },
   "menu": {
@@ -22,11 +98,23 @@
       "whyCWCO": "Why CWCO?",
       "gettingStarted": "Getting Started",
       "creatingComponents": "Creating Components",
+      "webComponent": "WebComponent",
+      "contextProviderComponent": "ContextProviderComponent",
+      "configurations": "configurations",
+      "onMount": "onMount",
+      "onDestroy": "onDestroy",
+      "onUpdate": "onUpdate",
+      "onAdoption": "onAdoption",
+      "onError": "onError",
       "componentsLifecycles": "Component Lifecycles",
-      "attrAndProps": "Attributes & Properties",
+      "attributes": "Attributes",
+      "properties": "Properties",
       "template": "Template",
       "directive": "Directive",
+      "customDirective": "Custom Directive",
       "context": "Context",
+      "events": "Events",
+      "errors": "Errors",
       "stylesheet": "Stylesheet",
       "faq": "FAQ"
     },
