@@ -3,6 +3,7 @@ const pages = require('./pages/data/pages');
 const en = require('./pages/data/i18n/en.json');
 const menu = require('./pages/data/menu');
 const socialMedia = require('./pages/data/social-media');
+const faq = require('./pages/data/faq');
 const {CodeSnippet} = require('./pages/tags/code-snippet');
 
 module.exports = {
@@ -12,6 +13,7 @@ module.exports = {
     pages,
     menu,
     socialMedia,
+    faq,
     translations: {
       en
     }
