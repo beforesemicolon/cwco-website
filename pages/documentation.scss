@@ -41,7 +41,7 @@
     }
   
     p, li, a {
-      line-height: 165%;
+      line-height: 125%;
     }
     
     ul, ol {
@@ -61,7 +61,6 @@
         padding: 5px;
         font-style: italic;
       }
-  
     }
     
     a {
@@ -92,7 +91,6 @@
         }
       }
     }
-  
   
     strong, b {
       font-weight: 300;
@@ -193,6 +191,10 @@ footer {
     article {
       min-width: 100%;
       max-width: 100%;
+  
+      code-snippet {
+        font-size: 12px !important;
+      }
     }
   
     #documentation-menu {
