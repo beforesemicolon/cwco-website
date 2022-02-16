@@ -1,4 +1,4 @@
-<h2 id="contextprovidercomponent"><a href="#contextprovidercomponent"></a>ContextProviderComponent</h2>
+<h2 id="contextprovidercomponent"><a href="#contextprovidercomponent">ContextProviderComponent</a></h2>
 <p>The ContextProviderComponent class is a
    special <a href="https://github.com/beforesemicolon/cwco/blob/master/docs/WebComponent.md">WebComponent</a> class
    in a sense that it allows you to define the template right in your HTML file with it serving as the data provider for
@@ -12,10 +12,10 @@ const {ContextProviderComponent} = window;
 import {ContextProviderComponent} from "cwco";
 </code-snippet>
 
-<h3 id="mode"><a href="#mode"></a>Mode</h3>
+<h3 id="mode"><a href="#mode">Mode</a></h3>
 <p>By default, the ContextProviderComponent is in the <code>&quot;none&quot;</code> mode. Which means that its content can be easily
    target by CSS selectors of the document or in javascript DOM queries.</p>
-<h3 id="template"><a href="#template"></a>Template</h3>
+<h3 id="template"><a href="#template">Template</a></h3>
 <p>By default, the template is a single slot tag which means you don&#39;t need to define the component template inside the
    class.</p>
 <p>You can define your data in the class...</p>
@@ -44,7 +44,7 @@ TodoApp.register();
 </todo-app>
 </code-snippet>
 
-<h3 id="registration"><a href="#registration"></a>Registration</h3>
+<h3 id="registration"><a href="#registration">Registration</a></h3>
 <p>If you intend to define content in the HTML file, you MUST register the context provider component before all other components.</p>
 <p>If you have multiple context provider component you must register them in the order you use them in the HTML file.</p>
 
@@ -87,7 +87,7 @@ StoreDataProvider.register();
 TodoApp.register();
 </code-snippet>
 
-<h3 id="the-slot-tag"><a href="#the-slot-tag"></a>The slot tag</h3>
+<h3 id="the-slot-tag"><a href="#the-slot-tag">The slot tag</a></h3>
 <p>What really makes the ContextProviderComponent special is how it handles the <code>slot</code> tag. It has a custom slot handler that gives
    it its superpowers. This means that no matter the component mode, the slot tag will be handled the same way which is
    not something you can do natively in HTML.</p>
@@ -147,7 +147,7 @@ TodoApp.register();
 </todo-app>
 </code-snippet>
 
-<h3 id="data-and-methods"><a href="#data-and-methods"></a>Data and methods</h3>
+<h3 id="data-and-methods"><a href="#data-and-methods">Data and methods</a></h3>
 <p>Any data defined inside the class can be accessed inside the template but not inside the custom components
    you create.</p>
 <p>From the example above, the <code>app</code> object cannot be accessed inside the <code>todo-item</code> template. However, you can access
@@ -175,7 +175,7 @@ TodoApp.register();
 <p>What this means is that, any HTML tag that is placed inside the body of the <code>todo-app</code> tag can access the
    ToDoApp class data and methods. Any HTML tag that belongs to other tags template will not. For those, you
    need to specify data as context.</p>
-<h3 id="context"><a href="#context"></a>Context</h3>
+<h3 id="context"><a href="#context">Context</a></h3>
 <p>ContextProviderComponent is like any other WebComponent and therefore, it may contain
 	<a href="https://github.com/beforesemicolon/cwco/blob/master/docs/context.md">context data</a>.</p>
 <p>This is the only way you can provide data inside the descendents component templates and it is excellent
@@ -213,7 +213,7 @@ class ThemeProvider extends ContextProviderComponent {
 </todo-app>
 </code-snippet>
 
-<h3 id="styling"><a href="#styling"></a>Styling</h3>
+<h3 id="styling"><a href="#styling">Styling</a></h3>
 <p>By default, all context providers tag will be styled as display block. This can easily be overridden by defining
    your own stylesheet property.</p>
 <p>Styling your context provider component is no different than styling any other WebComponent but because

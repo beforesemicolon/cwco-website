@@ -1,4 +1,4 @@
-<h2 id="directives"><a href="#directives"></a>Directives</h2>
+<h2 id="directives"><a href="#directives">Directives</a></h2>
 <p>Directives are HTML attributes not specific to any tag. They are global logic attributes.</p>
 <p>The idea of a directive is already built-in into HTML. For example, the attributes <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/draggable">draggable</a>
    and <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/contenteditable">contenteditable</a> are directives.
@@ -9,10 +9,10 @@
    Their value are already understood to be information to be executed for a result. When creating a custom one,
    you have a chance to handle parsing the value yourself, so you can take values in whatever format you want.</p>
 
-<h3 id="repeat"><a href="#repeat"></a>repeat</h3>
+<h3 id="repeat"><a href="#repeat">repeat</a></h3>
 <p>The <code>repeat</code> directive will repeat the DOM element based on a list-like object values or a specific number.</p>
 
-<h4 id="repeat-based-on-number"><a href="#repeat-based-on-number"></a>repeat based on number</h4>
+<h4 id="repeat-based-on-number"><a href="#repeat-based-on-number">repeat based on number</a></h4>
 <p>You can specify how many times you want the element to be repeated by simply providing a number.</p>
 <p>Below example will repeat the <code>.list-item</code> div 10 times.</p>
 
@@ -26,7 +26,7 @@ class FlatList extends WebComponent {
 }
 </code-snippet>
 
-<h4 id="repeat-based-on-data"><a href="#repeat-based-on-data"></a>repeat based on data</h4>
+<h4 id="repeat-based-on-data"><a href="#repeat-based-on-data">repeat based on data</a></h4>
 <p>You can also provide iterable objects and object literal as value, and it will repeat the element based on number of
    entries in the object. </p>
 <p>It supports the following objects:</p>
@@ -76,7 +76,7 @@ class FlatList extends WebComponent {
 }
 </code-snippet>
 
-<h4 id="item"><a href="#item"></a>$item</h4>
+<h4 id="item"><a href="#item">$item</a></h4>
 <p>It would make no sense to simply repeat elements without a way to reference the items in the list. For that reason,
    the <code>repeat</code> directive creates a <code>$item</code> context variable on the element it is set that can be inherited by any child node.</p>
 <p>It is available whether you use a number or list-like objects.</p>
@@ -105,7 +105,7 @@ class FlatList extends WebComponent {
 }
 </code-snippet>
 
-<h4 id="key"><a href="#key"></a>$key</h4>
+<h4 id="key"><a href="#key">$key</a></h4>
 <p>Similarly, you can read the <code>key</code> for the item you are iterating. When using number, Array and Set as value, the <code>$key</code> will
    be the index value. For Map and Object literal, the key will be the key of the item.</p>
 
@@ -135,7 +135,7 @@ class FlatList extends WebComponent {
 }
 </code-snippet>
 
-<h4 id="repeat-as"><a href="#repeat-as"></a>Repeat As</h4>
+<h4 id="repeat-as"><a href="#repeat-as">Repeat As</a></h4>
 <p>You don&#39;t have to stick to <code>$item</code> and <code>$key</code>. You may also specify how you want to reference the items and keys of
    your list which can be convenient when you have nested repeats.</p>
 

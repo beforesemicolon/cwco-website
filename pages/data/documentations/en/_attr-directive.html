@@ -1,4 +1,4 @@
-<h2 id="directives"><a href="#directives"></a>Directives</h2>
+<h2 id="directives"><a href="#directives">Directives</a></h2>
 <p>Directives are HTML attributes not specific to any tag. They are global logic attributes.</p>
 <p>The idea of a directive is already built-in into HTML. For example, the attributes <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/draggable">draggable</a>
    and <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/contenteditable">contenteditable</a> are directives.
@@ -9,7 +9,7 @@
    Their value are already understood to be information to be executed for a result. When creating a custom one,
    you have a chance to handle parsing the value yourself, so you can take values in whatever format you want.</p>
 
-<h3 id="attr"><a href="#attr"></a>attr</h3>
+<h3 id="attr"><a href="#attr">attr</a></h3>
 <p>The <code>attr</code> directive allows you to set an attribute on the DOM element based on TRUTHY or FALSEY value.</p>
 <p>It uses the dot notation to separate the attribute name and the value and its value can have two parts
    depending on the attribute you are setting;</p>
@@ -23,7 +23,7 @@ curly braces for data binding but for the [condition]
 the curly braces are not necessary.
 </code-snippet>
 
-<h4 id="boolean-attributes"><a href="#boolean-attributes"></a>Boolean Attributes</h4>
+<h4 id="boolean-attributes"><a href="#boolean-attributes">Boolean Attributes</a></h4>
 <p>There are certain attributes in HTML that are considered to be <a href="https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#boolean-attributes">boolean attributes</a>.
    They do not require a value, but if you set them to true, they will be set to the attribute name.</p>
 <p>The below example will only set the <code>disabled</code> attribute on the button if the <code>disabled</code> property is truthy.</p>
@@ -45,7 +45,7 @@ ActionButton.register();
 </code-snippet>
 
 <p>This library automatically converts native boolean attributes to BOOLEAN values properties.</p>
-<h4 id="style-attribute"><a href="#style-attribute"></a>Style Attribute</h4>
+<h4 id="style-attribute"><a href="#style-attribute">Style Attribute</a></h4>
 <p>There are two ways you can use the <code>attr</code> directive to set style attributes. You can use it for a specific style
    property...</p>
 
@@ -95,7 +95,7 @@ ActionButton.register();
 attr.style="[CSS string], [condition]"
 </code-snippet>
 
-<h4 id="class-attribute"><a href="#class-attribute"></a>Class Attribute</h4>
+<h4 id="class-attribute"><a href="#class-attribute">Class Attribute</a></h4>
 <p>The <code>attr</code> directive can also be used to set class attributes, and it follows the same concept as the style attribute.</p>
 <p>You can use it for a specific class...</p>
 
@@ -141,7 +141,7 @@ ActionButton.register();
 
 <p>with the format of:</p>
 
-<h4 id="data-attribute"><a href="#data-attribute"></a>Data Attribute</h4>
+<h4 id="data-attribute"><a href="#data-attribute">Data Attribute</a></h4>
 <p>The data attribute is another special attribute that only follows a single format:</p>
 <p>You can only use it for a specific data name</p>
 

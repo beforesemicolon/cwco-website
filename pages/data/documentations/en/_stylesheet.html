@@ -1,4 +1,4 @@
-<h2 id="stylesheet"><a href="#stylesheet"></a>Stylesheet</h2>
+<h2 id="stylesheet"><a href="#stylesheet">Stylesheet</a></h2>
 <p>The stylesheet getter is a way to define the style for the component.</p>
 
 <code-snippet language="js">
@@ -29,7 +29,7 @@ class SubmitButton extends WebComponent {
 <p>You don&#39;t need to place the CSS inside the style tag when defining the <code>stylesheet</code> property. <code>WebComponent</code> will
    automatically place it inside the <code>style</code> tag for you whether inside the shadow root or the head tag.</p>
 
-<h3 id="mode-none"><a href="#mode-none"></a>mode none</h3>
+<h3 id="mode-none"><a href="#mode-none">mode none</a></h3>
 <p>If the mode of the component is set to <code>none</code>, the style is then placed inside the <code>head</code> tag in the document and any
    reference of <code>:host</code> will be replaced with the name of the tag.</p>
 <p>The above example style will look like the following the head tag.</p>
@@ -52,7 +52,7 @@ class SubmitButton extends WebComponent {
 <p>It is very important to start any style selector with <code>:host</code> to avoid any affecting other elements on the page
    if you intend to use the <code>none</code> mode.</p>
 
-<h3 id="data-binding"><a href="#data-binding"></a>data binding</h3>
+<h3 id="data-binding"><a href="#data-binding">data binding</a></h3>
 <p>You can refer to data inside the stylesheet by using the <code>[...]</code> syntax. You can only do it for the property values.</p>
 <p>This is great for when you want to refer to some theme data or simply want to react to data changes for CSS updates.
    Yes! It will update on data changes. This means that you may not need to define class to be set or removed
@@ -106,7 +106,7 @@ class ThemeProvider extends ContextProvider {
 </theme-provider>
 </code-snippet>
 
-<h3 id="import-stylesheet"><a href="#import-stylesheet"></a>import stylesheet</h3>
+<h3 id="import-stylesheet"><a href="#import-stylesheet">import stylesheet</a></h3>
 <p>What the <code>stylesheet</code> can also return is a stylesheet link. This is useful when you want to import a stylesheet
    from another file.</p>
 
@@ -124,7 +124,7 @@ class MyButton extends WebComponent {
 
 <p>Modern Browsers will automatically import the stylesheet only ONCE even if the component is used multiple times on the page.</p>
 
-<h3 id="extend-style"><a href="#extend-style"></a>extend style</h3>
+<h3 id="extend-style"><a href="#extend-style">extend style</a></h3>
 <p>The ability to extend style is super useful when you want to inheret other components to make specific changes.</p>
 <p>You can have a top component that is not meant to be user directly on the DOM which must NOT be registered. This component
    will contain the basic style, template, data and logic needed for the component.</p>

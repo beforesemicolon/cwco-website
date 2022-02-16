@@ -1,4 +1,4 @@
-<h2 id="custom-directives"><a href="#custom-directives"></a>Custom Directives</h2>
+<h2 id="custom-directives"><a href="#custom-directives">Custom Directives</a></h2>
 <p>The idea of a directive is already built-in into HTML. For example, the attributes <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/draggable">draggable</a>
    and <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/contenteditable">contenteditable</a> are directives.</p>
 <p>Directives are simply HTML attributes not specific to any tag which give the tag additional capabilities or change it to
@@ -7,7 +7,7 @@
    implementation -- something never seen before. That means that you can implement your own <code>draggable</code> directive
    to behave the way you would like to.</p>
 
-<h3 id="directive"><a href="#directive"></a>Directive</h3>
+<h3 id="directive"><a href="#directive">Directive</a></h3>
 <p>To give you the ability to create your own directive, a <code>Directive</code> class is exposed which you can extend to define
    your custom directive. It is that easy.</p>
 
@@ -27,7 +27,7 @@ class Wrapper extends Directive {
 }
 </code-snippet>
 
-<h3 id="name"><a href="#name"></a>Name</h3>
+<h3 id="name"><a href="#name">Name</a></h3>
 <p>⚠️ It is very important to know that the name of your class is used to create the directive, and it will be all
    lower-cased when used on the tags.</p>
 <p>For our example above, the attribute would be called <code>wrapper</code>.</p>
@@ -35,7 +35,7 @@ class Wrapper extends Directive {
 <p>⚠️ Another good thing to know is that the directive attribute is removed before attaching the element to the DOM but the
    framework keeps track of the node and its directive and will make sure to handle things in the background for you.</p>
 
-<h3 id="register"><a href="#register"></a>Register</h3>
+<h3 id="register"><a href="#register">Register</a></h3>
 <p>Just by creating your directive class will not make it immediately usable. You must register your directive first by
    calling the <code>register</code> method very similarly to how you register components.</p>
 
@@ -62,7 +62,7 @@ Wrapper.register('wrap-in');
 <p>⚠️ Simply make sure that the directive name is a valid attribute name and without &quot;dots&quot; as these have special meaning
    for this library. This library will not validate your directive name.</p>
 
-<h3 id="parse-value"><a href="#parse-value"></a>Parse Value</h3>
+<h3 id="parse-value"><a href="#parse-value">Parse Value</a></h3>
 <p>The <code>Directive</code> class exposes the <code>parseValue</code> method you must override to handle parsing the attribute value string
    before it gets changed to a specific data.</p>
 <p>It must return a valid JSON value string, and it gets called with the value (if any) and props which are the rest of the attribute name
@@ -115,7 +115,7 @@ Wrapper.register();
    array with 2 items. The first is the value and the second is the prop. This string will be then changed into a real
    array and passed to the <code>render</code> method as first argument.</p>
 
-<h3 id="render"><a href="#render"></a>Render</h3>
+<h3 id="render"><a href="#render">Render</a></h3>
 <p>The <code>render</code> method is what tells the framework how to render the element. It is also where you will put the logic related
    to how you want the element to render. </p>
 <p>⚠️ It must return a valid node(text, comment or any other HTML element), array of nodes or null. Whatever you return
@@ -174,7 +174,7 @@ Wrapper.register();
 	<li>setting or removing directive attributes. These may or not be picked up by the framework which may lead to weird behaviors.</li>
 </ul>
 
-<h3 id="node-reference"><a href="#node-reference"></a>node reference</h3>
+<h3 id="node-reference"><a href="#node-reference">node reference</a></h3>
 <p>You may also create node references similar to the <code>ref</code> directive using the <code>setRef</code> method of <code>Directive</code>.</p>
 <p>This method will set the reference of the node you specify in the component <code>$refs</code> object which you can access in
    component lifecycle or any other methods.</p>
@@ -204,7 +204,7 @@ FirstChildRef.register();
 
 <p>This will be accessed the same way you <a href="https://github.com/beforesemicolon/cwco/blob/master/docs/directives.md#ref">access node references inside component</a>.</p>
 
-<h3 id="node-context"><a href="#node-context"></a>node context</h3>
+<h3 id="node-context"><a href="#node-context">node context</a></h3>
 <p>You may also define context data for the node element itself. This is similar to <a href="https://github.com/beforesemicolon/cwco/blob/master/docs/context.md">component context</a>
    which means that you can define data for the node which will be inherited by any descendent nodes.</p>
 <p>You already have seen this in action. When you use the <code>repeat</code> directive it sets <code>$item</code> and <code>$key</code> context

@@ -1,4 +1,4 @@
-<h2 id="properties"><a href="#properties"></a>Properties</h2>
+<h2 id="properties"><a href="#properties">Properties</a></h2>
 <p>Properties are simply class properties that WebComponent watch for updates.</p>
 <p>It must not be private, static or setters and getters in order to trigger a DOM update.</p>
 
@@ -21,7 +21,7 @@ class TodoItem extends WebComponent {
 }
 </code-snippet>
 
-<h3 id="property-update"><a href="#property-update"></a>Property Update</h3>
+<h3 id="property-update"><a href="#property-update">Property Update</a></h3>
 <p>Property can be updated inside the class or directly on the class element instance.</p>
 
 <code-snippet language="js">
@@ -105,13 +105,13 @@ document.body.appendChild(new CounterWidget())
 	<li>Deep updates on plain Array, Typed Arrays, Object Literals, Map and Set.</li>
 </ul>
 
-<h4 id="forceupdate"><a href="#forceupdate"></a>forceUpdate</h4>
+<h4 id="forceupdate"><a href="#forceupdate">forceUpdate</a></h4>
 <p>The <code>forceUpdate</code> is a NOT recommended way to force the component DOM Nodes to be updated. </p>
 <p>You should NEVER feel the need to use this method as the component does its job to update the DOM when there is
    change at any level of the properties value.</p>
 <p>Know that, it will not cause the <a href="https://github.com/beforesemicolon/cwco/blob/master/docs/livecycles.md#onupdate">onUpdate</a> livecycle method to be called.</p>
 
-<h3 id="private-property"><a href="#private-property"></a>Private Property</h3>
+<h3 id="private-property"><a href="#private-property">Private Property</a></h3>
 <p>Private properties are private to anything outside the class. They are perfect when you want to set data
    that should only be accessed or changed from inside the class.</p>
 <p>One thing to know is that they do not trigger DOM update when they are updated. </p>

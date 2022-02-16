@@ -61,11 +61,11 @@
         padding: 5px;
         font-style: italic;
       }
-    }
-    
-    a {
-      color: var(--cta-color, $cta-color);
-      font-weight: 300;
+  
+      a {
+        color: var(--cta-color, $cta-color);
+        font-weight: 300;
+      }
     }
   
     details {

@@ -1,11 +1,11 @@
-<h2 id="template"><a href="#template"></a>Template</h2>
+<h2 id="template"><a href="#template">Template</a></h2>
 <p>The web component template is a way for you to communicate to <code>WebComponent</code> what the inner HTML of your component looks
    like.</p>
 <p>Other libraries simply take your HTML or JSX and recalculate things when data are changed.</p>
 <p><code>cwco</code> templates works differently than other libraries. It will only be read it once when creating the DOM
                      elements and any detected changes is then made directly on the DOM. The template is simply a static data source.</p>
 
-<h3 id="define-template"><a href="#define-template"></a>Define Template</h3>
+<h3 id="define-template"><a href="#define-template">Define Template</a></h3>
 <p>All you need to define your component template is set a getter for template where you return the HTML string
    representing the inner part of your component</p>
 
@@ -24,7 +24,7 @@ class TodoItem extends WebComponent {
 </code-snippet>
 
 <p>It is important to keep template readonly with the getter.</p>
-<h4 id="template-id"><a href="#template-id"></a>Template ID</h4>
+<h4 id="template-id"><a href="#template-id">Template ID</a></h4>
 <p>You may also use HTML <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template">template tag</a> to set
    the template of your component and all you have to do is tell the component about the template id.</p>
 
@@ -45,7 +45,7 @@ class TodoItem extends WebComponent {
 }
 </code-snippet>
 
-<h3 id="data-binding"><a href="#data-binding"></a>Data Binding</h3>
+<h3 id="data-binding"><a href="#data-binding">Data Binding</a></h3>
 <p>You can use curly braces to bind data to your templates. Inside, you can refer to properties from which
    you want the value from or add logic that produces strings to be added to your HTML.</p>
 
@@ -70,7 +70,7 @@ class TodoItem extends WebComponent {
 
 <p><code>cwco</code> tracks these data references and know when and where to update the DOM when there is a data change. You
                      don&#39;t have to do anything to update the DOM once there is a data change.</p>
-<h4 id="escaping-curly-braces"><a href="#escaping-curly-braces"></a>Escaping curly braces</h4>
+<h4 id="escaping-curly-braces"><a href="#escaping-curly-braces">Escaping curly braces</a></h4>
 <p>There are cases where you want to add a curly brace to your template. For example, in a regex for the input
    pattern attribute:</p>
 
@@ -86,7 +86,7 @@ class TodoItem extends WebComponent {
 <input type="text" pattern="{'{0,9}'}">
 </code-snippet>
 
-<h4 id="data-logic"><a href="#data-logic"></a>Data Logic</h4>
+<h4 id="data-logic"><a href="#data-logic">Data Logic</a></h4>
 <p>Inside the curly brace you can put javascript logic that gets executed and result is added to the template.</p>
 
 <code-snippet language="js">
@@ -107,7 +107,7 @@ class TodoItem extends WebComponent {
 }
 </code-snippet>
 
-<h3 id="the-this-keyword"><a href="#the-this-keyword"></a>the &quot;this&quot; keyword</h3>
+<h3 id="the-this-keyword"><a href="#the-this-keyword">the &quot;this&quot; keyword</a></h3>
 <p>There will be situations that you must use the <code>this</code> keyword in order to put data in the template.</p>
 <p>Any explicit public properties declared or observed attributes defined can be referenced in the template without the
    need to use the <code>this</code> keyword.</p>
@@ -127,7 +127,7 @@ class SampleComp extends WebComponent {
 <p>If the property is something that exists in the HTMLElement or any of its ancestors, you must explicitly reach them
    using the <code>this</code> keyword.</p>
 <p>The same is true for any private properties.</p>
-<h3 id="javascript-template-literal"><a href="#javascript-template-literal"></a>Javascript Template Literal</h3>
+<h3 id="javascript-template-literal"><a href="#javascript-template-literal">Javascript Template Literal</a></h3>
 <p>There is a huge difference between
    the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals">Javascript template literal</a>
    curly braces and <code>cwco</code> template data binding curly braces.</p>
@@ -157,7 +157,7 @@ class SampleComp extends WebComponent {
 </code-snippet>
 
 <p>It is important for the template to contain the curly braces to mark the placeholders to put the data into.</p>
-<h3 id="slots"><a href="#slots"></a>slots</h3>
+<h3 id="slots"><a href="#slots">slots</a></h3>
 <p>Using <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot">HTML slot tag</a> will make templates more flexible
    and dynamic. It is the final detail when it comes to template.</p>
 <p>With <code>WebComponent</code> slots are even more powerful and allows for something no other library can do.</p>
