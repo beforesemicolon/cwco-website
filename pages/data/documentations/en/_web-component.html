@@ -116,10 +116,10 @@ document.body.appendChild(countDisplay);
 */
 </code-snippet>
 
-<p><a href="https://github.com/beforesemicolon/cwco/blob/master/docs/attributes.md">Learn More about Observed Attributes</a></p>
+<p><a href="/documentation/attributes">Learn More about Observed Attributes</a></p>
 <p>When your component is about to render, the template is processed. This is the only time your
    template is used and anything update after that happens directly on the DOM.</p>
-<p><a href="https://github.com/beforesemicolon/cwco/blob/master/docs/template.md">Learn More About Templates</a></p>
+<p><a href="/documentation/template">Learn More About Templates</a></p>
 <h3 id="shadow-dom"><a href="#shadow-dom">Shadow DOM</a></h3>
 <p>By default, the WebComponent will render your component content inside an <code>open</code> <a href="https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot">shadow-root</a>.</p>
 <p>You can change that by specifying the <code>mode</code> static property inside the class.</p>
@@ -139,7 +139,7 @@ class MyButton extends WebComponent {
 </code-snippet>
 
 <p><strong><em>Note</em></strong>: The <code>none</code> mode is not natively supported. It is a unique mode specific to this library.</p>
-<p><a href="https://github.com/beforesemicolon/cwco/blob/master/docs/configurations.md#mode">Learn More about Mode</a></p>
+<p><a href="/documentation/configurations#mode">Learn More about Mode</a></p>
 <p>The shadow-root element is accessible via the <code>root</code> or <code>shadowRoot</code> property. It will be null if the mode is <code>closed</code>.
    It will return the component itself if the mode is <code>none</code>.</p>
 
