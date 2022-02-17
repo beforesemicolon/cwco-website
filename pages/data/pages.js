@@ -1,11 +1,11 @@
 const path = require("path");
 const fs = require("fs");
 
-const createPage = (url, {localeKey, template, imageUrl = ""} = {}) => {
+const createPage = (urlPath, {localeKey, template, imageUrl = ""} = {}) => {
   return {
     title: (locale) => locale.pages[localeKey].title,
     description: (locale) => locale.pages[localeKey].description,
-    url,
+    path: urlPath,
     CSP: "script-src \"nonce-local\", \"strict-dynamic\" \"unsafe-inline\" https:; object-src \"none\"; base-uri http://localhost:3000/;",
     imageUrl,
     content: (locale) => {

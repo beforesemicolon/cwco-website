@@ -31,6 +31,15 @@
     &-center {
       justify-content: center;
     }
+    &-apart {
+      justify-content: space-between;
+    }
+    &-evenly {
+      justify-content: space-evenly;
+    }
+    &-around {
+      justify-content: space-around;
+    }
   }
   
   &.baseline {
@@ -68,6 +77,15 @@
     }
     &-bottom {
       justify-content: flex-end;
+    }
+    &-apart {
+      justify-content: space-between;
+    }
+    &-evenly {
+      justify-content: space-evenly;
+    }
+    &-around {
+      justify-content: space-around;
     }
   }
 }

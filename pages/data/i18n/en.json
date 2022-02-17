@@ -126,7 +126,7 @@
       "attributes": "Attributes",
       "properties": "Properties",
       "template": "Template",
-      "directive": "Directive",
+      "directive": "Directives",
       "ifDirective": "If",
       "repeatDirective": "Repeat",
       "attrDirective": "Attr",
