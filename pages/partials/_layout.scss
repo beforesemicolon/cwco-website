@@ -72,6 +72,9 @@ header {
   align-items: flex-end;
   border-bottom: 1px solid $light-grey;
   width: 100vw;
+  position: fixed;
+  left: 0;
+  top: 0;
   
   h1 {
     margin: 0;
@@ -183,6 +186,7 @@ header {
 
 // main
 main {
+  padding-top: 115px;
 }
 
 // footer

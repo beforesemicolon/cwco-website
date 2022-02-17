@@ -17,9 +17,10 @@
     padding: 50px;
     min-width: calc(100% - 350px);
     max-width: calc(100% - 350px);
-    
+
     h2, h3, h4, h5, h6 {
       font-weight: 300;
+      scroll-margin-top: 120px;
     }
     
     h2 {

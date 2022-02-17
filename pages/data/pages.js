@@ -11,7 +11,7 @@ const createPage = (url, {localeKey, template, imageUrl = ""} = {}) => {
     content: (locale) => {
       return template
         ? fs.readFileSync(
-          path.resolve(__dirname, `./documentations/${locale}/_${template}.html`),
+          path.resolve(__dirname, `../partials/documentations/${locale}/_${template}.html`),
           'utf-8'
         )
         : '';
