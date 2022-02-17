@@ -1,7 +1,7 @@
 const path = require("path");
 const fs = require("fs");
 
-const createPage = (urlPath, {localeKey, template, imageUrl = ""} = {}) => {
+const createPage = (urlPath, {localeKey, template, imageUrl = "/assets/cwco-thumbnail.jpg"} = {}) => {
   return {
     title: (locale) => locale.pages[localeKey].title,
     description: (locale) => locale.pages[localeKey].description,

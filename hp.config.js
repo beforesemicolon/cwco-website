@@ -9,6 +9,7 @@ const {CodeSnippet} = require('./pages/tags/code-snippet');
 module.exports = {
   env,
   staticData: {
+    domain: env === 'development' ? 'http://localhost:3000' : 'https://cwco.io',
     version: "1.2.0",
     pages,
     menu,
