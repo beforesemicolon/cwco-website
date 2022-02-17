@@ -1,0 +1,12 @@
+@import "sass/fonts";
+@import "sass/normalizer";
+@import "sass/theme";
+@import "partials/layout";
+@import "sass/components/button";
+@import "sass/components/flexbox";
+@import "sass/common";
+
+h2 {
+  text-align: center;
+  margin: 120px 0 150px;
+}

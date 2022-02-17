@@ -21,6 +21,7 @@ const createPage = (url, {localeKey, template, imageUrl = ""} = {}) => {
 
 module.exports = {
   "/": createPage("/", {localeKey: "home"}),
+  "/404": createPage("/404", {localeKey: "notFound"}),
   "/documentation": createPage("/documentation", {localeKey: "documentation", template: "why-cwco"}),
   "/documentation/getting-started": createPage("/documentation/getting-started", {
     localeKey: "gettingStarted",

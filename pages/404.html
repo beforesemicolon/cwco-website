@@ -1,0 +1,14 @@
+<variable name="t" value="$data.translations[locale] || $data.translations.en"></variable>
+<variable name="page" value="$data.pages[path]"></variable>
+
+<include partial="layout" data="{
+	...page,
+	title: page.title(t),
+	description: page.description(t),
+	version: $data.version,
+}">
+	<link rel="stylesheet" href="./404.scss" defer>
+
+	<h2>404 - Page Not Found!</h2>
+
+</include>

@@ -4,6 +4,10 @@
       "title": "CWCO - Web Components Library",
       "description": "Web Component Library to build future proof web libraries and application"
     },
+    "notFound": {
+      "title": "404 - Page Not Found | CWCO",
+      "description": "The page you are looking for no longer or never existed."
+    },
     "documentation": {
       "title": "Documentation | CWCO - Web Components Library",
       "description": "CWCO Documentation, Getting Started and Tutorial Guide"
