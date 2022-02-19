@@ -1,13 +1,17 @@
 const path = require("path");
 const fs = require("fs");
+const uniqueAlphaNumericId = require("../../utils/unique-alphanumeric");
 
 const createPage = (urlPath, {localeKey, template, imageUrl = "/assets/cwco-thumbnail.jpg"} = {}) => {
+  const nonce = uniqueAlphaNumericId()
   return {
     title: (locale) => locale.pages[localeKey].title,
     description: (locale) => locale.pages[localeKey].description,
     path: urlPath,
-    CSP: "script-src 'nonce-local', 'strict-dynamic' 'unsafe-inline' https: object-src; 'none'; base-uri 'self';",
+    nonce,
+    CSP: `script-src 'nonce-${nonce}' 'unsafe-eval'; base-uri 'self'; object-src 'none'; font-src 'self';`,
     imageUrl,
+    localeKey,
     content: (locale) => {
       return template
         ? fs.readFileSync(
@@ -21,6 +25,7 @@ const createPage = (urlPath, {localeKey, template, imageUrl = "/assets/cwco-thum
 
 module.exports = {
   "/": createPage("/", {localeKey: "home"}),
+  "/search-results": createPage("/search-results", {localeKey: "searchResults"}),
   "/404": createPage("/404", {localeKey: "notFound"}),
   "/documentation": createPage("/documentation", {localeKey: "documentation", template: "why-cwco"}),
   "/documentation/getting-started": createPage("/documentation/getting-started", {
