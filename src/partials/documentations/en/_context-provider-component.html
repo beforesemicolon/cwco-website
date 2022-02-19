@@ -1,6 +1,6 @@
 <h2 id="contextprovidercomponent"><a href="#contextprovidercomponent">ContextProviderComponent</a></h2>
 <p>The ContextProviderComponent class is a
-   special <a href="./documentation/web-component">WebComponent</a> class
+   special <a href="/documentation/web-component">WebComponent</a> class
    in a sense that it allows you to define the template right in your HTML file with it serving as the data provider for
    your template.</p>
 
@@ -130,7 +130,7 @@ TodoApp.register();
 </code-snippet>
 
 <p>You can render the <code>todo-item</code> tag inside the <code>todo-app</code> tag and it will be placed where the slot tag is defined using
-   the <a href="./documentation/repeat-directive">repeat directive</a> to repeat
+   the <a href="/documentation/repeat-directive">repeat directive</a> to repeat
    for every <code>app.todos</code> array item.</p>
 
 <code-snippet language="html">
@@ -177,7 +177,7 @@ TodoApp.register();
    need to specify data as context.</p>
 <h3 id="context"><a href="#context">Context</a></h3>
 <p>ContextProviderComponent is like any other WebComponent and therefore, it may contain
-	<a href="./documentation/context">context data</a>.</p>
+	<a href="/documentation/context">context data</a>.</p>
 <p>This is the only way you can provide data inside the descendents component templates and it is excellent
    for data you want to share deeply for all components.</p>
 
@@ -220,7 +220,7 @@ class ThemeProvider extends ContextProviderComponent {
    by default it does not use shadow root, you need to prefix every style with the <code>:host</code> to make sure
    the style does not affect things outside of its body.</p>
 <p>This is due to the special way style tags are handled in <code>none</code> mode. You can
-	<a href="./documentation/stylesheet">Lear more about it here</a></p>
+	<a href="/documentation/stylesheet">Lear more about it here</a></p>
 
 <code-snippet language="js">
 class TodoApp extends ContextProviderComponent {
@@ -252,6 +252,6 @@ class TodoApp extends ContextProviderComponent {
 
 
 <div class="row align-apart doc-navigation">
-	<a href="./documentation/web-component" class="btn outlined-btn">< Creating Component</a>
-	<a href="./documentation/configurations" class="btn outlined-btn">Configurations ></a>
+	<a href="/documentation/web-component" class="btn outlined-btn">< Creating Component</a>
+	<a href="/documentation/configurations" class="btn outlined-btn">Configurations ></a>
 </div>
