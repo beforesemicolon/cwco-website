@@ -43,7 +43,7 @@ module.exports = {
     learningResources: {
       title: en.menu.learningResources.title,
       items: [
-        {label: en.menu.learningResources.essentialTraining, path: "/essential-training"},
+        // {label: en.menu.learningResources.essentialTraining, path: "/essential-training"},
         {label: en.menu.learningResources.documentation, path: "/documentation"},
         {label: en.menu.learningResources.usageExamples, path: "/examples"},
         {label: en.menu.learningResources.youtubePlaylist, link: "https://www.youtube.com/playlist?list=PLpWvGP6yhJUjZJEhaULhXJ0NNbH_EOOuj"},
