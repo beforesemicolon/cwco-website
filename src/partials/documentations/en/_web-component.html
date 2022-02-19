@@ -1,7 +1,7 @@
 <h2 id="webcomponent"><a href="#webcomponent">WebComponent</a></h2>
 <p>The WebComponent class is the main API you need to interact with in order to create your components.
    That alone make things pretty simple to learn.</p>
-<p>This component by default extends the <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement">HTMLElement</a>
+<p>This component by default extends the <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement">HTMLElement</a>
    class which means it does not allow you to extend specific HTML elements.</p>
 <p>So instead of initializing your components like this:</p>
 
@@ -81,7 +81,7 @@ Note: The register call will override the "tagName" property as it is more speci
 	<li>InputField or input-field</li>
 	<li>SmallTitle or small-title</li>
 </ul>
-<p><strong><em><a href="https://html.spec.whatwg.org/multipage/custom-elements.html#valid-custom-element-name">Learn About WHATWG Valid Component Naming Spec</a></em></strong></p>
+<p><strong><em><a target="_blank" href="https://html.spec.whatwg.org/multipage/custom-elements.html#valid-custom-element-name">Learn About WHATWG Valid Component Naming Spec</a></em></strong></p>
 <h3 id="initialization"><a href="#initialization">Initialization</a></h3>
 <p>The WebComponent also takes care of attaching shadow root and all the setup needed to prepare
    your component for rendering.</p>
@@ -121,7 +121,7 @@ document.body.appendChild(countDisplay);
    template is used and anything update after that happens directly on the DOM.</p>
 <p><a href="/documentation/template">Learn More About Templates</a></p>
 <h3 id="shadow-dom"><a href="#shadow-dom">Shadow DOM</a></h3>
-<p>By default, the WebComponent will render your component content inside an <code>open</code> <a href="https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot">shadow-root</a>.</p>
+<p>By default, the WebComponent will render your component content inside an <code>open</code> <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot">shadow-root</a>.</p>
 <p>You can change that by specifying the <code>mode</code> static property inside the class.</p>
 
 <code-snippet language="js">

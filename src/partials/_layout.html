@@ -49,7 +49,7 @@
 	<header class="page-wrapper row">
 		<div class="row gap-sm">
 			<h1><a href="/"><img src="../assets/cwco-logo.svg" alt="CWCO logo"></a></h1>
-			<a href="https://www.npmjs.com/package/cwco" class="version-number" target="_blank"
+			<a target="_blank" href="https://www.npmjs.com/package/cwco" class="version-number" target="_blank"
 			   rel="noreferrer">v{version}</a>
 		</div>
 		<div class="row gap-sm">
@@ -95,7 +95,7 @@
 				<h3>{$data.menu.footer.learningResources.title}</h3>
 				<ul>
 					<li #repeat="$data.menu.footer.learningResources.items">
-						<a href="{$item.path ?? $item.link}" rel="noopener">{$item.label}</a>
+						<a href="{$item.path ?? $item.link}" rel="noopener" target="{item.link ? '_blank' : '_self'}">{$item.label}</a>
 					</li>
 				</ul>
 			</section>
@@ -103,11 +103,11 @@
 				<h3>{$data.menu.footer.about.title}</h3>
 				<ul>
 					<li #repeat="$data.menu.footer.about.items">
-						<a href="{$item.path ?? $item.link}" rel="noopener">{$item.label}</a>
+						<a href="{$item.path ?? $item.link}" rel="noopener" target="{item.link ? '_blank' : '_self'}">{$item.label}</a>
 					</li>
 					<li>
 						<address aria-label="social-media" class="row gap-sm">
-							<a #repeat="$data.socialMedia" href="{$item.path ?? $item.link}" rel="noopener">
+							<a #repeat="$data.socialMedia" href="{$item.path ?? $item.link}" rel="noopener" target="{item.link ? '_blank' : '_self'}">
 								<img src="../assets/{$item.icon}" alt="{$item.label}" width="20">
 							</a>
 						</address>
