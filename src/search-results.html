@@ -1,0 +1,27 @@
+<variable name="t" value="$data.translations[locale] || $data.translations.en"></variable>
+<variable name="page" value="$data.pages[path]"></variable>
+
+<include partial="layout" data="{
+	...page,
+	title: page.title(t),
+	description: page.description(t),
+	version: $data.version,
+}">
+	<link rel="stylesheet" href="./search-results.scss" inject-id="style" defer>
+	
+	<noscript>
+		<p>This page requires Javascript to function</p>
+	</noscript>
+	
+	<search-results #ignore>
+		<h2 bind="Search Results ({loading ? results.length : '-'})">Search Results</h2>
+		<ul>
+			<li repeat="results">
+				<a href="" bind="{$item.name}" attr.href="{$item.name}, $item.name"></a>
+			</li>
+		</ul>
+	</search-results>
+	
+	<script type="text/javascript" src="data/documentation-brief.js"></script>
+	<script src="search-results.js" nonce="local"></script>
+</include>

@@ -8,6 +8,10 @@
       "title": "404 - Page Not Found | CWCO",
       "description": "The page you are looking for no longer or never existed."
     },
+    "searchResults": {
+      "title": "Search Results | CWCO",
+      "description": "Search results. Web Components Library"
+    },
     "documentation": {
       "title": "Documentation | CWCO - Web Components Library",
       "description": "CWCO Documentation, Getting Started and Tutorial Guide on How to build Web Components with CWCO"
@@ -162,6 +166,9 @@
   "button": {
     "getStarted": "Get Started",
     "documentation": "Documentation"
+  },
+  "field": {
+    "searchLabel": "Search..."
   },
   "featureList": [
     "No Build Required! (Plug and Play)",

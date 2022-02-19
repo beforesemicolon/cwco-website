@@ -1,0 +1,11 @@
+@import "sass/fonts";
+@import "sass/normalizer";
+@import "sass/theme";
+@import "partials/layout";
+@import "sass/components/button";
+@import "sass/components/flexbox";
+@import "sass/common";
+
+search-results {
+  padding: 50px 0;
+}

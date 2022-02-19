@@ -41,6 +41,7 @@
 	<meta name="msapplication-TileImage" content="../assets/favicon/ms-icon-144x144.png">
 	<meta name="theme-color" content="#ffffff">
 	
+	<script src="https://unpkg.com/cwco/dist/cwco.min.js" nonce="local"></script>
 	<inject id="style"></inject>
 </head>
 <body>
@@ -52,7 +53,7 @@
 			<a href="https://www.npmjs.com/package/cwco" class="version-number" target="_blank"
 			   rel="noreferrer">v{version}</a>
 		</div>
-		<div class="row gap-sm">
+		<div class="row gap-xsm right-block">
 			<nav tabindex="0">
 				<ul aria-label="main-menu" role="menubar">
 					<li #repeat="$data.menu.main" #attr="class, active, path === $item.path">
@@ -79,7 +80,7 @@
 					</li>
 				</ul>
 			</nav>
-			<button type="button" class="icon"><img src="./../assets/search-icon.svg" alt="search icon"></button>
+			<search-field placeholder="{t.field.searchLabel}"></search-field>
 			<button tabindex="0" type="button" class="icon" id="mobile-menu-toggle"><img
 				src="./../assets/mobile-menu-icon.svg" alt="mobile menu icon"></button>
 		</div>
@@ -123,5 +124,6 @@
 	</footer>
 	
 	<inject id="script"></inject>
+	<script src="layout.js" nonce="local"></script>
 </body>
 </html>
