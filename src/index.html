@@ -1,0 +1,91 @@
+<variable name="t" value="$data.translations[locale] || $data.translations.en"></variable>
+<variable name="page" value="$data.pages[path]"></variable>
+
+<include partial="layout" data="{
+	...page,
+	title: page.title(t),
+	description: page.description(t),
+	version: $data.version,
+}">
+	<link rel="stylesheet" href="./home.scss" inject-id="style" defer>
+	
+	<div class="details">
+		<div class="intro">
+			<h2>{t.intro.title}</h2>
+			<p class="description">{t.intro.description}</p>
+			<p class="license-github"><span>{t.license}</span> <a href="https://github.com/beforesemicolon/cwco" target="_blank" rel="noopener"><img
+				src="./assets/github.png" alt="github-icon" width="25" ></a></p>
+			<div class="cta-action">
+				<a href="/documentation/getting-started" class="btn cta-btn">{t.button.getStarted}</a>
+				<a href="/documentation"  class="btn outlined-btn">{t.button.documentation}</a>
+			</div>
+			<!-- /.cta-action -->
+		</div>
+		<ul class="feature-list" on.click="handleClick()">
+			<li #repeat="t.featureList">
+				<img src="./assets/check-mark.png" alt="check mark" width="20"> {$item}
+			</li>
+		</ul>
+	</div>
+	
+	<div id="shapes-bg"></div>
+	
+	<script src="./scripts/particles.min.js" nonce="local"></script>
+	<script nonce="local">
+		particlesJS("shapes-bg", {
+			"particles": {
+				"number": {
+					"value": 15,
+					"density": {
+						"enable": true,
+						"value_area": 800
+					}
+				},
+				"color": {
+					"value": ["#fff5f7", "#f6f5ff", "#f5feff", "#fff5f5", "#f5faff", "#f7fff5", "#f5fffa", "#f5ffff", "#fff5f9", "#f5f6ff"]
+				},
+				"shape": {
+					"type": ["circle", "edge", "triangle"],
+				},
+				"opacity": {
+					"value": 1,
+					"random": false,
+					"anim": {
+						"enable": false,
+						"speed": 1,
+						"opacity_min": 0.1,
+						"sync": true
+					}
+				},
+				"size": {
+					"value": 75,
+					"random": true,
+					"anim": {
+						"enable": false,
+						"speed": 80,
+						"size_min": 0.1,
+						"sync": false
+					}
+				},
+				"move": {
+					"enable": true,
+					"speed": 2,
+				}
+			},
+			"interactivity": {
+				"detect_on": "canvas",
+				"events": {
+					"onhover": {
+						"enable": false,
+						"mode": "repulse"
+					},
+					"onclick": {
+						"enable": false,
+					},
+					"resize": true
+				},
+			},
+			"retina_detect": true
+		})
+	</script>
+</include>

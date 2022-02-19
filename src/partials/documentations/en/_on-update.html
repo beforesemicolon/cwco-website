@@ -1,0 +1,57 @@
+<h2 id="livecycles"><a href="#livecycles">LiveCycles</a></h2>
+<p>The native web component API has <a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#using_the_lifecycle_callbacks">livecycles</a>
+   methods:</p>
+<ul>
+	<li>connectedCallback;</li>
+	<li>disconnectedCallback;</li>
+	<li>attributeChangedCallback;</li>
+	<li>adoptedCallback;</li>
+</ul>
+<p><code>WebComponent</code> simply renames them and &quot;fixes&quot; couple of things about some of them.</p>
+
+<h3 id="onupdate"><a href="#onupdate">onUpdate</a></h3>
+<p>This livecycle function is called right after the DOM gets updated by
+	<a href="./documentation/properties">property</a>,
+   observed <a href="./documentation/attributes">attribute</a> or
+	<a href="./documentation/context">context</a>
+   is updated.</p>
+<p>Differently than the <code>attributeChangedCallback</code>, the <code>onUpdate</code> will only get called if the component is in the DOM
+   and fully parsed with children rendered.</p>
+<p>It will always get called with the name of the property that changed, the old and the new value as arguments except for
+   context updates where new and old value are always the same for lack of context object tracking.</p>
+
+<code-snippet language="js">
+class BFSButton extends WebComponent {
+	static observedAttributes = ['label']
+	
+	onUpdate(prop, oldValue, newValue) {
+		console.log('updated', prop, oldValue, newValue)
+	}
+}
+
+BFSButton.register();
+
+</code-snippet>
+
+<code-snippet language="js">
+const btn = new BFSButton();
+
+// will not trigger onUpdate call
+// because the component is not in the DOM yet
+btn.label = 'sample';
+
+// will trigger onMount call
+document.body.appendChild(btn)
+
+// will trigger onUpdate call and DOM update
+btn.label = 'another';
+btn.setAttribute('label', 'another');
+
+// will trigger onDestroy call
+btn.remove()
+</code-snippet>
+
+<div class="row align-apart doc-navigation">
+	<a href="./documentation/on-destroy" class="btn outlined-btn">< onDestroy</a>
+	<a href="./documentation/on-adoption" class="btn outlined-btn">onAdoption ></a>
+</div>

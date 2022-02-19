@@ -1,0 +1,85 @@
+<h2 id="errors"><a href="#errors">Errors</a></h2>
+<p>With HTML if something is invalid it will simply be ignored most of the time. If you provide invalid attribute value or
+   fail to provide a required attribute, the DOM will simply ignore the element.</p>
+<p><code>WebComponent</code> follows the same philosophy. If you provide invalid attribute value or fail to provide a required
+                             attribute, it will simply be ignored. Anything that goes wrong with your component will be logged to the console but
+                             will not prevent the rest of the app from working unless it affects the internal logic.</p>
+<h3 id="onerror"><a href="#onerror">onError</a></h3>
+<p>This livecycle function is called when an error occurs during the component rendering.</p>
+
+<code-snippet language="js">
+class ErrorExample extends WebComponent {
+	onError(error) {
+		alert(`error ${error.message}`)
+	}
+	
+	onMount() {
+		throw new Error('failed');
+	}
+	
+	get template() {
+		return `
+			<button
+				type="button"
+				onclick="throwError()">
+				throw error
+			</button>`
+	}
+	
+	throwError() {
+		this.onError(new Error('throwError'))
+	}
+}
+
+ErrorExample.register();
+</code-snippet>
+
+<p>You may also call it directly as it is the only lifecycle method that you are allowed to call.
+   When called is passed the error object and will simply log the error to the console.</p>
+
+<h3 id="global-error-handler"><a href="#global-error-handler">Global error handler</a></h3>
+<p>It is a perfect hook to use to debug your application since it can also be used to track errors globally.</p>
+<p>You can simply create a non-rendering component which sole purpose is to handle errors.</p>
+
+<code-snippet language="js">
+const {WebComponent} = window;
+
+class Component extends WebComponent {
+	onError(error) {
+		// Always call super.onError() to log the error to the console.
+		super.onError(error);
+		
+		// send error to app tracking analytics
+		// or any other error handling logic you need for your app.
+	}
+}
+</code-snippet>
+
+<p>With such component, instead of using <code>WebComponent</code> to create your components, you can simply use <code>Component</code>
+   so any error that occurs can be handled in a single place.</p>
+
+<code-snippet language="js">
+class HeadingTitle extends Component {
+	static observedAttributes = ['text', 'type'];
+	
+	onMount() {
+		// any error you throw or
+		// the component throws will be handled by the global Component
+		throw new Error('failed');
+	}
+	
+	get template() {
+		return `<${this.type}><slot>{text}</slot></${this.type}>`
+	}
+}
+
+HeadingTitle.register()
+</code-snippet>
+
+<p>This is simply using the power of OOP inheritance to handle errors. Any component meant to be extended <strong>should not be registered</strong>.</p>
+<p>This concept is an amazing <code>WebComponent</code> feature that allows you to create variations and a component.</p>
+
+<div class="row align-apart doc-navigation">
+	<a href="./documentation/on-adoption" class="btn outlined-btn">< onAdoption</a>
+	<a href="./documentation/attributes" class="btn outlined-btn">Attributes ></a>
+</div>

@@ -1,10 +1,10 @@
 const env = process.env.NODE_ENV || 'development';
-const pages = require('./pages/data/pages');
-const en = require('./pages/data/i18n/en.json');
-const menu = require('./pages/data/menu');
-const socialMedia = require('./pages/data/social-media');
-const faq = require('./pages/data/faq');
-const {CodeSnippet} = require('./pages/tags/code-snippet');
+const pages = require('./src/data/pages');
+const en = require('./src/data/i18n/en.json');
+const menu = require('./src/data/menu');
+const socialMedia = require('./src/data/social-media');
+const faq = require('./src/data/faq');
+const {CodeSnippet} = require('./src/tags/code-snippet');
 
 module.exports = {
   env,

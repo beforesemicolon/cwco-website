@@ -1,0 +1,35 @@
+<variable name="t" value="$data.translations[locale] || $data.translations.en"></variable>
+<variable name="page" value="$data.pages[path]"></variable>
+
+<include partial="layout" data="{
+	...page,
+	title: page.title(t),
+	description: page.description(t),
+	version: $data.version,
+}">
+	<link rel="stylesheet" href="documentation.scss" inject-id="style" defer>
+	<link rel="stylesheet" href="../node_modules/highlight.js/styles/github-dark-dimmed.css" inject-id="style" defer>
+
+	<div id="documentation-block">
+		<article>
+			<inject html="page.content(locale)"></inject>
+		</article>
+		
+		<ul id="documentation-menu" aria-label="documentation-menu" role="menubar">
+			<li #repeat="$data.menu.documentation"
+			    class="{path === $item.path && !$item.subMenu?.length ? 'active' : ''} {$item.subMenu?.length ? 'with-submenu' : ''} {$item.subMenu?.some(m => m.path === path) ? 'expanded' : ''}">
+				<a role="menuitem" href="{$item.path}">{$item.label}</a>
+				<ul aria-label="documentation-sub-menu"
+				    role="menubar"
+				    #if="$item.subMenu?.length"
+				    #attr="hidden, !$item.subMenu?.some(m => m.path === path)">
+					<li #repeat="$item.subMenu as subMenuItem"
+					    #attr="class, active, path === subMenuItem.path">
+						<a role="menuitem" href="{subMenuItem.path}">{subMenuItem.label}</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	
+</include>

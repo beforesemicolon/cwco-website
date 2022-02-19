@@ -1,0 +1,47 @@
+<h2 id="directives"><a href="#directives">Directives</a></h2>
+<p>Directives are HTML attributes not specific to any tag. They are global logic attributes.</p>
+<p>The idea of a directive is already built-in into HTML. For example, the attributes <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/draggable">draggable</a>
+   and <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/contenteditable">contenteditable</a> are directives.
+   They can be placed in any HTML tag to allow that tag to gain special capabilities.</p>
+<p>The idea is same here and with Web Components you have a few special built-in ones, and you can also <a href="./documentation/custom-directive">create a custom
+                                                                                                                                                                                                one</a> for your need.</p>
+<p>One thing in common for all directives is that you don&#39;t need to use the curly braces to specify data or logic in some cases.
+   Their value are already understood to be information to be executed for a result. When creating a custom one,
+   you have a chance to handle parsing the value yourself, so you can take values in whatever format you want.</p>
+
+<h3 id="if"><a href="#if">if</a></h3>
+<p>The <code>if</code> directive will simply add or remove a node element from the DOM based on the truthiness of the value.</p>
+<p>One important thing to know about the <code>if</code> directive is that the element is always the same instance, and
+   it simply puts or remove it from the DOM based on the value being
+	<a href="https://developer.mozilla.org/en-US/docs/Glossary/Truthy">TRUTHY</a> or <a href="https://developer.mozilla.org/en-US/docs/Glossary/Falsy">FALSY</a>.</p>
+
+<code-snippet language="js">
+class InputField extends WebComponent {
+	static observedAttributes = [
+		'label',
+		'value',
+		'name',
+		'type',
+		'error-message'
+	];
+	
+	get template() {
+		return `
+			<label class="input-field">
+				<span if="label">{label}</span>
+				<input type="{type}" name="{name}" value="{value}"/>
+				<span if="errorMessage">{errorMessage}</span>
+			</label>
+		`
+	}
+}
+
+InputField.register();
+</code-snippet>
+
+<p>Above example is an input field that will only add the label and error span elements to the DOM once their values are TRUTHY.</p>
+
+<div class="row align-apart doc-navigation">
+	<a href="./documentation/template" class="btn outlined-btn">< Template</a>
+	<a href="./documentation/repeat-directive" class="btn outlined-btn">Repeat ></a>
+</div>

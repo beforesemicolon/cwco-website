@@ -1,0 +1,130 @@
+<h2 id="attributes"><a href="#attributes">Attributes</a></h2>
+<p>Any attribute placed on the component tag are HTML attributes but in <code>WebComponent</code> the attributes referred to are the
+   ones you decide to observe for changes.</p>
+<h3 id="defining-attributes"><a href="#defining-attributes">Defining attributes</a></h3>
+<p>These are called <code>observedAttributes</code> and must be declared as an array of string attributes exactly how they
+   would look like when placed on the HTML tag.</p>
+
+<code-snippet language="js">
+class SubmitButton extends WebComponent {
+	static observedAttributes = ['label'];
+
+	get template() {
+		return '<button type="submit">{label}</button>';
+	}
+}
+</code-snippet>
+
+<p>In other libraries like React, these are referred to as <strong>props</strong>. Attributes that you get notified when they change.</p>
+<p>Attribute names must be:</p>
+<ul>
+	<li>kebab-case</li>
+	<li>lowercase</li>
+	<li>must start with a letter</li>
+	<li>may contain numbers</li>
+</ul>
+<h3 id="accessing-attribute"><a href="#accessing-attribute">Accessing attribute</a></h3>
+<p><code>WebComponent</code> will automatically map the attributes to properties in the class.</p>
+<p>If the attribute is in kebab case they will be changed into camel case.</p>
+
+<code-snippet language="js">
+class StatusIndicator extends WebComponent {
+	static observedAttributes = ['current-status'];
+
+	get template() {
+		return '<div class="curr-status">{currentStatus}</div>'
+  }
+}
+</code-snippet>
+
+<p>Since attributes are mapped to be properties, they also work like <a href="./documentation/properties">properties</a>.</p>
+<p>They will also update the DOM if changed.</p>
+
+<code-snippet language="js">
+const indicator = new StatusIndicator();
+
+document.body.appendChild(indicator);
+
+indicator.setAttribute('current-status', 'Pending');
+</code-snippet>
+
+<h3 id="auto-parsing"><a href="#auto-parsing">Auto parsing</a></h3>
+<p>The <code>WebComponent</code> will automatically try to parse your attribute string into proper data type.</p>
+
+<code-snippet language="html">
+<flat-list list="[2, 4, 6]"></flat-list>
+</code-snippet>
+
+<p>Note that these string must be valid JSON strings.</p>
+
+<code-snippet language="js">
+class FlatList extends WebComponent {
+	static observedAttributes = ['list'];
+
+	onMount() {
+		console.log(this.list); // will be an Array [2, 4, 6]
+	}
+}
+</code-snippet>
+
+<h3 id="class-data-and-style-attributes"><a href="#class-data-and-style-attributes">class, data-* and style attributes</a></h3>
+<p>There are 3 special attributes of the tag that will not be mapped to properties because they already
+   contain their respective properties.</p>
+<p>These are the <code>class</code>, <code>style</code> and <code>data-*</code> attributes.</p>
+
+<code-snippet language="js">
+class StatusIndicator extends WebComponent {
+	static observedAttributes = ['class', 'style', 'data-sample'];
+}
+</code-snippet>
+
+<p>When you observe these attributes you can later access:</p>
+<ul>
+	<li><code>class</code> via <code>className</code> or <code>classList</code>;</li>
+	<li><code>style</code> via <code>style</code>;</li>
+	<li><code>data-x</code> via <code>dataset</code>;</li>
+</ul>
+<p>When you use these native properties to update the attributes, they will trigger the <code>onUpdate</code> callback
+   as long as they are observed.</p>
+
+<code-snippet language="js">
+const indicator = new StatusIndicator();
+
+indicator.className = 'indicator';
+indicator.classList.add('active');
+indicator.style.background = 'red';
+indicator.dataset.sample = 'x'
+</code-snippet>
+
+<h3 id="default-value"><a href="#default-value">Default value</a></h3>
+<p>You can define a observed attribute default value by simply defining a camel case version of it.</p>
+
+<code-snippet lanaguage="js">
+class MyButton extends WebComponent {
+	static observedAttributes = ['label', 'type'];
+	type = 'button'; // default value for type if type attribute is not set
+
+	get template() {
+		return '<button type="{}">{label}</button>';
+	}
+}
+</code-snippet>
+
+<h3 id="attributes-vs-properties"><a href="#attributes-vs-properties">Attributes vs Properties</a></h3>
+<p>Attributes end up working just like properties because they are changed to be properties. On top of that,
+   they have the advantage of triggering changes when they are set or changed on the HTML tag.</p>
+<p>You should prefer attributes whenever you are expecting data to be set directly on the tag. </p>
+<p><code>WebComponents</code> allows you to receive simple to complex data via attributes.</p>
+
+<code-snippet language="html">
+<flat-list list="[2, 4, 6, 90]"></flat-list>
+
+// when inside another component template you can refer to the property
+// using the curly braces
+<flat-list list="{items}"></flat-list>
+</code-snippet>
+
+<div class="row align-apart doc-navigation">
+	<a href="./documentation/on-error" class="btn outlined-btn">< onError</a>
+	<a href="./documentation/properties" class="btn outlined-btn">Properties ></a>
+</div>

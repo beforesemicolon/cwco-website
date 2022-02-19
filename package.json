@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "local": "nodemon --watch ./pages -e html,scss,js,ts,css --exec node ./server.js"
+    "local": "nodemon --watch src -e html,scss,js,ts,css --exec node ./dev-server.js",
+    "build": "node ./build.js"
   },
   "keywords": [],
   "author": "",
