@@ -2,7 +2,7 @@
   "pages": {
     "home": {
       "title": "CWCO - Web Components Library",
-      "description": "Web Component Library to build future proof web libraries and application"
+      "description": "Web Component Library to build future proof Web Libraries and Application"
     },
     "notFound": {
       "title": "404 - Page Not Found | CWCO",
@@ -10,91 +10,91 @@
     },
     "documentation": {
       "title": "Documentation | CWCO - Web Components Library",
-      "description": "CWCO Documentation, Getting Started and Tutorial Guide"
+      "description": "CWCO Documentation, Getting Started and Tutorial Guide on How to build Web Components with CWCO"
     },
     "gettingStarted": {
       "title": "Getting Started Guide | CWCO - Web Components Library",
-      "description": "CWCO Getting Started Guide Documentation"
+      "description": "CWCO Getting Started Guide Documentation on How to build Web Components with CWCO"
     },
     "webComponent": {
       "title": "WebComponent | CWCO - Web Components Library",
-      "description": "CWCO WebComponent Class"
+      "description": "CWCO WebComponent Class - How to create Web Component with WebComponent class"
     },
     "contextProviderComponent": {
       "title": "ContextProviderComponent | CWCO - Web Components Library",
-      "description": "CWCO ContextProviderComponent Class"
+      "description": "CWCO ContextProviderComponent Class - How to create Web Component with ContextProviderComponent class"
     },
     "configurations": {
       "title": "Configurations | CWCO - Web Components Library",
-      "description": "CWCO Component Configurations"
+      "description": "CWCO Component Configurations - How to configure Web Component shadow root options and tag name"
     },
     "onMount": {
       "title": "onMount LiveCycle | CWCO - Web Components Library",
-      "description": "CWCO Component onMount LiveCycle"
+      "description": "CWCO Component onMount LiveCycle - Execute code before component is rendered"
     },
     "onDestroy": {
       "title": "onDestroy LiveCycle | CWCO - Web Components Library",
-      "description": "CWCO Component onDestroy LiveCycle"
+      "description": "CWCO Component onDestroy LiveCycle - Execute code before component is removed from the DOM"
     },
     "onAdoption": {
       "title": "onAdoption LiveCycle | CWCO - Web Components Library",
-      "description": "CWCO Component onAdoption LiveCycle"
+      "description": "CWCO Component onAdoption LiveCycle - Execute code after a component is moved to a new document"
     },
     "onUpdate": {
       "title": "onUpdate LiveCycle | CWCO - Web Components Library",
-      "description": "CWCO Component onUpdate LiveCycle"
+      "description": "CWCO Component onUpdate LiveCycle - Execute code after component data and view is updated"
     },
     "onError": {
       "title": "onError LiveCycle | CWCO - Web Components Library",
-      "description": "CWCO Component onError LiveCycle"
+      "description": "CWCO Component onError LiveCycle - How to execute code after an error in the component"
     },
     "attributes": {
       "title": "Component Attributes | CWCO - Web Components Library",
-      "description": "CWCO Component Attributes "
+      "description": "CWCO Component Attributes - Handling component props"
     },
     "properties": {
       "title": "Component Properties | CWCO - Web Components Library",
-      "description": "CWCO Component Properties"
+      "description": "CWCO Component Properties - Handling component class set properties"
     },
     "template": {
       "title": "Component Template | CWCO - Web Components Library",
-      "description": "CWCO Component Template"
+      "description": "CWCO Component Template - Handle component rendering HTML content"
     },
     "ifDirective": {
       "title": "Component If Directive | CWCO - Web Components Library",
-      "description": "CWCO Component If Directive"
+      "description": "CWCO Component If Directive - Manipulate element with special global attributes"
     },
     "repeatDirective": {
       "title": "Component Repeat Directive | CWCO - Web Components Library",
-      "description": "CWCO Component Repeat Directive"
+      "description": "CWCO Component Repeat Directive - Make an element repeat based on data and options"
     },
     "attrDirective": {
       "title": "Component Attr Directive | CWCO - Web Components Library",
-      "description": "CWCO Component Attr Directive"
+      "description": "CWCO Component Attr Directive - Conditionally set or remove element attribute"
     },
     "bindDirective": {
       "title": "Component Bind Directive | CWCO - Web Components Library",
-      "description": "CWCO Component Bind Directive"
+      "description": "CWCO Component Bind Directive - Conditionally update element object properties"
     },
     "refDirective": {
       "title": "Component Ref Directive | CWCO - Web Components Library",
-      "description": "CWCO Component Ref Directive"
+      "description": "CWCO Component Ref Directive - Grab an DOM element object reference"
     },
     "customDirective": {
       "title": "Component Custom Directive | CWCO - Web Components Library",
-      "description": "CWCO Component Custom Directive"
+      "description": "CWCO Component Custom Directive - Create your own global attributes"
     },
     "context": {
       "title": "Component Context | CWCO - Web Components Library",
-      "description": "CWCO Component Context"
+      "description": "CWCO Component Context - Share data deeply to descendent elements"
     },
     "stylesheet": {
       "title": "Component Stylesheet | CWCO - Web Components Library",
-      "description": "CWCO Component Stylesheet"
+      "description": "CWCO Component Stylesheet - Encapsulate component style with data binding capabilities"
     },
     "events": {
       "title": "Component Events | CWCO - Web Components Library",
-      "description": "CWCO Component Events"
+      "description": "CWCO Component Events - How to handle component events"
     },
     "faq": {
       "title": "FAQ | CWCO - Web Components Library",
