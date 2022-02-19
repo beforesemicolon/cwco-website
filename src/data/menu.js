@@ -2,7 +2,7 @@ const en = require('./i18n/en.json');
 
 module.exports = {
   main: [
-    {label: en.menu.main.tryItOut, link: "https://codepen.io/beforesemicolon/pen/eYGMwbz"},
+    {label: en.menu.main.tryItOut, link: "https://stackblitz.com/edit/web-platform-ezn1mb?file=script.js"},
     {label: en.menu.main.docs, path: "/documentation"},
     {label: en.menu.main.examples, link: "https://beforesemicolon.github.io/cwco/?example=create-component.html&theme=neo&file=app.js"},
     {label: en.menu.main.tutorial, link: "https://www.youtube.com/watch?v=yv3BeEssw9E"},
