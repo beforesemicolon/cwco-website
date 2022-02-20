@@ -195,6 +195,7 @@ footer {
   margin-top: 70px;
   padding-top: 50px;
   padding-bottom: 50px;
+  position: relative;
   
   .footer-sections {
     display: flex;
@@ -355,6 +356,8 @@ footer {
   }
   
   footer {
+    position: static;
+    
     .copyright {
       text-align: left;
       margin-top: 40px;
