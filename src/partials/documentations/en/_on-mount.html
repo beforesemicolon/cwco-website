@@ -1,5 +1,5 @@
 <h2 id="livecycles"><a href="#livecycles">LiveCycles</a></h2>
-<p>The native web component API has <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#using_the_lifecycle_callbacks">livecycles</a>
+<p>The native web component API has <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#using_the_lifecycle_callbacks">lifecycles</a>
    methods:</p>
 <ul>
 	<li>connectedCallback;</li>
@@ -7,7 +7,8 @@
 	<li>attributeChangedCallback;</li>
 	<li>adoptedCallback;</li>
 </ul>
-<p><code>WebComponent</code> simply renames them and &quot;fixes&quot; couple of things about some of them.</p>
+<p>CWCO simply renames them and &quot;fixes&quot; a couple of things about some of them.</p>
+
 <h3 id="onmount"><a href="#onmount">onMount</a></h3>
 <p>This livecycle function is called when the component is inserted in the document soon after
    the first render.</p>
@@ -28,8 +29,23 @@ document.body.appendChild(new BFSButton())
 </code-snippet>
 
 <p>You can verify if the component is in the DOM by checking the native <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/API/Node/isConnected">isConnected</a>
-   or <code>WebComponend</code> &quot;<strong>mounted</strong>&quot; properties. We would strongly you to use <code>mounted</code> property instead of <code>isConnected</code>
+   or <code>WebComponent</code> &quot;<strong>mounted</strong>&quot; property.</p>
+
+<p>We suggest you to use <code>mounted</code> property instead of <code>isConnected</code>
    as it will better tell you if the component is in the DOM and its template was parsed and set as well.</p>
+
+<h3 id="what-happens-during-mounting"><a href="#what-happens-during-mounting">What happens during mounting?</a></h3>
+<p>CWCO will set the shadow root up according to the <a href="/documentation/configurations">configurations</a> you set.</p>
+
+<p>Internally, it listens to the <code>connectedCallback</code> and then access the <a href="/documentation/template">template</a>
+to parse it into elements while tracking the parts of the template you want to data bind.</p>
+
+<p>Once it is done parsing and tracking the template it set the elements as the component body content.</p>
+
+<p>If you remove the component element from the DOM and attach to it again, it will trigger a <code>onMount</code> but
+   it will not parse and track the elements again. <strong>Parsing and tracking only happen once</strong>.
+   In this scenario, it will simply try to update the component body elements in case you placed it inside a different
+   component with different context data.</p>
 
 <div class="row align-apart doc-navigation">
 	<a href="/documentation/configurations" class="btn outlined-btn">< Configurations</a>
