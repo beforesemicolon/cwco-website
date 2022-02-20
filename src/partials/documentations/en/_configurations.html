@@ -4,15 +4,15 @@
 <h3 id="tagname"><a href="#tagname">tagName</a></h3>
 <p>The tag name is defined by any of the following:</p>
 <ul>
-	<li>the name of the class;</li>
-	<li>the value of the static <code>tagName</code> property;</li>
-	<li>the name you provided when registering with the <code>register</code> call;</li>
+	<li><a href="/documentation/configurations#class-name">the name of the class;</a></li>
+	<li>the value of the static <a href="/documentation/configurations#tagname">tagName</a> property;</li>
+	<li>the name you provided when registering with the <a href="/documentation/configurations#register">register</a> call;</li>
 </ul>
 <h4 id="class-name"><a href="#class-name">Class name</a></h4>
 <p>When you define the class for your component you must use a combination of at least two words
    distinguished by casing (camel or pascal casing).
    Your class name is then taken and converted into HTML tags before trying to register it.</p>
-<p>The tag name must be a <a target="_blank" href="https://html.spec.whatwg.org/multipage/custom-elements.html#valid-custom-element-name">valid tag name</a>
+<p>The tag name must be a <a target="_blank" href="https://html.spec.whatwg.org/multipage/custom-elements.html#valid-custom-element-name">valid custom tag name</a>
    according to rules defined by web standards.</p>
 
 <code-snippet language="js">
@@ -39,7 +39,7 @@ FlatList.register();
 console.log(FlatList.tagName) // returns 'flat-list'
 </code-snippet>
 
-<h5 id="tagname"><a href="#tagname">tagName</a></h5>
+<h4 id="tagname"><a href="#tagname">tagName</a></h4>
 <p>You may also use the static <code>tagName</code> inside your class definition. This option is particularly useful
    if you want to keep your class names simple and a custom tag name to match.</p>
 
@@ -67,15 +67,15 @@ FlatList.register();
 console.log(Button.tagName) // returns 'bfs-button'
 </code-snippet>
 
-<h5 id="register"><a href="#register">register</a></h5>
+<h4 id="register"><a href="#register">register</a></h4>
 <p>The name of your tag can also be defined when you try to register your tag as a value for the <code>register</code> call.</p>
 
 <code-snippet language="js">
-class FlatList extends WebComponent {}
+class List extends WebComponent {}
 
-FlatList.register('flat-list');
+List.register('flat-list');
 
-console.log(FlatList.tagName) // returns 'flat-list'
+console.log(List.tagName) // returns 'flat-list'
 </code-snippet>
 
 <h3 id="mode"><a href="#mode">mode</a></h3>
@@ -93,7 +93,7 @@ class TodoItem extends WebComponent {
 }
 </code-snippet>
 
-<p>You can access the shadow root via <code>root</code> and <code>shadowRoot</code> property in the instance of the element;</p>
+<p>You can access the shadow root via <code>root</code> and <code>shadowRoot</code> properties in the instance of the element;</p>
 
 <code-snippet language="js">
 class TodoItem extends WebComponent {
@@ -109,22 +109,53 @@ todo.shadowRoot;
 document.body.appendChild(todo);
 </code-snippet>
 
+<p>We recommend you use the <code>root</code> property which is specific to CWCO instead of the native <code>shadowRoot</code>. This
+becomes evident when have <code>mode</code> set to none.</p>
+
+<code-snippet language="js">
+
+const one = new CompOne(); // mode = open
+const two = new CompTwo(); // mode = closed
+const three = new CompThree(); // mode = none
+
+one.root // #shadow-root (open)
+one.shadowRoot // #shadow-root (open)
+
+two.root // #shadow-root (closed)
+two.shadowRoot // #shadow-root (closed)
+
+three.root // <comp-three></comp-three>
+three.shadowRoot // null
+</code-snippet>
+
+<p>Accessing the <code>root</code> of the component is important if you want to query or read the elements inside
+the component.</p>
+
 <h3 id="delegatesfocus"><a href="#delegatesfocus">delegatesFocus</a></h3>
-<p>The <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot/delegatesFocus">delegateFocus</a> options control s
-   how the internal focus propagate to the host tag. It can be very useful to apply focus to the component tag when
+<p>The <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot/delegatesFocus">delegateFocus</a> options controls
+   how the internal focus propagates to the host tag. It can be very useful to apply focus to the component tag when
    some internal element receives focus.</p>
 
+<p>In the example below, whenever the input field receives focus, the entire component tag will have the browser
+outline style applied to it. Notice that the outline style is removed from the field to avoid double outline.</p>
 <code-snippet language="js">
 class SearchField extends WebComponent {
 	static delegateFocus = true;
 	
 	get template() {
-		return '<input type="search" style="outline: none">'
+		return `
+			<label>
+				<span>{label}</span>
+				<input type="search" style="outline: none">
+			</label>
+		`;
 	}
 }
 </code-snippet>
 
-<p>So instead of this:</p>
+<p>This is nice because the whole component is seen as one.</p>
+
+<p>Traditionally you would do this:</p>
 
 <code-snippet language="js">
 class MyButton extends HTMLElement {
@@ -138,7 +169,7 @@ class MyButton extends HTMLElement {
 customElements.define('my-button', MyButton)
 </code-snippet>
 
-<p>You can do this:</p>
+<p>With CWCO you can do this:</p>
 
 <code-snippet language="js">
 class MyButton extends WebComponent {
