@@ -1,8 +1,8 @@
 <h2 id="webcomponent"><a href="#webcomponent">WebComponent</a></h2>
-<p>The WebComponent class is the main API you need to interact with in order to create your components.
+<p>The <code>WebComponent</code> class is one of the main classes you need to interact with in order to create your components.
    That alone make things pretty simple to learn.</p>
 <p>This component by default extends the <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement">HTMLElement</a>
-   class which means it does not allow you to extend specific HTML elements.</p>
+   class which means it that <strong>there is no support to extend specific HTML element</strong>.</p>
 <p>So instead of initializing your components like this:</p>
 
 <code-snippet language="js">
@@ -20,8 +20,8 @@ class MyButton extends WebComponent {
 </code-snippet>
 
 <h3 id="registration"><a href="#registration">Registration</a></h3>
-<p>The WebComponent class also takes care of registering the component for you by exposing the <code>register</code>
-   method that you can call to let the document know you have a special tag to use.</p>
+<p>The <code>WebComponent</code> class also takes care of registering the component for you by exposing the static <code>register</code>
+   method that you can call to let the document know you have a custom component to use.</p>
 
 <code-snippet language="js">
 class MyButton extends WebComponent {
@@ -32,7 +32,7 @@ class MyButton extends WebComponent {
 MyButton.register();
 </code-snippet>
 
-<p>You may also register multiple components at once using the <code>registerAll</code> method.</p>
+<p>You may also register multiple components at once using the static <code>registerAll</code> method.</p>
 
 <code-snippet language="js">
 class MyButton extends WebComponent {}
@@ -47,8 +47,9 @@ WebComponent.registerAll([
 </code-snippet>
 
 <h3 id="component-naming"><a href="#component-naming">Component Naming</a></h3>
-<p>By default, the WebComponent uses the class name to change into a html tag.</p>
-<p>Using our <code>MyButton</code> example, it will use the class name to create the <code>my-button</code> tag and register it like that.</p>
+
+<p>By default, the <code>WebComponent</code> uses the class name to change into an HTML tag name.</p>
+<p>Using the <code>MyButton</code> example, it will use the class name to create the <code>my-button</code> tag and register it like that.</p>
 <p>You may also specify your own name using the <code>register</code> call or the static <code>tagName</code> property inside the class;</p>
 
 <code-snippet language="js">
@@ -61,9 +62,9 @@ class MyButton extends WebComponent {
 MyButton.register('special-button');
 </code-snippet>
 
-<code-snippet>
-Note: The register call will override the "tagName" property as it is more specific.
-</code-snippet>
+<blockquote class="note">
+	<strong>Note</strong>: The register call will override the "tagName" property as it is more specific.
+</blockquote>
 
 <p>It is also important to make sure that both, class name or tag name, needs to be at least two words to
    be considered a valid tag name. This is actually a native component name convention.</p>
@@ -83,13 +84,14 @@ Note: The register call will override the "tagName" property as it is more speci
 </ul>
 <p><strong><em><a target="_blank" href="https://html.spec.whatwg.org/multipage/custom-elements.html#valid-custom-element-name">Learn About WHATWG Valid Component Naming Spec</a></em></strong></p>
 <h3 id="initialization"><a href="#initialization">Initialization</a></h3>
-<p>The WebComponent also takes care of attaching shadow root and all the setup needed to prepare
+<p>The <code>WebComponent</code> also takes care of attaching shadow root and all the setup needed to prepare
    your component for rendering.</p>
 
 <code-snippet language="js">
 class CountDisplay extends WebComponent {
-	// every observable atrributes will be mapped to a camelCase equivalent property
-	static observedAttributes = ['count'];
+	static observedAttributes = [
+		'count'
+	];
 	
 	get template() {
 		return '{count}'
@@ -97,7 +99,8 @@ class CountDisplay extends WebComponent {
 }
 
 CountDisplay.register();
-
+</code-snippet>
+<code-snippet language="js">
 // to create an element from the component do this
 const countDisplay = new CountDisplay();
 // or this
@@ -118,10 +121,10 @@ document.body.appendChild(countDisplay);
 
 <p><a href="/documentation/attributes">Learn More about Observed Attributes</a></p>
 <p>When your component is about to render, the template is processed. This is the only time your
-   template is used and anything update after that happens directly on the DOM.</p>
+   template is used and any updates after that happens directly on the DOM.</p>
 <p><a href="/documentation/template">Learn More About Templates</a></p>
 <h3 id="shadow-dom"><a href="#shadow-dom">Shadow DOM</a></h3>
-<p>By default, the WebComponent will render your component content inside an <code>open</code> <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot">shadow-root</a>.</p>
+<p>By default, the <code>WebComponent</code> will render your component content inside an <code>open</code> <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot">shadow-root</a>.</p>
 <p>You can change that by specifying the <code>mode</code> static property inside the class.</p>
 
 <code-snippet language="js">
@@ -134,14 +137,17 @@ class MyButton extends WebComponent {
 
 <code-snippet language="js">
 class MyButton extends WebComponent {
-	static mode: 'none'; // will no attach shadow root to component
+	// will not attach shadow root to component
+	static mode: 'none';
 }
 </code-snippet>
 
-<p><strong><em>Note</em></strong>: The <code>none</code> mode is not natively supported. It is a unique mode specific to this library.</p>
+<blockquote class="note">
+	<strong>Note</strong>: The <code>none</code> mode is not natively supported. It is a unique mode specific to this library.
+</blockquote>
 <p><a href="/documentation/configurations#mode">Learn More about Mode</a></p>
-<p>The shadow-root element is accessible via the <code>root</code> or <code>shadowRoot</code> property. It will be null if the mode is <code>closed</code>.
-   It will return the component itself if the mode is <code>none</code>.</p>
+<p>The shadow-root element is accessible via the <code>root</code> or <code>shadowRoot</code> property. It will be <code>null</code> if the mode is <code>closed</code>
+   or the component element itself if the mode is <code>none</code>.</p>
 
 <code-snippet language="js">
 class MyButton extends WebComponent {
@@ -154,7 +160,8 @@ class MyButton extends WebComponent {
 
 <h3 id="parsehtml"><a href="#parsehtml">parseHTML</a></h3>
 <p>The HTML string used by this framework will not be parsed correctly by the browser as it allows many &quot;illegal&quot; symbols
-   mixed with HTML in the body or attribute values. Because of this, you should always try to parse HTML string specific
+   mixed with HTML in the body or attribute values.</p>
+<p> Because of this, you should always try to parse HTML string specific
    to this library using the <code>WebComponent.parseHTML</code> static method as it takes in consideration all the special syntax.</p>
 
 <code-snippet language="js">
@@ -168,6 +175,10 @@ const html = `
 const myButton = WebComponent.parseHTML(html).children[0];
 </code-snippet>
 
+<p>The <code>parseHTML</code> will not create a component from the string provided. It will return
+a <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment">DocumentFragment</a> containing all the elements matching the string template you provide.</p>
+
+<p>This method will be particularly useful when you are creating complex <a href="/documentation/custom-directive">custom directives</a></p>
 
 <div class="row align-apart doc-navigation">
 	<a href="/documentation/getting-started" class="btn outlined-btn"> < Getting Started</a>

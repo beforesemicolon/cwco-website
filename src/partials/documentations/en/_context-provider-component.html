@@ -1,5 +1,5 @@
 <h2 id="contextprovidercomponent"><a href="#contextprovidercomponent">ContextProviderComponent</a></h2>
-<p>The ContextProviderComponent class is a
+<p>The <code>ContextProviderComponent</code> class is a
    special <a href="/documentation/web-component">WebComponent</a> class
    in a sense that it allows you to define the template right in your HTML file with it serving as the data provider for
    your template.</p>
@@ -13,10 +13,11 @@ import {ContextProviderComponent} from "cwco";
 </code-snippet>
 
 <h3 id="mode"><a href="#mode">Mode</a></h3>
-<p>By default, the ContextProviderComponent is in the <code>&quot;none&quot;</code> mode. Which means that its content can be easily
+<p>By default, the <code>ContextProviderComponent</code> is in the <code>none</code> mode. Which means that its content can be easily
    target by CSS selectors of the document or in javascript DOM queries.</p>
+
 <h3 id="template"><a href="#template">Template</a></h3>
-<p>By default, the template is a single slot tag which means you don&#39;t need to define the component template inside the
+<p>By default, the template is a single <code>slot</code> tag which means you don&#39;t need to define the component template inside the
    class.</p>
 <p>You can define your data in the class...</p>
 
@@ -33,31 +34,43 @@ class TodoApp extends ContextProviderComponent {
 TodoApp.register();
 </code-snippet>
 
-<p>...then set the content right in the HTML file and reference the data from the class.</p>
+<p>...and then set the content right in the HTML file and reference the data from the class.</p>
 
 <code-snippet language="html">
 <!-- documentation.html-->
 
 <todo-app>
-	<h1>{app.title}</h1>
-	<p>{app.description</p>
+	<h1 bind="{app.title}">No Title</h1>
+	<p bind="{app.description}">No Description</p>
 </todo-app>
 </code-snippet>
 
-<h3 id="registration"><a href="#registration">Registration</a></h3>
-<p>If you intend to define content in the HTML file, you MUST register the context provider component before all other components.</p>
-<p>If you have multiple context provider component you must register them in the order you use them in the HTML file.</p>
+<blockquote class="note">
+	<strong>Note:</strong> It is recommended to use the <a href="/documentation/bind-directive">bind</a> directive
+	when you are defining your template directly in the HTML body. This is to avoid curly brace flashes before the
+	javascript loads.
+</blockquote>
 
+<p>The above example binds <code>app.title</code> and <code>app.description</code> with defaults.
+Before Javascript loads the title will be <code>No Title</code> then the value of the title.</p>
+
+<h3 id="registration"><a href="#registration">Registration</a></h3>
+<p>if you intend to have multiple provider with template in the HTML file, you will run into issues of registration.</p>
+
+<p>Below will throw errors</p>
 <code-snippet language="html">
 <theme-provider>
 	<store-data-provider>
 		<todo-app>
 			<h1>{app.title}</h1>
-			<p>{app.description</p>
+			<p>{app.description}</p>
 		</todo-app>
 	</store-data-provider>
 </theme-provider>
 </code-snippet>
+
+<p>This is because, everything render inside, will try to reference data inside the outer most component,
+which in this case is <code>theme-provider</code> which has no <code>app</code> data. As you can see below:</p>
 
 <code-snippet language="js">
 class ThemeProvider extends ContextProviderComponent {
@@ -87,11 +100,72 @@ StoreDataProvider.register();
 TodoApp.register();
 </code-snippet>
 
+<p>Here is when you need to rely on <a href="/documentation/context">context data</a> to deal with this situation.</p>
+
+<p>You can start by moving data to the context by declaring a static <code>initialContext</code> property.
+This creates data that can be accessed by any descendent component or element without via <code>$context</code> property.</p>
+
+<code-snippet language="js">
+class ThemeProvider extends ContextProviderComponent {
+	static initialContext = {
+		theme: {
+			primary: "blue",
+			secondary: "red",
+		}
+	}
+}
+
+class StoreDataProvider extends ContextProviderComponent {
+	static initialContext = {
+		store: {
+			todos: [],
+			user: {}
+		}
+	}
+}
+
+class TodoApp extends WebComponent {
+	app = {
+		title: "Todo App",
+		description: "My super cool todo app",
+	}
+	
+	get template() {
+		return `
+			<h1>{app.title}</h1>
+			<p>{app.description}</p>
+			{theme}
+			{store}
+		`
+	}
+}
+</code-snippet>
+
+<blockquote class="note">
+	<strong>Note:</strong> For this now, we just need to make sure to register all context providers before the <code>TodoApp</code> component.
+</blockquote>
+
+<p>And then update the template like so.</p>
+
+<code-snippet language="html">
+<store-data-provider>
+	<theme-provider>
+		<todo-app></todo-app>
+	</theme-provider>
+</store-data-provider>
+</code-snippet>
+
+<p>As you can see, the order of the context providers registration only matters if you are to put HTML directly
+in the HTML document body. If the content of the template is placed inside the component class, it is all fine.</p>
+
+<p>In general, it is a good practice to register the context providers before all components of your application. These
+are components which normally handle global data and should run before the rest of the app.</p>
+
 <h3 id="the-slot-tag"><a href="#the-slot-tag">The slot tag</a></h3>
-<p>What really makes the ContextProviderComponent special is how it handles the <code>slot</code> tag. It has a custom slot handler that gives
-   it its superpowers. This means that no matter the component mode, the slot tag will be handled the same way which is
-   not something you can do natively in HTML.</p>
-<p>The template is a single slot tag, but you can also define your own template with slots where you wish. The only thing
+<p>What really makes the <code>ContextProviderComponent</code> special is how it handles the <code>slot</code> tag.</p>
+<p>It has a custom <code>slot</code> handler that gives it its superpowers. This means that no matter the component mode,
+   the slot tag will be handled the same way which is not something you can do natively in HTML.</p>
+<p>The template is a single <code>slot</code> tag, but you can also define your own template with slots where you wish. The only thing
    you need to keep in mind is that the slot is handled differently.</p>
 <p>The example below renders the title and description inside and lets the rest of the app to be defined in the HTML file.</p>
 
@@ -134,8 +208,7 @@ TodoApp.register();
    for every <code>app.todos</code> array item.</p>
 
 <code-snippet language="html">
-<!-- documentation.html-->
-
+<!-- todo-app.html-->
 <todo-app>
 	<todo-item
 		repeat="app.todos"
@@ -175,10 +248,11 @@ TodoApp.register();
 <p>What this means is that, any HTML tag that is placed inside the body of the <code>todo-app</code> tag can access the
    ToDoApp class data and methods. Any HTML tag that belongs to other tags template will not. For those, you
    need to specify data as context.</p>
+
 <h3 id="context"><a href="#context">Context</a></h3>
-<p>ContextProviderComponent is like any other WebComponent and therefore, it may contain
+<p><code>ContextProviderComponent</code> is like any other <code>WebComponent</code> and therefore, it may contain
 	<a href="/documentation/context">context data</a>.</p>
-<p>This is the only way you can provide data inside the descendents component templates and it is excellent
+<p>This is the only way you can provide data inside the descendents component templates, and it is excellent
    for data you want to share deeply for all components.</p>
 
 <code-snippet language="js">
@@ -201,26 +275,19 @@ class ThemeProvider extends ContextProviderComponent {
    deeply inside any component templates.</p>
 
 <code-snippet language="html">
-<todo-app>
-	<theme-provider>
-		<button
-			type="button"
-			attr.style="
-				color: {theme.colors.light};
-				background: {theme.colors.primary},
-				true">click me</button>
-	</theme-provider>
-</todo-app>
+<theme-provider>
+	<todo-app></todo-app>
+</theme-provider>
 </code-snippet>
 
 <h3 id="styling"><a href="#styling">Styling</a></h3>
 <p>By default, all context providers tag will be styled as display block. This can easily be overridden by defining
    your own stylesheet property.</p>
-<p>Styling your context provider component is no different than styling any other WebComponent but because
+<p>Styling your context provider component is no different from styling any other web component but because
    by default it does not use shadow root, you need to prefix every style with the <code>:host</code> to make sure
-   the style does not affect things outside of its body.</p>
+   the style does not affect things outside its body.</p>
 <p>This is due to the special way style tags are handled in <code>none</code> mode. You can
-	<a href="/documentation/stylesheet">Lear more about it here</a></p>
+	<a href="/documentation/stylesheet">Learn more about it here</a></p>
 
 <code-snippet language="js">
 class TodoApp extends ContextProviderComponent {
@@ -247,8 +314,8 @@ class TodoApp extends ContextProviderComponent {
 </code-snippet>
 
 <p>One thing to know is that the <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS/::slotted">::slotted selector</a>
-   will not work because the way the ContextProviderComponent handles the slot tags no matter what the mode
-   of the component.</p>
+   will not work because the way the <code>ContextProviderComponent</code> handles the slot tags no matter what the mode
+   of the component. If you need to use <code>::slotted</code> please use the <code>WebComponent</code> instead.</p>
 
 
 <div class="row align-apart doc-navigation">
