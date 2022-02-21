@@ -1,0 +1,142 @@
+<h2 id="static-component"><a href="#static-component">Static Component</a></h2>
+<p>In CWCO, a <strong>static component</strong>:</p>
+<ol>
+	<li>Will not be <a href="/documentation/web-component#registration">registered</a>;</li>
+	<li>Will not be rendered;</li>
+	<li>Will be extended as a base component;</li>
+</ol>
+
+<p>Let's say we want to create different <strong>button variations</strong> but want to minimize the work to avoid repetition
+	and make it much easier to maintain the component. We can then do something like this.
+</p>
+
+<code-snippet language="js">
+class BaseButton extends WebComponent {
+	static observedAttributes = [
+		'label',
+		'disabled',
+		'type',
+	];
+	static delegatesFocus = true;
+
+	get template() {
+		return `
+			<button
+				class="btn"
+				type="{type}"
+				attr.disabled="disabled"
+			>
+				<slot>{label}</slot>
+			</button>
+		`;
+	}
+	
+	get stylesheet() {
+		return `
+			<style>
+				:host {
+					display: inline-block;
+					pointer-events: [disabled ? 'none' : 'auto'];
+					cursor: [disabled ? 'not-allowed' : 'pointer'];
+					opacity: [disabled ? '0.5' : '1'];
+				}
+				
+				:host * {
+					box-sizing: border-box;
+				}
+				
+				:host .btn {
+					-webkit-appearance: none;
+					-moz-appearance: none;
+					appearance: none;
+					outline: none;
+					border: none;
+					cursor: pointer;
+				}
+			</style>
+		`
+	}
+}
+</code-snippet>
+
+<p>With the base button we can then create any variations via inheritance.</p>
+
+<h3 id="inheritance"><a href="#inheritance">Inheritance</a></h3>
+<p>Inheritance is just an alternative way create changes of a component. You can use compositions of components or
+wrapper components but inheritance is the one that gives you more control as it allows you to change anything about
+that component.</p>
+
+<h4 id="extending-style"><a href="#extending-style">Extending Style</a></h4>
+<p>We can create now different variations of the component by changing the style.</p>
+
+<code-snippet language="js">
+class PrimaryButton extends BaseButton {
+	get stylesheet() {
+		return `
+			${super.stylesheet}
+			<style>
+				:host .btn {
+					background: black;
+					color: white;
+				}
+			</style>
+		`
+	}
+}
+
+PrimaryButton.register()
+</code-snippet>
+<p>In the above example we created a <code>primary-button</code> which is just the <code>BaseButton</code> with
+different background and color.</p>
+
+<p>To extend a style, all you need is insert the <code>super.stylesheet</code> before your style. That will include
+the parent class <code>stylesheet</code> before your style declarations.</p>
+
+<h4 id="extending-observed-attributes"><a href="#extending-observed-attributes">Extending Observed Attributes</a></h4>
+<p>You may also need to support different <code>observedAttributes</code> for your new variation. You can reference
+the parent class ones when you try to create yours.</p>
+
+<code-snippet language="js">
+class LinkButton extends BaseButton {
+	static observedAttributes = [
+		...BaseButton.observedAttributes,
+		'href',
+		'target'
+	];
+}
+
+LinkButton.register()
+</code-snippet>
+
+<h4 id="extending-template"><a href="#extending-template">Extending Template</a></h4>
+<p>When extending the <code>template</code> you can either completely override it or wrap it in additional HTML.</p>
+
+<p>Let's continue with the <code>LinkButton</code> example above to give it a new template that makes sense.</p>
+
+<code-snippet language="js">
+class LinkButton extends BaseButton {
+	static observedAttributes = [
+		...BaseButton.observedAttributes,
+		'href',
+		'target'
+	];
+	
+	get template() {
+		return `
+			<a
+				class="btn"
+				href="{href}"
+				attr.target="{target}, target">
+					<slot>{label}</slot>
+			</a>`
+	}
+}
+
+LinkButton.register()
+</code-snippet>
+
+<div class="row align-apart doc-navigation">
+	<a href="/documentation/configurations" class="btn outlined-btn">< Configurations</a>
+	<a href="/documentation/on-mount" class="btn outlined-btn">LiveCycles ></a>
+</div>
+

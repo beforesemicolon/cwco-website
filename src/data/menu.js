@@ -15,6 +15,7 @@ module.exports = {
         {label: en.menu.documentation.webComponent, path: "/documentation/web-component"},
         {label: en.menu.documentation.contextProviderComponent, path: "/documentation/context-provider-component"},
         {label: en.menu.documentation.configurations, path: "/documentation/configurations"},
+        {label: en.menu.documentation.staticComponent, path: "/documentation/static-component"},
       ]},
     {label: en.menu.documentation.componentsLifecycles, path: "/documentation/on-mount", subMenu: [
         {label: en.menu.documentation.onMount, path: "/documentation/on-mount"},

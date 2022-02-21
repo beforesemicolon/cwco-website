@@ -44,6 +44,10 @@ module.exports = {
     localeKey: "configurations",
     template: "configurations"
   }),
+  "/documentation/static-component": createPage("/documentation/static-component", {
+    localeKey: "staticComponent",
+    template: "static-component"
+  }),
   "/documentation/on-mount": createPage("/documentation/on-mount", {localeKey: "onMount", template: "on-mount"}),
   "/documentation/on-destroy": createPage("/documentation/on-destroy", {
     localeKey: "onDestroy",

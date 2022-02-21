@@ -28,6 +28,10 @@
       "title": "Configurations | CWCO - Web Components Library",
       "description": "CWCO Component Configurations - How to configure Web Component shadow root options and tag name"
     },
+    "staticComponent": {
+      "title": "Static Component | CWCO - Web Components Library",
+      "description": "CWCO Static Component - How to create base components to be extend and create variations"
+    },
     "onMount": {
       "title": "onMount LiveCycle | CWCO - Web Components Library",
       "description": "CWCO Component onMount LiveCycle - Execute code before component is rendered"
@@ -117,6 +121,7 @@
       "webComponent": "WebComponent",
       "contextProviderComponent": "ContextProviderComponent",
       "configurations": "configurations",
+      "staticComponent": "Static Component",
       "onMount": "onMount",
       "onDestroy": "onDestroy",
       "onUpdate": "onUpdate",
