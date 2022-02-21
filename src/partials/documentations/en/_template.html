@@ -2,8 +2,8 @@
 <p>The web component template is a way for you to communicate to <code>WebComponent</code> what the inner HTML of your component looks
    like.</p>
 <p>Other libraries simply take your HTML or JSX and recalculate things when data are changed.</p>
-<p><code>cwco</code> templates works differently than other libraries. It will only be read it once when creating the DOM
-                     elements and any detected changes is then made directly on the DOM. The template is simply a static data source.</p>
+<p><code>cwco</code> templates works differently than other libraries. It will only be read once when adding the component to the DOM
+	for the first time. The template is simply a static data source.</p>
 
 <h3 id="define-template"><a href="#define-template">Define Template</a></h3>
 <p>All you need to define your component template is set a getter for template where you return the HTML string
@@ -23,9 +23,11 @@ class TodoItem extends WebComponent {
 }
 </code-snippet>
 
-<p>It is important to keep template readonly with the getter.</p>
+<p>It is important to keep template readonly with the getter. You may see errors if you don't do so, especially if you
+use CWCO in a typescript project.</p>
+
 <h4 id="template-id"><a href="#template-id">Template ID</a></h4>
-<p>You may also use HTML <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template">template tag</a> to set
+<p>You may also use HTML <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template">template tag</a> to define
    the template of your component and all you have to do is tell the component about the template id.</p>
 
 <code-snippet language="html">
@@ -47,7 +49,7 @@ class TodoItem extends WebComponent {
 
 <h3 id="data-binding"><a href="#data-binding">Data Binding</a></h3>
 <p>You can use curly braces to bind data to your templates. Inside, you can refer to properties from which
-   you want the value from or add logic that produces strings to be added to your HTML.</p>
+   you want the value from or add logic that produces value to be added to the element.</p>
 
 <code-snippet language="js">
 class TodoItem extends WebComponent {
@@ -71,14 +73,15 @@ class TodoItem extends WebComponent {
 <p><code>cwco</code> tracks these data references and know when and where to update the DOM when there is a data change. You
                      don&#39;t have to do anything to update the DOM once there is a data change.</p>
 <h4 id="escaping-curly-braces"><a href="#escaping-curly-braces">Escaping curly braces</a></h4>
-<p>There are cases where you want to add a curly brace to your template. For example, in a regex for the input
+<p>There are cases where you want to add a curly brace to your template but don't mean it as data binding. For example, in a regex for the input
    pattern attribute:</p>
 
 <code-snippet language="html">
 <input type="text" pattern="{0,9}">
 </code-snippet>
 
-<p>Just leaving it like that will throw an error because it will assume you want to execute what&#39;s inside the curly braces.</p>
+<p>Just leaving it like that will throw an error because it will assume you want to execute what&#39;s inside the curly braces
+   which is an invalid Javascript expression.</p>
 <p>To solve this you can wrap it in single quotes and again wrap that in curly braces. What this does is execute what&#39;s
    inside the curly braces resulting in a string matching the regex pattern you want.</p>
 
@@ -107,6 +110,14 @@ class TodoItem extends WebComponent {
 }
 </code-snippet>
 
+<p>CWCO evaluates strings on the fly. This can become a concern if you have strict
+	<a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP">CSP</a> configurations that does not allow
+	<a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src#unsafe_eval_expressions"><code>unsafe-eval</code>.</a>
+</p>
+
+<p>If working with CWCO, you must allow <code>unsafe-eval</code> CSP. We try our best to minimize the risks in evaluations
+by executing strings in contextualized scope your component is in.</p>
+
 <h3 id="the-this-keyword"><a href="#the-this-keyword">the &quot;this&quot; keyword</a></h3>
 <p>There will be situations that you must use the <code>this</code> keyword in order to put data in the template.</p>
 <p>Any explicit public properties declared or observed attributes defined can be referenced in the template without the
@@ -126,7 +137,7 @@ class SampleComp extends WebComponent {
 
 <p>If the property is something that exists in the HTMLElement or any of its ancestors, you must explicitly reach them
    using the <code>this</code> keyword.</p>
-<p>The same is true for any private properties.</p>
+<p>The same is true for any private properties and getters.</p>
 <h3 id="javascript-template-literal"><a href="#javascript-template-literal">Javascript Template Literal</a></h3>
 <p>There is a huge difference between
    the <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals">Javascript template literal</a>
@@ -136,25 +147,28 @@ class SampleComp extends WebComponent {
    update template on data change in the <code #ignore>${...}</code> notation, it will not be executed on update.</p>
 <p>Inside the template string, <code #ignore>${...}</code> is different than <code #ignore>{...}</code>.</p>
 
-<code-snippet language="html">
-// taking in consideration the TodoItem class...
+<p>Taking in consideration the above <code>TodoItem</code> class...</p>
 
-// this
+<p>This...</p>
+
+<code-snippet language="html">
 `<div class="todo-item ${status === 'done' ? 'completed' : 'pending'}">
 	<h3>${title}</h3>
 	<p>${description}</p>
 	<p><strong>Status</strong> ${status === 'done' ? 'Done' : 'In Progress'}</p>
 </div>`
 
-// becomes
+</code-snippet>
+<p>...becomes...</p>
+<code-snippet language="html">
 `<div class="todo-item pending">
 	<h3>untitled</h3>
 	<p></p>
 	<p><strong>Status</strong> In Progress</p>
 </div>`
-
-// which tells WebComponent nothing about where to update on data change
 </code-snippet>
+
+<p>...which tells <code>WebComponent</code> nothing about where to update on data change.</p>
 
 <p>It is important for the template to contain the curly braces to mark the placeholders to put the data into.</p>
 <h3 id="slots"><a href="#slots">slots</a></h3>
