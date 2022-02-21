@@ -24,7 +24,7 @@ module.exports = {
         {label: en.menu.documentation.onAdoption, path: "/documentation/on-adoption"},
         {label: en.menu.documentation.onError, path: "/documentation/on-error"},
       ]},
-    {label: en.menu.documentation.attributes, path: "/documentation/attributes", subMenu: []},
+    {label: en.menu.documentation.observedAttributes, path: "/documentation/observed-attributes", subMenu: []},
     {label: en.menu.documentation.properties, path: "/documentation/properties", subMenu: []},
     {label: en.menu.documentation.template, path: "/documentation/template", subMenu: []},
     {label: en.menu.documentation.directive, path: "/documentation/if-directive", subMenu: [

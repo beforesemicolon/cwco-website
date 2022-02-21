@@ -55,6 +55,13 @@
   
     p, li, a, blockquote {
       line-height: 150%;
+  
+      code {
+        font-family: monospace;
+        background: var(--light-blue, $light-blue);
+        padding: 5px;
+        font-style: italic;
+      }
     }
     
     ul, ol {
@@ -67,13 +74,6 @@
     
     p {
       margin-bottom: 15px;
-  
-      code {
-        font-family: monospace;
-        background: var(--light-blue, $light-blue);
-        padding: 5px;
-        font-style: italic;
-      }
     }
     
     > *:not(h2):not(h3):not(h4):not(h5):not(h6) {

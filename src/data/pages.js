@@ -59,9 +59,9 @@ module.exports = {
     template: "on-adoption"
   }),
   "/documentation/on-error": createPage("/documentation/on-error", {localeKey: "onError", template: "on-error"}),
-  "/documentation/attributes": createPage("/documentation/attributes", {
-    localeKey: "attributes",
-    template: "attributes"
+  "/documentation/observed-attributes": createPage("/documentation/observed-attributes", {
+    localeKey: "observedAttributes",
+    template: "observed-attributes"
   }),
   "/documentation/properties": createPage("/documentation/properties", {
     localeKey: "properties",

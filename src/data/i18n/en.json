@@ -52,9 +52,9 @@
       "title": "onError LiveCycle | CWCO - Web Components Library",
       "description": "CWCO Component onError LiveCycle - How to execute code after an error in the component"
     },
-    "attributes": {
-      "title": "Component Attributes | CWCO - Web Components Library",
-      "description": "CWCO Component Attributes - Handling component props"
+    "observedAttributes": {
+      "title": "Component Observed Attributes | CWCO - Web Components Library",
+      "description": "CWCO Component Observed Attributes - Handling component props"
     },
     "properties": {
       "title": "Component Properties | CWCO - Web Components Library",
@@ -128,7 +128,7 @@
       "onAdoption": "onAdoption",
       "onError": "onError",
       "componentsLifecycles": "Component Lifecycles",
-      "attributes": "Attributes",
+      "observedAttributes": "Observed Attributes",
       "properties": "Properties",
       "template": "Template",
       "directive": "Directives",

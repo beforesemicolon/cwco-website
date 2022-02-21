@@ -1,0 +1,208 @@
+<h2 id="observed-attributes"><a href="#observed-attributes">Observed Attributes</a></h2>
+<p><strong>Observed attributes</strong> are any HTML attributes you decide that should trigger an update when set, removed or updated.
+In other libraries and frameworks these are often referred to as <strong>Props</strong>.</p>
+<h3 id="defining-observed-attributes"><a href="#defining-observed-attributes">Defining observed attributes</a></h3>
+<p>CWCO way to declare <code>observedAttributes</code> is the same as the native way. It must be declared as an array of string attributes exactly how they
+   would appear when set on the HTML tag.</p>
+
+<code-snippet language="js">
+class SubmitButton extends WebComponent {
+	static observedAttributes = ['label'];
+
+	get template() {
+		return '<button type="submit">{label}</button>';
+	}
+}
+</code-snippet>
+
+<code-snippet language="html">
+<submit-button label="Send Message"></submit-button>
+</code-snippet>
+
+<p>The web standard rules to naming attribute are:</p>
+<ul>
+	<li>kebab-case</li>
+	<li>lowercase</li>
+	<li>must start with a letter</li>
+	<li>may contain numbers</li>
+</ul>
+
+<p>Any attribute will automatically convert to lowercase when set on the DOM. It is very important to follow these rules
+when observing custom attributes for your component.</p>
+
+<h3 id="attribute-to-properties"><a href="#attribute-to-properties">Attribute to properties.</a></h3>
+<p>CWCO takes the list of <code>observedAttributes</code> to change into <strong>camelCased properties</strong>. This is so you
+can reference them inside the class and from the component element instance.</p>
+
+<h3 id="accessing-observed-attributes"><a href="#accessing-observed-attributes">Accessing observed attribute</a></h3>
+<p>If the attribute is in kebab case they will be changed into a camel case equivalent class property.</p>
+
+<code-snippet language="js">
+class StatusIndicator extends WebComponent {
+	static observedAttributes = ['current-status'];
+
+	get template() {
+		return '<div class="curr-status">{currentStatus}</div>'
+  }
+
+	onMount() {
+		console.log(this.currentStatus)
+	}
+}
+
+StatusIndicator.register();
+</code-snippet>
+
+<p>Since attributes are mapped to be properties, they also work like <a href="/documentation/properties">properties</a>.</p>
+
+<code-snippet language="js">
+const indicator = new StatusIndicator();
+
+document.body.appendChild(indicator);
+
+// access attribute as property
+indicator.currentStatus = 'Pending';
+</code-snippet>
+
+<p>When setting them, you use their attribute name.</p>
+
+<code-snippet language="js">
+const indicator = new StatusIndicator();
+
+document.body.appendChild(indicator);
+
+// access attribute as attribute
+indicator.setAttribute('current-status', 'Pending');
+</code-snippet>
+
+<h3 id="class-data-and-style-attributes"><a href="#class-data-and-style-attributes">class, data-* and style attributes</a></h3>
+<p>There are three special attributes that will not be mapped to properties because they already
+   contain their respective special properties in the element.</p>
+<p>These are the <code>class</code>, <code>style</code> and <code>data-*</code> attributes.</p>
+
+<code-snippet language="js">
+class StatusIndicator extends WebComponent {
+	static observedAttributes = [
+		'class',
+		'style',
+		'data-sample'
+	];
+}
+</code-snippet>
+
+<p>When you observe these attributes you can later access them like:</p>
+<ul>
+	<li><b>class</b>: <code>className</code> or <code>classList</code>;</li>
+	<li><b>style</b>: <code>style</code>;</li>
+	<li><b>data-x</b>: <code>dataset</code>;</li>
+</ul>
+<p>When you use these native properties to update the attributes, they will trigger the <code>onUpdate</code> callback
+   as long as they are observed.</p>
+
+<code-snippet language="js">
+const indicator = new StatusIndicator();
+
+indicator.className = 'indicator';
+indicator.classList.add('active');
+indicator.style.background = 'red';
+indicator.dataset.sample = 'x'
+</code-snippet>
+
+<h3 id="default-value"><a href="#default-value">Default value</a></h3>
+<p>By default an attribute is either a string or boolean. HTML has
+	<a href="https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#boolean-attributes">boolean attributes</a>
+	and CWCO will automatically detect these and create a property matching them with a boolean value(false). Everything else
+	is an empty string if not set on the tag.</p>
+
+<p>You can define an observed attribute default value by simply setting a value to its property name.</p>
+
+<code-snippet lanaguage="js">
+class MyButton extends WebComponent {
+	static observedAttributes = [
+		'label',
+		'type'
+	];
+	type = 'button';
+	
+	get template() {
+		return '<button type="{type}">{label}</button>';
+	}
+}
+</code-snippet>
+
+<h3 id="auto-parsing"><a href="#auto-parsing">Auto parsing</a></h3>
+<p>The <code>WebComponent</code> will automatically try to parse your attribute string into proper data type.</p>
+
+<code-snippet language="html">
+<flat-list list="[2, 4, 6]"></flat-list>
+</code-snippet>
+
+<code-snippet language="js">
+class FlatList extends WebComponent {
+	static observedAttributes = ['list'];
+
+	onMount() {
+		console.log(this.list); // will be an Array [2, 4, 6]
+	}
+}
+</code-snippet>
+
+<blockquote class="note"><strong>Note:</strong> These strings must be valid JSON strings.</blockquote>
+
+<p>If you use curly brace to bind a specific data, CWCO will reference that data from the component that passed it down.</p>
+
+<h3 id="custom-boolean-attributes"><a href="#custom-boolean-attributes">Custom Boolean Attributes</a></h3>
+<p>If you use native boolean attributes like <code>disabled</code> and <code>checked</code> you don't to set values.</p>
+
+<code-snippet language="html">
+<my-button disabled></my-button>
+<radio-button checked></radio-button>
+</code-snippet>
+
+<p>They are the only ones which values are correctly assumed to be of type <code>boolean</code>. If you create a custom
+attribute and want it to be boolean you must give them boolean values and set the default inside the class.</p>
+
+<code-snippet language="js">
+class StatusIndicator extends WebComponent {
+	static observedAttributes = [
+		'error',
+		'success',
+		'warning',
+		'info'
+	];
+	error = false;
+	success = false;
+	warning = false;
+	info = true;
+}
+</code-snippet>
+
+<code-snippet language="html">
+<status-indicator error="true"></status-indicator>
+<status-indicator success="true"></status-indicator>
+<status-indicator warning="true"></status-indicator>
+<status-indicator></status-indicator>
+</code-snippet>
+
+
+<h3 id="attributes-vs-properties"><a href="#attributes-vs-properties">Attributes vs Properties</a></h3>
+<p>Attributes end up working just like properties because they are changed to be properties. On top of that,
+   they have the advantage of triggering changes when they are set or changed on the HTML tag.</p>
+<p>You should prefer attributes whenever you are expecting data to be set directly on the tag. </p>
+<p><code>WebComponent</code> allows you to receive simple to complex data via attributes.</p>
+
+<code-snippet language="html">
+<flat-list list="[2, 4, 6, 90]"></flat-list>
+
+// when inside another component template you can refer to the property
+// using the curly braces
+<flat-list list="{items}"></flat-list>
+</code-snippet>
+
+<p>This is a feature you cannot find natively in web components API and that is strongly recommended as best practice which
+CWCO automatically support and handle for you.</p>
+
+<div class="row align-apart doc-navigation">
+	<a href="/documentation/on-error" class="btn outlined-btn">< onError</a>
+	<a href="/documentation/properties" class="btn outlined-btn">Properties ></a>
+</div>
