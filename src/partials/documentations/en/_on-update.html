@@ -1,24 +1,13 @@
-<h2 id="livecycles"><a href="#livecycles">LiveCycles</a></h2>
-<p>The native web component API has <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#using_the_lifecycle_callbacks">livecycles</a>
-   methods:</p>
-<ul>
-	<li>connectedCallback;</li>
-	<li>disconnectedCallback;</li>
-	<li>attributeChangedCallback;</li>
-	<li>adoptedCallback;</li>
-</ul>
-<p><code>WebComponent</code> simply renames them and &quot;fixes&quot; couple of things about some of them.</p>
-
-<h3 id="onupdate"><a href="#onupdate">onUpdate</a></h3>
-<p>This livecycle function is called right after the DOM gets updated by
+<h2 id="onupdate"><a href="#onupdate">onUpdate</a></h2>
+<p>This livecycle function is called right after the DOM gets updated by a
 	<a href="/documentation/properties">property</a>,
-   observed <a href="/documentation/attributes">attribute</a> or
+	<a href="/documentation/attributes">observed attribute</a> or
 	<a href="/documentation/context">context</a>
-   is updated.</p>
-<p>Differently than the <code>attributeChangedCallback</code>, the <code>onUpdate</code> will only get called if the component is in the DOM
-   and fully parsed with children rendered.</p>
-<p>It will always get called with the name of the property that changed, the old and the new value as arguments except for
-   context updates where new and old value are always the same for lack of context object tracking.</p>
+   is change.</p>
+<p>Differently than the <code>attributeChangedCallback</code>, the <code>onUpdate</code> will only get called if the component is
+	<a href="/documentation/on-mount#mounted">mounted</a>. The <code>attributeChangedCallback</code> can also be called
+before the <code>connectedCallback</code> in case the tag has observed attributes. That does not happen with <code>onUpdate</code>.</p>
+<p>It will always get called with the name of the property that changed, the old and the new value as arguments.</p>
 
 <code-snippet language="js">
 class BFSButton extends WebComponent {
@@ -50,6 +39,42 @@ btn.setAttribute('label', 'another');
 // will trigger onDestroy call
 btn.remove()
 </code-snippet>
+
+<p>In other libraries and frameworks, the update livecycle is often called after the first render but not with CWCO.</p>
+
+<p>If <code>onUpdate</code> is called, the following is <code>True</code>:</p>
+<ol>
+	<li>A property, attribute or context was changed.</li>
+	<li>The DOM elements already got updated with the changes.</li>
+</ol>
+
+<p>So <code>onUpdate</code> is more like a <strong>afterComponentUpdate</strong> and CWCO offers no lifecycles for before
+the component updates. You can achieve that by combining setters and <code>forceUpdate</code> if you really need such feature.</p>
+
+<code-snippet language="js">
+class CountUpButton extends WebComponent {
+	#count = 0;
+	
+	get count() {
+		return this.#count;
+	}
+	
+	set count(val) {
+		this.#count = val;
+		this.forceUpdate(); // won't trigger onUpdate
+	}
+
+	get template() {
+		// you need the "this" keyword to access getters
+		return '<button type="button">{this.count}</button>'
+	}
+}
+</code-snippet>
+
+<blockquote class="note">
+	<strong>Note:</strong> We strongly advice against using the <code>forceUpdate</code>. You should avoid it as much as possible.
+	We plan on supporting setters to trigger DOM updates in the near future.
+</blockquote>
 
 <div class="row align-apart doc-navigation">
 	<a href="/documentation/on-destroy" class="btn outlined-btn">< onDestroy</a>

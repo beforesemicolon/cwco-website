@@ -151,11 +151,21 @@
         font-weight: 300;
       }
       
+      &.active,
+      &:hover:not(.with-submenu) {
+        & > a {
+          background: var(--light, $light);
+          
+        }
+      }
+  
       &.active {
         & > a {
-          font-weight: 500;
+          color: var(--cta-color, $cta-color);
         }
+      }
   
+      &.active {
         &::before {
           content: "";
           display: inline-block;
@@ -164,7 +174,7 @@
           border-radius: 50%;
           background: var(--cta-color, $cta-color);
           position: absolute;
-          left: 0;
+          left: -5px;
           top: 15px;
           transform: translate(-120%, 0);
         }
@@ -183,9 +193,19 @@
           transform: translate(-120%, 0);
         }
         
+        ul {
+          display: none;
+          padding-left: 15px;
+        }
+  
+        &:hover,
         &.expanded {
           &::before {
             background: url("assets/arrow-up-icon.svg") center center/ 100% no-repeat;
+          }
+          
+          ul {
+            display: block;
           }
         }
       }

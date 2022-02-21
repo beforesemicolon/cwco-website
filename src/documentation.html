@@ -21,8 +21,7 @@
 				<a role="menuitem" href="{$item.path}">{$item.label}</a>
 				<ul aria-label="documentation-sub-menu"
 				    role="menubar"
-				    #if="$item.subMenu?.length"
-				    #attr="hidden, !$item.subMenu?.some(m => m.path === path)">
+				    #if="$item.subMenu?.length">
 					<li #repeat="$item.subMenu as subMenuItem"
 					    #attr="class, active, path === subMenuItem.path">
 						<a role="menuitem" href="{subMenuItem.path}">{subMenuItem.label}</a>
