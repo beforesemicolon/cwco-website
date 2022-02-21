@@ -180,6 +180,13 @@ a <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/API/Docu
 
 <p>This method will be particularly useful when you are creating complex <a href="/documentation/custom-directive">custom directives</a></p>
 
+<h3 id="forceupdate"><a href="#forceupdate">forceUpdate</a></h3>
+<p>The <code>forceUpdate</code> method is used internally to update the component content. It is a <strong>NOT</strong> recommended way to update your component. </p>
+<p>You should NEVER feel the need to use this method as the component does its job to update the DOM when there is
+   change at any level of the properties value.</p>
+<p>Also, it will not cause the <a href="/documentation/on-update">onUpdate</a> livecycle method to be called. Try your best to trigger updates
+via property and attribute changes.</p>
+
 <div class="row align-apart doc-navigation">
 	<a href="/documentation/getting-started" class="btn outlined-btn"> < Getting Started</a>
 	<a href="/documentation/context-provider-component" class="btn outlined-btn">ContextProviderComponent ></a>

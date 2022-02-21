@@ -163,9 +163,7 @@
         & > a {
           color: var(--cta-color, $cta-color);
         }
-      }
-  
-      &.active {
+        
         &::before {
           content: "";
           display: inline-block;
@@ -174,7 +172,7 @@
           border-radius: 50%;
           background: var(--cta-color, $cta-color);
           position: absolute;
-          left: -5px;
+          left: 0;
           top: 15px;
           transform: translate(-120%, 0);
         }

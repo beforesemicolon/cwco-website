@@ -1,6 +1,5 @@
 <h2 id="properties"><a href="#properties">Properties</a></h2>
-<p>Properties are simply class properties that WebComponent watch for updates.</p>
-<p>It must not be private, static or setters and getters in order to trigger a DOM update.</p>
+<p>Properties are simply <strong>public class properties</strong> that <code>WebComponent</code> watches for updates.</p>
 
 <code-snippet language="js">
 class TodoItem extends WebComponent {
@@ -32,8 +31,8 @@ todo.title = 'My Todo';
 document.body.appendChild(todo);
 </code-snippet>
 
-<p>Whenever there is a property value update the component will update on the DOM.
-   The example below will update the count whenever the increment and decrement buttons are clicked.</p>
+<p>Whenever there is a property update the component will update the DOM.
+   The example below will update the count whenever the <b>increment</b> and <b>decrement</b> buttons are clicked.</p>
 
 <code-snippet language="js">
 class CounterWidget extends WebComponent {
@@ -53,7 +52,7 @@ class CounterWidget extends WebComponent {
 	}
 	
 	updateCount(newCount) {
-		this.count = newCount; // will trigger DOM update
+		this.count = newCount;
 	}
 }
 
@@ -62,10 +61,12 @@ CounterWidget.register();
 document.body.appendChild(new CounterWidget())
 </code-snippet>
 
+<h3 id="deep-updates"><a href="#deep-updates">Deep Updates</a></h3>
+
 <p>The component can even detect deep object changes.</p>
 <p>If we change the count to be an object with the <code>value</code> property, the component will update the DOM when we change
    that property.</p>
-<p>Any property you declare on the class including all the attributes will be deeply watched.</p>
+<p>Any property you declare on the class, including all the attributes, will be deeply watched.</p>
 
 <code-snippet language="js">
 class CounterWidget extends WebComponent {
@@ -77,10 +78,12 @@ class CounterWidget extends WebComponent {
 			{count.value}
 			<button type="button"
 			        onclick="updateCount(this.count.value - 1)">
-				decrement</button>
+				decrement
+			</button>
 			<button type="button"
 			        onclick="updateCount(this.count.value + 1)">
-				increment</button>
+				increment
+			</button>
 		`;
 	}
 	
@@ -95,27 +98,104 @@ document.body.appendChild(new CounterWidget())
 
 </code-snippet>
 
-<p>This is what makes this library a truly reactive library. It does this by using proxy behind the scenes. Also, it is good
-   to know that not everything you set as a property will be observed.</p>
-<p>For example, you can set a canvas context or a DOM to a property and those will only trigger an update if you re-assign
-   the property. Not if they changed deeply.</p>
+<p>This is what makes this library a <strong>truly reactive</strong>. It does this by using
+	<a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy">Proxy</a> behind the scenes.</p>
 <p>So, updates are triggered by:</p>
 <ul>
 	<li>Any property re-assignment;</li>
-	<li>Deep updates on plain Array, Typed Arrays, Object Literals, Map and Set.</li>
+	<li>Deep updates on <a href="/documentation/properties#observable-properties">observable properties</a>.</li>
 </ul>
 
-<h4 id="forceupdate"><a href="#forceupdate">forceUpdate</a></h4>
-<p>The <code>forceUpdate</code> is a NOT recommended way to force the component DOM Nodes to be updated. </p>
-<p>You should NEVER feel the need to use this method as the component does its job to update the DOM when there is
-   change at any level of the properties value.</p>
-<p>Know that, it will not cause the <a href="/documentation/on-update">onUpdate</a> livecycle method to be called.</p>
+<h4 id="observable-properties"><a href="#observable-properties">Observable properties</a></h4>
+<p>Class properties can have any value. You can set an <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a> instance,
+a <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D">CanvasRenderingContext2D</a> instance, a custom class, etc.</p>
+<p>These are not valid data and whenever they change will not trigger the component to update. They are static data values which you can still reference
+inside the template.</p>
+<p>CWCO considers <strong>observable properties</strong> to be of type:</p>
+<ul>
+	<li><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Glossary/Primitive">primitive</a>;</li>
+	<li><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">Map</a>;</li>
+	<li><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set">Set</a>;</li>
+	<li><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>;</li>
+	<li><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Typed_arrays">Typed Array</a>;</li>
+	<li><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>;</li>
+</ul>
 
 <h3 id="private-property"><a href="#private-property">Private Property</a></h3>
 <p>Private properties are private to anything outside the class. They are perfect when you want to set data
    that should only be accessed or changed from inside the class.</p>
-<p>One thing to know is that they do not trigger DOM update when they are updated. </p>
-<p>Use them to avoid DOM updates when internal stuff change. If a property is not used in the template, it SHOULD be private.</p>
+<p>One thing to know is that <strong>they do not trigger component update on changes</strong>.</p>
+<p>If a property is not used in the template, it SHOULD be private. Use them for internal calculations to further optimize your component.</p>
+
+<code-snippet language="js">
+class CountDown extends WebComponent {
+	static observedAttributes = [
+		'count'
+	];
+	#timer = 0;
+	
+	get template() {
+		return '{count}';
+	}
+	
+	onMount() {
+		this.#timer = setInterval(() => {
+			if(this.count > 0) {
+				this.count -= 1;
+			} else {
+				clearInterval(this.#timer)
+			}
+		}, 1000)
+	}
+	
+	onDestroy() {
+		clearInterval(this.#timer)
+	}
+}
+</code-snippet>
+
+<p>The above example shows that since <code>#timer</code> is not used in template, and it is only an internal
+piece of data, it is just <b>private</b>. This is a <strong>best practice</strong> to follow which will avoid
+un-necessary component updates.</p>
+
+<h3 id="getters-and-setters"><a href="#getters-and-setters">Getters and Setters</a></h3>
+<p>Getters and setters are not considered normal properties, and they will not trigger component updates. If you want
+to use them you can combine your setters with <a href="/documentation/web-component#forceupdate">forceUpdate</a></p>
+
+<code-snippet language="js">
+class CountUpButton extends WebComponent {
+	#count = 0;
+	
+	get count() {
+		return this.#count;
+	}
+	
+	set count(val) {
+		this.#count = val;
+		this.forceUpdate();
+	}
+	
+	get template() {
+		return '<button type="button">{this.count}</button>'
+	}
+}
+</code-snippet>
+
+<blockquote class="note">
+	<strong>Note:</strong> <code>forceUpdate</code> will not trigger component <code>onUpdate</code> to be called.
+</blockquote>
+
+<p>To reference getters inside the template you must use the <a href="/documentation/template#the-this-keyword">this keyword</a>
+   as they are not seen as normal properties.</p>
+
+<h3 id="multiple-properties-changes"><a href="#multiple-properties-changes">Multiple properties changes</a></h3>
+<p>CWCO automatically detects when you make multiple properties changes and does a single update after. This simply means that
+if you update <b>3 properties sequentially</b> in one action, the web component will <b>only update once</b>.</p>
+
+<code-snippet language="js">
+this.pro1 = 25;
+this.pro2 = 'simple';
+</code-snippet>
 
 <div class="row align-apart doc-navigation">
 	<a href="/documentation/observed-attributes" class="btn outlined-btn">< Observed Attributes</a>
