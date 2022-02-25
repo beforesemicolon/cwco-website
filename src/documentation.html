@@ -14,21 +14,6 @@
 		<article>
 			<inject html="page.content(locale)"></inject>
 		</article>
-		
-		<ul id="documentation-menu" aria-label="documentation-menu" role="menubar">
-			<li #repeat="$data.menu.documentation"
-			    class="{path === $item.path && !$item.subMenu?.length ? 'active' : ''} {$item.subMenu?.length ? 'with-submenu' : ''} {$item.subMenu?.some(m => m.path === path) ? 'expanded' : ''}">
-				<a role="menuitem" href="{$item.path}">{$item.label}</a>
-				<ul aria-label="documentation-sub-menu"
-				    role="menubar"
-				    #if="$item.subMenu?.length">
-					<li #repeat="$item.subMenu as subMenuItem"
-					    #attr="class, active, path === subMenuItem.path">
-						<a role="menuitem" href="{subMenuItem.path}">{subMenuItem.label}</a>
-					</li>
-				</ul>
-			</li>
-		</ul>
 	</div>
 	
 </include>

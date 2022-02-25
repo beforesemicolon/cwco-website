@@ -12,11 +12,12 @@
   article {
     flex: 1;
     color: var(--black, $black);
-    border-left: 1px solid var(--mid-grey, $mid-grey);
-    border-right: 1px solid var(--mid-grey, $mid-grey);
+    border-left: 1px solid var(--light-grey, $light-grey);
+    border-right: 1px solid var(--light-grey, $light-grey);
     padding: 50px;
     min-width: calc(100% - 350px);
     max-width: calc(100% - 350px);
+    min-height: 90vh;
 
     h2, h3, h4, h5, h6 {
       font-weight: 300;
@@ -135,95 +136,26 @@
       }
     }
   }
-  
-  #documentation-menu {
-    width: 320px;
-    max-height: calc(100vh - 170px);
-    overflow: auto;
-    background: var(--light-grey, $light-grey);
-    padding: 20px 10px 10px 30px;
-    border-radius: 5px;
-    margin: 50px 0 0 50px;
-    position: fixed;
-    top: 100px;
-    right: calc(50vw + 10px - min(1200px, calc(100vw - 50px))/2);
-    
-    li {
-      position: relative;
-      
-      a {
-        display: block;
-        padding: 10px;
-        text-decoration: none;
-        color: var(--dark, $dark);
-        font-weight: 300;
-      }
-      
-      &.active,
-      &:hover:not(.with-submenu) {
-        & > a {
-          background: var(--light, $light);
-          
-        }
-      }
-  
-      &.active {
-        & > a {
-          color: var(--cta-color, $cta-color);
-        }
-        
-        &::before {
-          content: "";
-          display: inline-block;
-          width: 8px;
-          height: 8px;
-          border-radius: 50%;
-          background: var(--cta-color, $cta-color);
-          position: absolute;
-          left: 0;
-          top: 15px;
-          transform: translate(-120%, 0);
-        }
-      }
-      
-      &.with-submenu {
-        &::before {
-          content: "";
-          display: inline-block;
-          width: 8px;
-          height: 8px;
-          background: url("assets/arrow-down-icon.svg") center center/ 100% no-repeat;
-          position: absolute;
-          left: 0;
-          top: 15px;
-          transform: translate(-120%, 0);
-        }
-        
-        ul {
-          display: none;
-          padding-left: 15px;
-        }
-  
-        &:hover,
-        &.expanded {
-          &::before {
-            background: url("assets/arrow-up-icon.svg") center center/ 100% no-repeat;
-          }
-          
-          ul {
-            display: block;
-          }
-        }
-      }
-    }
-  }
 }
 
 footer {
   margin-top: 20px;
 }
 
-@media screen and (max-width: 1025px) {
+@media screen and (min-width: 1025px) {
+  #documentation-menu {
+    width: 320px !important;
+    font-size: 1rem !important;
+  
+    li {
+      a, strong {
+        padding: 10px 30px !important;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
   #documentation-block {
     article {
       padding: 50px 0;
@@ -231,11 +163,34 @@ footer {
       min-width: calc(100% - 250px);
       max-width: calc(100% - 250px);
     }
+  }
+}
+
+@media screen and (min-width: 726px) {
+  #documentation-menu {
+    display: block;
+    width: 225px;
+    height: auto !important;
+    max-height: calc(100vh - 170px) !important;
+    overflow: auto;
+    border: 1px solid var(--mid-grey, $mid-grey);
+    background: var(--light-grey, $light-grey);
+    padding: 20px 0;
+    border-radius: 5px;
+    margin: 0;
+    position: fixed;
+    top: 130px;
+    right: calc(50vw + 10px - min(1200px, calc(100vw - 50px))/2);
+    font-size: 0.9rem;
   
-    #documentation-menu {
-      width: 220px;
-      font-size: 14px;
-      padding: 10px 2px 10px 20px;
+    li {
+      a, strong {
+        padding: 10px;
+      }
+    }
+
+    ul {
+      display: block;
     }
   }
 }
@@ -249,10 +204,6 @@ footer {
       code-snippet {
         font-size: 12px !important;
       }
-    }
-  
-    #documentation-menu {
-      display: none !important;
     }
   }
 }
