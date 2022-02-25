@@ -1,15 +1,15 @@
 <h2 id="custom-directives"><a href="#custom-directives">Custom Directives</a></h2>
-<p>The idea of a directive is already built-in into HTML. For example, the attributes <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/draggable">draggable</a>
-   and <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/contenteditable">contenteditable</a> are directives.</p>
-<p>Directives are simply HTML attributes not specific to any tag which give the tag additional capabilities or change it to
-   something else based on specified values.</p>
-<p>With <code>cwco</code> the convention is the same, but you get the additional capability of overriding native HTML attribute
-   implementation -- something never seen before. That means that you can implement your own <code>draggable</code> directive
-   to behave the way you would like to.</p>
+<p>Not everything needs to be components. Directives allow you to add behavior to how a particular element gets rendered.</p>
+
+<p>CWCO comes with a limited variety of directives which may not be enough for things you are trying to build. The ability
+to create your own directives allows you to do even more powerful things.</p>
+
+<p>One thing to know about directive attributes is that they are never rendered on the DOM. That means once it activates,
+it stays in the background to perform the instructions you provide it with when there is a data change.</p>
 
 <h3 id="directive"><a href="#directive">Directive</a></h3>
-<p>To give you the ability to create your own directive, a <code>Directive</code> class is exposed which you can extend to define
-   your custom directive. It is that easy.</p>
+<p>To give you the ability to create your own directive, CWCO exposes the <code>Directive</code> class which you can extend to define
+   your custom directive. It is that easy!</p>
 
 <code-snippet language="js">
 // in the browser
@@ -28,16 +28,15 @@ class Wrapper extends Directive {
 </code-snippet>
 
 <h3 id="name"><a href="#name">Name</a></h3>
-<p>⚠️ It is very important to know that the name of your class is used to create the directive, and it will be all
+<p>Like components, the name of your class is used to create the directive, and it will be all
    lower-cased when used on the tags.</p>
-<p>For our example above, the attribute would be called <code>wrapper</code>.</p>
-<p>That means that you could create a class called <code>ContentEditable</code> and the attribute would be called <code>contenteditable</code>.</p>
-<p>⚠️ Another good thing to know is that the directive attribute is removed before attaching the element to the DOM but the
-   framework keeps track of the node and its directive and will make sure to handle things in the background for you.</p>
+<p>For our <code>Wrapper</code> class example above, the attribute would be called <code>wrapper</code>.</p>
+<p>That means that you could create a class called <code>ContentEditable</code> and the attribute would be called <code>contenteditable</code>
+which allows you to define your own behavior for that native attribute.</p>
 
 <h3 id="register"><a href="#register">Register</a></h3>
-<p>Just by creating your directive class will not make it immediately usable. You must register your directive first by
-   calling the <code>register</code> method very similarly to how you register components.</p>
+<p>Just by creating your directive class will not make it immediately usable. You must register it first by
+   calling the static <code>register</code> method very similarly to how you register components.</p>
 
 <code-snippet language="js">
 class Wrapper extends Directive {
@@ -47,8 +46,10 @@ class Wrapper extends Directive {
 Wrapper.register();
 </code-snippet>
 
-<p>⚠️ A good best practices is to register all your directives before your components, so they get picked up when rendering
-   the components you create.</p>
+<blockquote class="note">
+	<strong>Note:</strong> It is best if you register all your directives before your components, so they get picked up when rendering
+   the components you create.
+</blockquote>
 <p>You may also specify a name for your directive when you are registering it.</p>
 
 <code-snippet language="js">
@@ -59,15 +60,15 @@ class Wrapper extends Directive {
 Wrapper.register('wrap-in');
 </code-snippet>
 
-<p>⚠️ Simply make sure that the directive name is a valid attribute name and without &quot;dots&quot; as these have special meaning
-   for this library. This library will not validate your directive name.</p>
+<p>Simply make sure that the directive name is a valid attribute name and without &quot;dots&quot; as these have special meaning
+   for CWCO. This library will not validate your directive name.</p>
 
-<h3 id="parse-value"><a href="#parse-value">Parse Value</a></h3>
+<h3 id="parse-value"><a href="#parse-value">parseValue()</a></h3>
 <p>The <code>Directive</code> class exposes the <code>parseValue</code> method you must override to handle parsing the attribute value string
    before it gets changed to a specific data.</p>
 <p>It must return a valid JSON value string, and it gets called with the value (if any) and props which are the rest of the attribute name
    after the dot(if any).</p>
-<p>For example, for the <code>attr</code> directive the <code>parseValue</code> would be called with <code>item</code> as value and <code>class</code> as prop.</p>
+<p>For the below example, the <code>attr</code> directive the <code>parseValue</code> would be called with <code>item</code> as value and <code>class</code> as prop.</p>
 
 <code-snippet language="html">
 <button attr.class="item, true">click me</button>
@@ -86,7 +87,7 @@ Wrapper.register('wrap-in');
 
 <code-snippet language="html">
 <ul wrapper="nav">
-	<li wrapper="ul">{$item}</li>
+	<li wrapper="ul" repeat="3">{$item}</li>
 </ul>
 </code-snippet>
 
@@ -115,22 +116,30 @@ Wrapper.register();
    array with 2 items. The first is the value and the second is the prop. This string will be then changed into a real
    array and passed to the <code>render</code> method as first argument.</p>
 
-<h3 id="render"><a href="#render">Render</a></h3>
-<p>The <code>render</code> method is what tells the framework how to render the element. It is also where you will put the logic related
+<h3 id="render"><a href="#render">render()</a></h3>
+<p>The <code>render</code> method is what tells CWCO how to render the element. It is also where you will put the logic related
    to how you want the element to render. </p>
-<p>⚠️ It must return a valid node(text, comment or any other HTML element), array of nodes or null. Whatever you return
-   will be rendered instead of the node element but if you return <code>null</code> the node will be simply commented out. Returning
-   the node received simply means the node will remain rendered.</p>
-<p>The <code>render</code> method gets called with 2 arguments:</p>
+<p>It must return one of these:</p>
 <ul>
-	<li><strong>value</strong> (result of parsing the string returned by <code>parseValue</code>);</li>
-	<li>options containing <ul>
-		<li><strong>element</strong>: the element that the directive is attached to;</li>
-		<li><strong>rawElementOuterHTML</strong>: the element&#39;s outerHTML as it was defined in the template. Use <code>WebComponent.parseHTML</code> to turn into an Element;</li>
-		<li><strong>Node</strong>: the last node or array of node the directive render method returned;</li>
-	</ul>
-	</li>
+	<li>The node itself (default);</li>
+	<li>A valid node(text, comment or any other HTML element);</li>
+	<li>array of nodes;</li>
+	<li>null.</li>
 </ul>
+<p>Whatever you return
+   will be rendered instead of the node element but if you return <code>null</code> the node will be simply commented out. Returning
+   the node received simply means the node will remain rendered as is.</p>
+<p>The <code>render</code> method gets called with 2 arguments:</p>
+<ol>
+	<li><strong>value</strong> (result of parsing the string returned by <code>parseValue</code>);</li>
+	<li>options containing:
+		<ul>
+			<li><strong>element</strong>: the element that the directive was attached to;</li>
+			<li><strong>rawElementOuterHTML</strong>: the element&#39;s outerHTML as it was defined in the template. Use <code>WebComponent.parseHTML</code> to turn into an Element;</li>
+			<li><strong>node</strong>: anything returned previously by <code>render</code>. Will be null on the first time.</li>
+		</ul>
+	</li>
+</ol>
 <p>Continuing with our <code>wrapper</code> example, the <code>render</code> method should be expecting an array containing the value and the prop
    as first argument, the node itself and its outer HTML as defined in the template.</p>
 <p>We can handle that like so.</p>
@@ -141,19 +150,16 @@ class Wrapper extends Directive {
 		return `["${value}", "${prop}"]`;
 	}
 	
-	render([value, prop], {element}) {
+	render([value = 'div', prop], {element}) {
 		const wrapperNode = document.createElement(value);
 	
 		if(prop) {
 			wrapperNode.style.display = prop;
 		}
-		
-		// appendChild will remove the node from the dom
-		// which will create problems because the framework
-		// will try to find it in the dom to replace it with wrapperNode
-		// and not find it
-		// NEVER move the node from the DOM
-		wrapperNode.appendChild(element.clone(true));
+	
+		// ALWAYS clone the element if you planing on moving
+		// it in the DOM
+		wrapperNode.appendChild(element.cloneNode(true));
 		
 		return wrapperNode;
 	}
@@ -162,17 +168,14 @@ class Wrapper extends Directive {
 Wrapper.register();
 </code-snippet>
 
-<p>⚠️ Note that the node was cloned before appended to the <code>wrapperNode</code>. It is not a good idea to move the node from its
+<blockquote class="note">
+	<strong>Note:</strong> that the node was cloned before appended to the <code>wrapperNode</code>. It is not a good idea to move the node from its
    current place as it will result in weird behaviors. You can set attributes and even insert nodes as descendent
-   but never remove it from the DOM or remove its children. If you do so, you own the risk. Clone it and modify the clone
-   as much as you want.</p>
-<p>General NO NOs:</p>
-<ul>
-	<li>move the node from the DOM which can happen in many different ways;</li>
-	<li>setting event listeners. The directive is call on every change and new listeners will be attached every time;</li>
-	<li>removing descendent nodes from the DOM. These may contain their own directives and other related complications.</li>
-	<li>setting or removing directive attributes. These may or not be picked up by the framework which may lead to weird behaviors.</li>
-</ul>
+   but never remove it from the DOM or remove its children. Clone it and modify the clone as much as you want.
+</blockquote>
+
+<p>CWCO still keep reference of the original element around. What you are returning with <code>render</code> is a node
+to replace it with on the DOM. Your directive will be called on every change so add logic with that in consideration.</p>
 
 <h3 id="node-reference"><a href="#node-reference">node reference</a></h3>
 <p>You may also create node references similar to the <code>ref</code> directive using the <code>setRef</code> method of <code>Directive</code>.</p>
@@ -245,10 +248,10 @@ ChildCount.register();
 </code-snippet>
 
 <p>You may also get a specific node context with the <code>getContext(anyNode)</code>. </p>
-<p>👌🏽 In general, it is good practice to mark node context data with leading dollar sign like <code>repeat</code> context <code>$item</code> and <code>$key</code>.
+<p>In general, it is good practice to mark node context data with leading dollar sign like <code>repeat</code> context <code>$item</code> and <code>$key</code>.
    It helps makes a good distinction of where data is coming from and match the <code>cwco</code> convention as well.</p>
-<p>⚠️ It is important to know that a node context data has precedence over the component data or context data. It will also
-   override its ancestors nodes similarly named context data.</p>
+<p>It is important to know that a node context data has precedence over the component data or context data. It will also
+   override its ancestors nodes similarly named context data when accessed.</p>
 
 <div class="row align-apart doc-navigation">
 	<a href="/documentation/ref-directive" class="btn outlined-btn">< Ref</a>
