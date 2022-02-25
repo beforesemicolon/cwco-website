@@ -1,11 +1,9 @@
 <h2 id="events"><a href="#events">Events</a></h2>
 <p>You can use event attributes to attach event listeners in the template. These attributes do not
-   make to the DOM. They are not rendered on the elements.</p>
+   make to the DOM. They are not rendered on the elements for security reasons.</p>
 
 <h3 id="handler-function"><a href="#handler-function">Handler Function</a></h3>
-<p>You must call the class function that handles that event as the attribute value. There is no need to use
-   curly braces here to call the handler method. All <code>on*</code> attributes are special attributes that are not rendered
-   on the DOM.</p>
+<p>You can call the class function that handles that event as the attribute value.</p>
 
 <code-snippet language="js">
 class MyButton extends WebComponent {
@@ -23,7 +21,7 @@ class MyButton extends WebComponent {
 </code-snippet>
 
 <h4 id="event"><a href="#event">$event</a></h4>
-<p>You can use the <code>$event</code> property to pass the event to the handler.</p>
+<p>You can use the <code>$event</code> property to pass the event to the handler when you need the reference of the event.</p>
 
 <code-snippet language="js">
 class MyButton extends WebComponent {
@@ -62,26 +60,10 @@ class MyButton extends WebComponent {
 <h3 id="handler-statement"><a href="#handler-statement">Handler statement</a></h3>
 <p>Sometimes the event handler function does a very simple thing that may feel like too much to create
    a whole function for.</p>
-<p>For cases like that you can leverage the curly braces to add the logic as a handler and <code>WebComponent</code>
+<p>For cases like that you can simply add the logic as a handler and <code>WebComponent</code>
    will take care of creating a handler for that event listener for you.</p>
-<p>The click event handler function simply dispatches a click event.</p>
 
-<code-snippet language="js">
-class MyButton extends WebComponent {
-	
-	handleClick() {
-		this.dispatchEvent(new Event('click'))
-	}
-	
-	get template() {
-		return `
-			<button type="button" onclick="handleClick()"></button>
-		`;
-	}
-}
-</code-snippet>
-
-<p>You can discard the <code>handleClick</code> event entirely by adding the event logic inline.</p>
+<p>We can simplify the above example like so.</p>
 
 <code-snippet language="js">
 class MyButton extends WebComponent {
@@ -93,7 +75,7 @@ class MyButton extends WebComponent {
 }
 </code-snippet>
 
-<p>You can still reference the <code>$event</code> this way.</p>
+<p>You can still reference the <code>$event</code> this way as well.</p>
 
 <code-snippet language="js">
 class MyButton extends WebComponent {
@@ -105,8 +87,12 @@ class MyButton extends WebComponent {
 }
 </code-snippet>
 
-<p>This feature is great for small code execution and should not be used for complex code logic. Think of inline handler as
-   the body of the function.</p>
+<blockquote class="note">
+	<strong>Note:</strong> The curly braces around everything is optional
+</blockquote>
+
+<p>This feature is great for small code execution. Think of inline handler as
+   the body of the function you would otherwise create.</p>
 
 <div class="row align-apart doc-navigation">
 	<a href="/documentation/stylesheet" class="btn outlined-btn">< Stylesheet</a>
