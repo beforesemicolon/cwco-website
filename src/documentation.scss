@@ -64,8 +64,16 @@
       }
     }
     
-    ul, ol {
+    ul {
       list-style: square;
+    }
+  
+    ol {
+      list-style: upper-roman;
+      
+      li::marker {
+        font-weight: 400;
+      }
     }
     
     li {
