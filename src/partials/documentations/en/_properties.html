@@ -188,15 +188,6 @@ class CountUpButton extends WebComponent {
 <p>To reference getters inside the template you must use the <a href="/documentation/template#the-this-keyword">this keyword</a>
    as they are not seen as normal properties.</p>
 
-<h3 id="multiple-properties-changes"><a href="#multiple-properties-changes">Multiple properties changes</a></h3>
-<p>CWCO automatically detects when you make multiple properties changes and does a single update after. This simply means that
-if you update <b>3 properties sequentially</b> in one action, the web component will <b>only update once</b>.</p>
-
-<code-snippet language="js">
-this.pro1 = 25;
-this.pro2 = 'simple';
-</code-snippet>
-
 <div class="row align-apart doc-navigation">
 	<a href="/documentation/observed-attributes" class="btn outlined-btn">< Observed Attributes</a>
 	<a href="/documentation/template" class="btn outlined-btn">Template ></a>
