@@ -46,7 +46,7 @@ module.exports = {
       items: [
         // {label: en.menu.learningResources.essentialTraining, path: "/essential-training"},
         {label: en.menu.learningResources.documentation, path: "/documentation"},
-        {label: en.menu.learningResources.usageExamples, path: "/examples"},
+        {label: en.menu.learningResources.usageExamples, path: "https://beforesemicolon.github.io/cwco/?example=create-component.html&theme=neo&file=app.js"},
         {label: en.menu.learningResources.youtubePlaylist, link: "https://www.youtube.com/playlist?list=PLpWvGP6yhJUjZJEhaULhXJ0NNbH_EOOuj"},
       ]
     },
