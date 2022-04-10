@@ -31,6 +31,44 @@ class SubmitButton extends WebComponent {
    automatically place it inside the <code>style</code> tag for you whether inside the shadow root or the head tag.
 </blockquote>
 
+<h3 id="css-object"><a href="#css-object">CSS Object (beta)</a></h3>
+<p class="version-flag"><i>Released with version <code>1.6.0</code>.</i></p>
+
+<p>You may also return an object representation of your CSS which comes with a few advantages:</p>
+<ol>
+	<li>Allows style nesting with <code>&</code> prefix;</li>
+	<li>Easier to extend from parent component;</li>
+</ol>
+
+<code-snippet language="js">
+class SubmitButton extends WebComponent {
+	static observedAttributes = ['label'];
+	radius = 5;
+	
+	get stylesheet() {
+		return {
+			':host' {
+				display: 'inline-block';
+	
+				'& button' {
+					backgroundColor: 'blue';
+					color: '#222';
+					borderRadius: '[radius]px';
+	
+					'&:hover {
+						backgroundColor: 'purple'
+					}
+				}
+			}
+		}
+	}
+	
+	get template() {
+		return '<button type="submit">{label}</button>'
+	}
+}
+</code-snippet>
+
 <h3 id="mode-none"><a href="#mode-none">mode none</a></h3>
 <p>If the mode of the component is set to <code>none</code>, the style is then placed inside the <code>head</code> tag in the document and any
    reference of <code>:host</code> and <code>:host-context</code> will be replaced accordingly.</p>

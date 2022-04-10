@@ -27,6 +27,17 @@
       -webkit-hyphens: auto;
       -moz-hyphens: auto;
       hyphens: auto;
+      
+      & + .version-flag {
+        margin: -4px 0 30px;
+        text-align: right;
+        font-size: 0.9rem;
+        
+        i {
+          background: var(--light-blue, $light-blue);
+          padding: 10px;
+        }
+      }
     }
     
     h2 {

@@ -92,6 +92,27 @@ different background and color.</p>
 <p>To extend a style, all you need is insert the <code>super.stylesheet</code> before your style. That will include
 the parent class <code>stylesheet</code> before your style declarations.</p>
 
+<p>Extending is much easier if you use CSS objects for stylesheet as it allows you to pick individual style declarations
+or simply spread the style.</p>
+<code-snippet language="js">
+class PrimaryButton extends BaseButton {
+	get stylesheet() {
+		return {
+			...super.stylesheet,
+			':host' {
+	      ...super.stylesheet[':host'],
+				'& .btn' {
+					backgroundColor: 'black';
+					color: 'white';
+				}
+			}
+		};
+	}
+}
+
+PrimaryButton.register()
+</code-snippet>
+
 <h4 id="extending-observed-attributes"><a href="#extending-observed-attributes">Extending Observed Attributes</a></h4>
 <p>You may also need to support different <code>observedAttributes</code> for your new variation. You can reference
 the parent class ones when you try to create yours.</p>
