@@ -60,6 +60,10 @@ class SubmitButton extends WebComponent {
 					}
 				}
 			}
+	    '@keyframes fadeInAndOut': {
+				from: {opacity: 0.6},
+				to: {opacity: 1}
+			}
 		}
 	}
 	
@@ -68,6 +72,93 @@ class SubmitButton extends WebComponent {
 	}
 }
 </code-snippet>
+
+<h4 id="selectors"><a href="#selectors">Selectors</a></h4>
+<p>Selectors can be any valid CSS selector including <code>@</code> block like <code>@media</code> and <code>@keyframes</code>.</p>
+<code-snippet language="css">
+{
+	'form button' {
+		backgroundColor: 'blue';
+		borderRadius: '5px';
+	  animation: fadeInOut 0.5s ease;
+	},
+	'@keyframes fadeInOut': {
+		from: {	opacity: 0.5},
+		to: {	opacity: 1}
+	}
+}
+</code-snippet>
+
+<h4 id="camelcase-property-name"><a href="#camelcase-property-name">Camelcase property names</a></h4>
+
+<p>Any CSS selector property must be camel-cases following <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Properties_Reference">CSS properties references</a>.</p>
+<code-snippet language="css">
+{
+	button {
+		backgroundColor: 'blue';
+		borderRadius: '5px';
+	}
+}
+
+// above becomes
+button {
+	background-color: blue;
+	border-radius: 5px;
+}
+</code-snippet>
+
+<h4 id="nesting-selectors"><a href="#nesting-selectors">Nesting selectors</a></h4>
+<p>Nesting selectors is the quickest and recommended way to group style to increase specificity without having to repeat parent selectors</p>
+<code-snippet language="css">
+{
+	button {
+		backgroundColor: 'blue';
+		span: {
+			display: 'inline-block'
+	  }
+	}
+}
+
+// above becomes
+button {
+	background-color: blue;
+}
+
+button span {
+	display: inline-block;
+}
+</code-snippet>
+<h4 id="parent-selector"><a href="#parent-selector">Parent selector (&)</a></h4>
+<p>You may also use the parent selector to attach selector states and do more nesting.</p>
+
+<code-snippet language="css">
+{
+	button {
+		backgroundColor: 'blue';
+		'&:hover': {
+			backgroundColor: 'red';'
+		},
+	  '& + span' {
+			display: 'inline-block'
+		}
+	}
+}
+
+// above becomes
+button {
+	background-color: blue;
+}
+
+button:hover {
+	background-color: red;
+}
+
+button + span {
+	display: inline-block;
+}
+</code-snippet>
+<p>With the parent select spacing matters so <code>&:hover</code> is not the same as <code>& :hover</code>.</p>
+<p>All <code>&</code> will be replaced with whatever parent selector chain.</p>
 
 <h3 id="mode-none"><a href="#mode-none">mode none</a></h3>
 <p>If the mode of the component is set to <code>none</code>, the style is then placed inside the <code>head</code> tag in the document and any
