@@ -16,19 +16,39 @@
 <p>It's okay to add it to the header. It is a very small package.</p>
 
 <code-snippet language="html">
+<!-- index.html -->
 <!doctype html>
 <html lang="en">
 <head>
 	...
 	
-	<!-- use the latest version -->
+	<!-- import CWCO latest version -->
 	<script src="https://unpkg.com/cwco/dist/cwco.min.js"></script>
 
 </head>
 <body>
-	...
+  <!--	app content here -->
+	<my-app>
+		{title}
+	</my-app>
+	
+  <!--	Always load your app script last -->
+	<script src="my-app.js"></script>
 </body>
 </html>
+</code-snippet>
+
+<code-snippet language="js">
+// my-app.js
+
+const {ContextProviderComponent} = window;
+
+class MyApp extends ContextProviderComponent {
+	title = "Hello World";
+}
+
+// register your app before any component
+MyApp.register();
 </code-snippet>
 
 <h3 id="node"><a href="#node">Node</a></h3>
@@ -169,7 +189,7 @@ MyButton.register();
 
 <p>Vite is an excellent tool to spin up quick projects, and you can use it to spin up other projects which <code>cwco</code> works
    fine with.</p>
-<h3 id="react-project"><a href="#react-project">React project</a></h3>
+<h3 id="react-project"><a href="#react-project">React + CWCO project</a></h3>
 <p>You can use <code>create-react-app</code> to spin a React app and create web component to use it there also.</p>
 
 <code-snippet>
@@ -255,7 +275,7 @@ function App() {
 export default App;
 </code-snippet>
 
-<h3 id="angular-project"><a href="#angular-project">Angular project</a></h3>
+<h3 id="angular-project"><a href="#angular-project">Angular + CWCO project</a></h3>
 <p>Angular projects can also use CWCO to build web components with few configurations.</p>
 <p>Create your angular project with the following commands</p>
 
