@@ -141,23 +141,20 @@ header {
   li {
     position: relative;
     
-    a, strong {
+    a {
       display: block;
-      padding: 10px 30px;
+      padding: 10px;
       text-decoration: none;
       color: var(--dark, $dark);
       font-weight: 300;
       text-align: right;
     }
     
-    strong {
-      font-size: 0.9rem;
-      opacity: 0.5;
-    }
-    
     &.with-submenu {
       ul {
-        background: var(--light-grey, $light-grey);
+        background: var(--light, $light);
+        border-bottom: 1px solid var(--mid-grey, $mid-grey);
+        margin: 0;
       }
     }
   }

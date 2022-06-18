@@ -65,7 +65,6 @@
 					<li #repeat="$data.menu.documentation"
 					    class="{path === $item.path && !$item.subMenu?.length ? 'active' : ''} {$item.subMenu?.length ? 'with-submenu' : ''}">
 						
-						<strong #if="$item.subMenu?.length">{$item.label}</strong>
 						<a #if="!$item.subMenu?.length" role="menuitem" href="{$item.path}">{$item.label}</a>
 						
 						<ul aria-label="documentation-sub-menu"

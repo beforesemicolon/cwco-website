@@ -28,6 +28,49 @@ BFSButton.register();
 document.body.appendChild(new BFSButton())
 </code-snippet>
 
+<h3 id="onmount-cleanup"><a href="#onmount-cleanup">onMount Cleanup</a></h3>
+<p>One handy detail about <code>onMount</code> is that you can return a function which will get called
+	when the component is removed from the DOM before the body of <a href="/documentation/on-destroy">onDestroy</a>
+	gets executed.</p>
+
+<code-snippet language="js">
+class TodoApp extends WebComponent {
+	todos = [];
+	
+	onMount() {
+		// return the unsubscribe function so the subscription
+	  // gets cleanup when the component is removed from the DOM
+		return todoStore.subscribe(async () => {
+      this.todos = await todoStore.getItems();
+		})
+	}
+
+}
+</code-snippet>
+<p>This is perfect to unsubscribe from things, cleanup timers, cancel animations, etc.</p>
+
+<code-snippet language="js">
+class TimeCounter extends WebComponent {
+	time = new Date();
+	
+	get template() {
+		return <p>{time.toLocaleString()}</p>
+	}
+	
+	onMount() {
+		const timer = setInterval(() => {
+			this.time = new Date();
+		}, 1000);
+	
+		return () => clearInterval(timer);
+	}
+	
+}
+</code-snippet>
+
+<p>It can be perfectly used alongside or instead of <a href="/documentation/on-destroy">onDestroy</a> lifecycle function.
+   If alongside, know that it will be executed before the <code>onMount</code> method.</p>
+
 <h3 id="mounted"><a href="#mounted">mounted</a></h3>
 
 <p>You can verify if the component is in the DOM by checking the native <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/API/Node/isConnected">isConnected</a>
