@@ -46,6 +46,64 @@ WebComponent.registerAll([
 ])
 </code-snippet>
 
+<h3 id="bootstrap"><a href="#bootstrap">Bootstrap</a></h3>
+
+<p>The <code>register</code> and <code>registerAll</code> static methods will ONY tell <em>CWCO</em> about your component
+   but not the browser. What this means is that if you place your tag on the page, it will not render itself.</p>
+
+<p>To "start" your component you must <code>bootstrap</code> it.</p>
+
+<p>This is especially good if you want to start an entire application.</p>
+
+<code-snippet language="js">
+// my-button.js
+class MyButton extends WebComponent {
+	...
+}
+
+// tell CWCO about your component
+MyButton.register();
+
+----------------
+
+// my-app.js
+class MyApp extends WebComponent {
+	get template() {
+		return '<my-button></my-button>';
+	}
+}
+
+// start your application
+MyApp.bootstrap();
+
+-----------------
+
+// index.html
+<my-app></my-app>
+</code-snippet>
+
+<p>We recommend to always have an app and bootstrap it to start. This will make sure everything renders in the
+   proper order. <strong>Register all your components first and then bootstrap your application.</strong></p>
+
+<p>If you just want to play with component alone, simply bootstrap the component and use it.</p>
+
+<code-snippet language="js">
+// my-button.js
+class MyButton extends WebComponent {
+	...
+}
+
+MyButton.bootstrap();
+
+// index.html
+<my-button></my-button>
+</code-snippet>
+
+<blockquote class="note">
+	<strong>Note:</strong> When you bootstrap a component it will automatically register it. No need to call <em>"register"</em>
+	and <em>"bootstrap"</em> after.
+</blockquote>
+
 <h3 id="component-naming"><a href="#component-naming">Component Naming</a></h3>
 
 <p>By default, the <code>WebComponent</code> uses the class name to change into an HTML tag name.</p>
@@ -60,6 +118,8 @@ class MyButton extends WebComponent {
 
 // or this
 MyButton.register('special-button');
+// same with bootstrap
+MyButton.bootstrap('special-button');
 </code-snippet>
 
 <blockquote class="note">

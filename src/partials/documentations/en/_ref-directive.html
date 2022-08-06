@@ -22,8 +22,6 @@ class InputField extends WebComponent {
 		`
 	}
 }
-
-InputField.register();
 </code-snippet>
 
 <p>Think of <code>ref</code> as the <code>querySelector</code> and <code>querySelectorAll</code>, only that you
@@ -89,8 +87,6 @@ class CompTwo extends WebComponent {
 		return '<comp-one ref="box"></comp-one>'
 	}
 }
-
-CompTwo.register();
 </code-snippet>
 <p>One thing to be careful about here is if <code>CompOne</code> is not registered before you try to access
 its references. The <code>$refs</code> only exists for CWCO components and is an element is not registered as so,

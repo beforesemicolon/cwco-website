@@ -70,7 +70,7 @@ class TodoApp extends WebComponent {
 	}
 }
 
-TodoApp.register();
+TodoApp.bootstrap();
 </code-snippet>
 
 <p>The <code>updateContext</code> only updates the properties that you provide, but it does not do a deep update. The example above
@@ -102,8 +102,6 @@ class TodoList extends WebComponent {
 		`;
 	}
 }
-
-TodoList.register();
 </code-snippet>
 
 <p>The <code>onUpdate</code> will be triggered after a context change which is a safe place to react and do anything you need.</p>
@@ -123,8 +121,6 @@ class TodoItem extends WebComponent {
 		`
 	}
 }
-
-TodoItem.register();
 </code-snippet>
 
 <p>The <code>TodoItem</code> has a loose dependency on the theme which is set in the app. This is okay as <code>TodoItem</code>
@@ -165,9 +161,6 @@ class SearchForm extends WebComponent {
 		// submit logic
 	}
 }
-
-
-SearchForm.register();
 </code-snippet>
 
 <p>For cases like the above it is best to use class properties as context is too robust for such simple things.</p>

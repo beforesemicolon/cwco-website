@@ -31,7 +31,7 @@ class TodoApp extends ContextProviderComponent {
 	}
 }
 
-TodoApp.register();
+TodoApp.bootstrap();
 </code-snippet>
 
 <p>...and then set the content right in the HTML file and reference the data from the class.</p>
@@ -53,113 +53,6 @@ TodoApp.register();
 
 <p>The above example binds <code>app.title</code> and <code>app.description</code> with defaults.
 Before Javascript loads the title will be <code>No Title</code> then the value of the title.</p>
-
-<h3 id="registration"><a href="#registration">Registration</a></h3>
-<p>if you intend to have multiple provider with template in the HTML file, you will run into issues of registration.</p>
-
-<p>Below will throw errors</p>
-<code-snippet language="html">
-<theme-provider>
-	<store-data-provider>
-		<todo-app>
-			<h1>{app.title}</h1>
-			<p>{app.description}</p>
-		</todo-app>
-	</store-data-provider>
-</theme-provider>
-</code-snippet>
-
-<p>This is because, everything render inside, will try to reference data inside the outer most component,
-which in this case is <code>theme-provider</code> which has no <code>app</code> data. As you can see below:</p>
-
-<code-snippet language="js">
-class ThemeProvider extends ContextProviderComponent {
-	theme = {
-		primary: "blue",
-		secondary: "red",
-	}
-}
-
-class StoreDataProvider extends ContextProviderComponent {
-	store = {
-		todos: [],
-		user: {}
-	}
-}
-
-class TodoApp extends ContextProviderComponent {
-	app = {
-		title: "Todo App",
-		description: "My super cool todo app",
-	}
-}
-
-// register them in the order you use them in the HTML file
-ThemeProvider.register()
-StoreDataProvider.register();
-TodoApp.register();
-</code-snippet>
-
-<p>Here is when you need to rely on <a href="/documentation/context">context data</a> to deal with this situation.</p>
-
-<p>You can start by moving data to the context by declaring a static <code>initialContext</code> property.
-This creates data that can be accessed by any descendent component or element without via <code>$context</code> property.</p>
-
-<code-snippet language="js">
-class ThemeProvider extends ContextProviderComponent {
-	static initialContext = {
-		theme: {
-			primary: "blue",
-			secondary: "red",
-		}
-	}
-}
-
-class StoreDataProvider extends ContextProviderComponent {
-	static initialContext = {
-		store: {
-			todos: [],
-			user: {}
-		}
-	}
-}
-
-class TodoApp extends WebComponent {
-	app = {
-		title: "Todo App",
-		description: "My super cool todo app",
-	}
-	
-	get template() {
-		return `
-			<h1>{app.title}</h1>
-			<p>{app.description}</p>
-			{theme}
-			{store}
-		`
-	}
-}
-</code-snippet>
-
-<blockquote class="note">
-	<strong>Note:</strong> For this now, we just need to make sure to register all context providers before the <code>TodoApp</code> component.
-</blockquote>
-
-<p>And then update the template like so.</p>
-
-<code-snippet language="html">
-<store-data-provider>
-	<theme-provider>
-		<todo-app></todo-app>
-	</theme-provider>
-</store-data-provider>
-</code-snippet>
-
-<p>As you can see, <strong>the order of the context providers registration only matters if you are to put HTML directly
-in the HTML document body</strong>. If the content of the template is placed inside the component class, it is all fine.</p>
-
-<p>In general, it is a good practice to register the context providers before all components of your application. These
-are components which normally handle global data and should run before the rest of the app.</p>
 
 <h3 id="the-slot-tag"><a href="#the-slot-tag">The slot tag</a></h3>
 <p>What really makes the <code>ContextProviderComponent</code> special is how it handles the <code>slot</code> tag.</p>
@@ -200,7 +93,7 @@ class TodoApp extends ContextProviderComponent {
 	}
 }
 
-TodoApp.register();
+TodoApp.bootstrap();
 </code-snippet>
 
 <p>You can render the <code>todo-item</code> tag inside the <code>todo-app</code> tag and it will be placed where the slot tag is defined using
@@ -275,9 +168,11 @@ class ThemeProvider extends ContextProviderComponent {
    deeply inside any component templates.</p>
 
 <code-snippet language="html">
-<theme-provider>
-	<todo-app></todo-app>
-</theme-provider>
+<todo-app>
+	<theme-provider>
+		...
+	</theme-provider>
+</todo-app>
 </code-snippet>
 
 <h3 id="styling"><a href="#styling">Styling</a></h3>

@@ -47,8 +47,8 @@ class MyApp extends ContextProviderComponent {
 	title = "Hello World";
 }
 
-// register your app before any component
-MyApp.register();
+// start your app
+MyApp.bootstrap();
 </code-snippet>
 
 <h3 id="node"><a href="#node">Node</a></h3>
@@ -114,7 +114,7 @@ class MyButton extends WebComponent {
 	}
 }
 
-MyButton.register();
+MyButton.bootstrap();
 
 const btn = new MyButton();
 btn.innerHTML = 'label'
@@ -160,7 +160,7 @@ class MyButton extends WebComponent {
 	}
 }
 
-MyButton.register();
+MyButton.bootstrap();
 </code-snippet>
 
 <p>Simply import <code>cwco</code> and start using it like normal.</p>
@@ -217,6 +217,7 @@ export class MyButton extends WebComponent {
 			</button>`;
 	}
 }
+
 </code-snippet>
 
 <p>Import and register all your components before you render your React app.</p>
@@ -233,9 +234,7 @@ import { MyButton } from './wc/MyButton';
 
 // register all web components
 // before app is added to the DOM
-WebComponent.registerAll([
-	MyButton
-]);
+MyButton.bootstrap()
 
 ReactDOM.render(
 	<React.StrictMode>
@@ -347,10 +346,8 @@ import {MyButton} from './web-components/my-button.component';
 export class AppModule {
 
 	constructor() {
-		// register all CWCO components
-		WebComponent.registerAll([
-			MyButton
-		])
+		// bootstrap all CWCO components
+		MyButton.bootstrap()
 	}
 }
 </code-snippet>
