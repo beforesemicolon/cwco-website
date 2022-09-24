@@ -31,6 +31,41 @@ class SubmitButton extends WebComponent {
    automatically place it inside the <code>style</code> tag for you whether inside the shadow root or the head tag.
 </blockquote>
 
+<h3 id="syntax-highlight"><a href="#syntax-highlight">Syntax Highlight</a></h3>
+<p>To help with syntax highlight for editors like <strong>VSCode</strong> <code>cwco</code> exposes
+<code>css</code> and <code>html</code>.</p>
+
+<code-snippet language="js">
+import {html, css} from "cwco";
+
+class SubmitButton extends WebComponent {
+	static observedAttributes = ['label'];
+	
+	get stylesheet() {
+		return css`
+			:host {
+				display: inline-block;
+			}
+			
+			:host button {
+				background: blue;
+				color: #222;
+			}
+		`;
+	}
+	
+	get template() {
+		return html`<button type="submit">{label}</button>`;
+	}
+}
+</code-snippet>
+
+<p>If you are using editors like <strong>VSCode</strong>, such help works great with plugins like
+	<a href="https://github.com/pushqrdx/vscode-inline-html">inline-html</a> and
+	<a href="https://marketplace.visualstudio.com/items?itemName=bierner.lit-html">lit-html</a></p>
+
+<p>If you use jetbrains IDE, HTML and CSS syntax highlight is automatically done without anything.</p>
+
 <h3 id="css-object"><a href="#css-object">CSS Object</a></h3>
 <p class="version-flag"><i>Released with version <code>1.6.0</code>.</i></p>
 

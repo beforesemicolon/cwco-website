@@ -94,6 +94,97 @@ class MyButton extends WebComponent {
 <p>This feature is great for small code execution. Think of inline handler as
    the body of the function you would otherwise create.</p>
 
+<h3 id="dispatch-event"><a href="#dispatch-event">Dispatch Events</a></h3>
+
+<p>Dispatching events is the only way you should be passing data to parent components.</p>
+
+<code-snippet language="js">
+class MyButton extends WebComponent {
+	get template() {
+		return html`
+			<input type="text" onchange="{handleChange($event)}"/>
+		`;
+	}
+
+	handleChange(event: Event) {
+		event.preventDefault();
+		event.stopPropagation();
+
+		this.dispatchEvent(new CustomEvent('change', {
+			detail: event.target.value
+		}))
+	}
+}
+</code-snippet>
+
+<p>On the above example, we listen to a <code>change</code> event on the input element and then
+dispatch a <a href="https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent">CustomEvent</a> of same name
+with the value as <code>detail</code>.</p>
+
+<h4 id="dispatch-best-practices"><a href="#dispatch-best-practices">Best Practices</a></h4>
+
+<h5>1 - Prevent default and stop propagation</h5>
+<p>Whenever you want to intercept a native event type and dispatch it with more details as the
+above code example, it is always good to <a href="">preventDefault</a> and <a href="">stopPropagation</a>
+otherwise the same event can be caught twice by the listener: 1 by your dispatch and the other by native behavior</p>
+
+<h5>2 - Raw data></h5>
+
+<p>The way data is reactive inside the component is because it uses
+	<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy">Proxy</a>.</p>
+<p>One problem that you possibly will run into is dispatching the proxied internal data
+which can get modified by the parent component which will trigger an update on the child component.</p>
+<p>To fix that you should always dispatch the raw data instead of the proxied one.</p>
+
+<code-snippet language="js">
+import {html, WebComponent} from "cwco";
+
+class PrentComp extends WebComponent {
+   opts = [
+			{value: 12, label: "one"},
+			{value: 24, label: "two"},
+	 ];
+	
+	 get template() {
+			return html`<selector-dropdown options="{opts}"></selector-dropdown>`;
+   }
+}
+</code-snippet>
+
+<code-snippet language="js">
+import {html, raw, WebComponent} from "cwco";
+
+class SelectorDropdown extends WebComponent {
+	static observedAttributes = ['options'];
+	options = [];
+	
+	get template() {
+		return html`
+			<select onchange="{handleChange($event)}">
+				<option
+					repeat="options as opt"
+					value="{opt.value}"
+					data-key="{$key}">{opt.label}</option>
+			</select>
+		`;
+	}
+	
+	handleChange(event: Event) {
+		event.preventDefault();
+		event.stopPropagation();
+	
+		const selectedOption = event.target.selectedOptions[0];
+		const optionIndex = selectedOption.dataset.key;
+		
+		this.dispatchEvent(new CustomEvent('change', {
+			detail: raw(this.options[optionIndex])
+		}))
+	}
+}
+</code-snippet>
+
+<p>Simply import and call <code>raw</code> to get the unproxied data.</p>
+
 <div class="row align-apart doc-navigation">
 	<a href="/documentation/stylesheet" class="btn outlined-btn">< Stylesheet</a>
 	<a href="/documentation/faq" class="btn outlined-btn">FAQ ></a>
