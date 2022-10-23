@@ -196,9 +196,14 @@ button + span {
 <p>All <code>&</code> will be replaced with whatever parent selector chain.</p>
 
 <h3 id="mode-none"><a href="#mode-none">mode none</a></h3>
-<p>If the mode of the component is set to <code>none</code>, the style is then placed inside the <code>head</code> tag in the document and any
-   reference of <code>:host</code> and <code>:host-context</code> will be replaced accordingly.</p>
-<p>The above example style will look like the following the head tag with <code>none</code> mode.</p>
+<p>If the mode of the component is set to <code>none</code>, the style is then placed inside the <code>head</code> tag
+   if the component is a <code>ContextProviderComponent</code>, otherwise style is ignored. In case the style is place in
+   the <code>head</code> tag, any reference of <code>:host</code> and <code>:host-context</code> will be replaced with
+   the name of the component.</p>
+
+<p>Components with "none" mode that are not <code>ContextProviderComponent</code> should be components meant to be styled
+by their parents. These should be headless components.</p>
+<p>The bellow example shows how style will look like in the head tag with <code>none</code> mode.</p>
 
 <code-snippet language="html">
 <head>
@@ -215,8 +220,10 @@ button + span {
 </head>
 </code-snippet>
 
-<p>It is very important to start any style selector with <code>:host</code> to avoid any affecting other elements on the page
-   if you intend to use the <code>none</code> mode.</p>
+<blockquote class="note">
+	<strong>Note:</strong> We recommend to start any style selector with <code>:host</code> to avoid any style affecting other elements on the page
+	since the style will be placed in the head of the document.
+</blockquote>
 
 <h3 id="data-binding"><a href="#data-binding">data binding</a></h3>
 <p>You can refer to data inside the stylesheet by using the <code>[...]</code> syntax.</p>
