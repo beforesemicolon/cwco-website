@@ -1,0 +1,73 @@
+name: Repair security dependencies
+
+on:
+  push:
+    branches: ["fix/security-dependencies"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: fix/security-dependencies
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 14.21.3
+          cache: npm
+
+      - name: Regenerate dependencies
+        run: |
+          rm -rf node_modules package-lock.json
+          npm install
+
+      - name: Verify patched dependency versions
+        run: |
+          node <<'NODE'
+          const lock = require('./package-lock.json');
+          const found = new Map();
+
+          function visit(dependencies = {}) {
+            for (const [name, data] of Object.entries(dependencies)) {
+              if (!found.has(name)) found.set(name, new Set());
+              if (data.version) found.get(name).add(data.version);
+              visit(data.dependencies);
+            }
+          }
+
+          visit(lock.dependencies);
+          const versions = name => [...(found.get(name) || [])];
+          console.log('express:', versions('express'));
+          console.log('braces:', versions('braces'));
+          console.log('lodash:', versions('lodash'));
+
+          if (!versions('express').includes('4.22.0')) {
+            throw new Error('Express 4.22.0 was not resolved.');
+          }
+          if (versions('braces').includes('3.0.2')) {
+            throw new Error('Vulnerable braces 3.0.2 remains in the lockfile.');
+          }
+          if (versions('lodash').includes('4.17.21')) {
+            throw new Error('Vulnerable lodash 4.17.21 remains in the lockfile.');
+          }
+          NODE
+
+      - name: Verify production build
+        run: npm run build
+
+      - name: Commit repaired lockfile
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package-lock.json
+          if git diff --cached --quiet; then
+            echo "Lockfile is already current."
+            exit 0
+          fi
+          git commit -m "fix(security): regenerate dependency lockfile"
+          git push origin HEAD:fix/security-dependencies
