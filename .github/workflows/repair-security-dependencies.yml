@@ -3,6 +3,9 @@ name: Repair security dependencies
 on:
   push:
     branches: ["fix/security-dependencies"]
+  pull_request:
+    branches: ["main"]
+    types: [opened, synchronize, reopened]
   workflow_dispatch:
 
 permissions:
