@@ -12,7 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@beforesemicolon/html-plus": "^0.7.0",
-    "express": "^4.22.0"
+    "express": "^5.0.0"
   },
   "devDependencies": {
     "highlight.js": "^11.4.0",
