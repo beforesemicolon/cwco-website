@@ -16,6 +16,6 @@
   },
   "devDependencies": {
     "highlight.js": "^11.4.0",
-    "nodemon": "^2.0.15"
+    "nodemon": "^3.0.0"
   }
 }
